@@ -1,3 +1,4 @@
+=======
 # Created by https://www.toptal.com/developers/gitignore/api/react,java,python,macos,git,visualstudiocode,visualstudio,sublimetext
 # Edit at https://www.toptal.com/developers/gitignore?templates=react,java,python,macos,git,visualstudiocode,visualstudio,sublimetext
 
@@ -704,3 +705,4 @@ FodyWeavers.xsd
 # Additional files built by Visual Studio
 
 # End of https://www.toptal.com/developers/gitignore/api/react,java,python,macos,git,visualstudiocode,visualstudio,sublimetext
+
