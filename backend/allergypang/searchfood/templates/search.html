@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <title>네이버 쇼핑 검색</title>
+</head>
+
+<body>
+    <h2> 바코드검색 html</h2>
+    <form method="POST">
+        {% csrf_token %}
+        <input type="text" name="barcode">
+        <button type="submit">검색</button>
+    </form>
+    
+</body>
+
+</html>
