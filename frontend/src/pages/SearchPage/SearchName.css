@@ -1,0 +1,14 @@
+.search-name-container {
+  display: flex;
+  flex-direction: column;
+  height: 100vh;
+}
+
+.search-bar {
+  flex: 8;
+  display: flex;
+}
+
+.bar {
+  margin: 30px;
+}

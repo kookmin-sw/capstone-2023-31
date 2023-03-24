@@ -1,0 +1,15 @@
+.footer-container {
+  height: 80px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-top: solid 1px #bebebe;
+}
+
+.btn2 {
+  flex: 1;
+  font-size: 20px;
+}
+.click{
+  color: #3875F6
+}
