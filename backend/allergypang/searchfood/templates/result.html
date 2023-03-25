@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <title>검색 결과</title>
+</head>
+
+<body>
+    <h1>검색 결과를 보여주는 페이지입니다.</h1>
+    {% if product %}
+    <h1>{{ product.product_name }}</h1>
+    
+    {% elif message %}
+    <p>{{ message }}</p>
+    {% endif %}
+</body>
+
+</html>
