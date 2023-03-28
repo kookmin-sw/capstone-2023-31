@@ -1,0 +1,32 @@
+import Modal from "react-modal";
+
+function ModalComponent({isOpen, onCancel, title, children}){
+
+  const customStyles = {
+    content: {
+      top: '50%',
+      left: '50%',
+      right: 'auto',
+      bottom: 'auto',
+      marginRight: '-50%',
+      transform: 'translate(-50%, -50%)',
+    },
+  };
+
+  return (
+    <div>
+      <Modal
+        ariaHideApp={false} 
+        isOpen={isOpen}
+        contentLabel={title}
+        onCancel={onCancel}
+        style={customStyles}
+      >
+        {children}
+      </Modal>
+      
+    </div>
+  )
+}
+
+export default ModalComponent;

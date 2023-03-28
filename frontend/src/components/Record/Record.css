@@ -1,0 +1,29 @@
+.record-container {
+  flex: 7;
+  display: flex;
+  flex-direction: column;
+  border-top: solid 1px rgb(209, 209, 209);
+  width: 100vw;
+}
+
+.record-name{
+  font-size: 20px;
+  margin: 30px;
+}
+
+.record {
+  flex: 5;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.calendar {
+  width: 90%;
+}
+
+.btn3 {
+  margin-right: 20px;
+  margin-bottom: 20px;
+  align-self: self-end;
+}
