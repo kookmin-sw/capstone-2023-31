@@ -1,8 +1,8 @@
 .header-container {
-  flex: 2;
+  /* flex: 2; */
   display: flex;
   flex-direction: column;
-  /* height: 25vh; */
+  height: 20vh;
 }
 
 .app-name {

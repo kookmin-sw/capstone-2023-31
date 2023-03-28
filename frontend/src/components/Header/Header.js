@@ -8,13 +8,13 @@ function Header() {
   
   const navigate = useNavigate()
   const location = useLocation();
-  const [headerLogo, setHeaderLogo] = useState("Allergy Pang")
+  const [headerLogo, setHeaderLogo] = useState("")
 
   useEffect(()=>{
     if(location.pathname == '/'){
       setHeaderLogo("Allergy Pang")
-    }else if(location.pathname == '/danger') {
-      setHeaderLogo("위험 음식 페이지")
+    }else if(location.pathname == '/alter') {
+      setHeaderLogo("대체 음식 페이지")
     }else if(location.pathname == '/mypage'){
       setHeaderLogo("마이 페이지")
     }else{

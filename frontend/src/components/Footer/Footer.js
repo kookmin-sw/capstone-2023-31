@@ -1,7 +1,6 @@
 import './Footer.css'
-import Icon, {HomeOutlined, UserOutlined, SwapOutlined} from '@ant-design/icons';
+import {HomeOutlined, UserOutlined, SwapOutlined} from '@ant-design/icons';
 import { useLocation, useNavigate } from 'react-router-dom';
-import { useState, useEffect } from 'react';
 
 function Footer(props) {
 
@@ -15,7 +14,7 @@ function Footer(props) {
         navigate('/')
       }}/>
       <SwapOutlined className={props.name ==="alter"? 'btn2 click':'btn2'} onClick={() => {
-        navigate('/danger')
+        navigate('/alter')
       }}/>
       <UserOutlined className={props.name ==="mypage"? 'btn2 click':'btn2'} onClick={() => {
         navigate('/mypage')
