@@ -1,7 +1,6 @@
-import { React, useState } from "react";
+import { React } from "react";
 import { useNavigate } from 'react-router-dom';
 import { Input } from 'antd';
-import Footer from "../../components/Footer/Footer";
 import './SearchName.css'
 import Header from "../../components/Header/Header";
 
