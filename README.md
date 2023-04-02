@@ -31,4 +31,4 @@ A-Pang!은 사용자가 자신의 알레르기 상태를 파악하고, 안전한
 ### 5. 프로젝트 구조
 ![stack](https://user-images.githubusercontent.com/66404477/229356303-b11d7de8-637d-4750-8e3a-5773309321f2.png)
 ### 6. 기타
-<br/><br/><br/>
+<br/><br/>
