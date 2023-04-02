@@ -10,7 +10,9 @@ A-Pang!은 사용자가 자신의 알레르기 상태를 파악하고, 안전한
 
 ### 2. 소개 영상
 
-프로젝트 소개하는 영상을 추가하세요
+<video src="https://youtu.be/C-NUh5lUpSo" width="500" height="300" controls>
+  Your browser does not support the video tag.
+</video>
 
 ### 3. 팀 소개
 
