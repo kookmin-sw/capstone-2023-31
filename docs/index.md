@@ -20,9 +20,9 @@ A-Pang!은 사용자가 자신의 알레르기 상태를 파악하고, 안전한
 ## 사용법[https://user-images.githubusercontent.com/66404477/229358312-ac729795-7298-42e7-a7bc-81581f9ed242.png
 ](https://user-images.githubusercontent.com/66404477/229358307-fa2fce06-7696-4495-bca7-0397fa9d6c29.png)
 
-제품 검색 시, 카메라 권한을 허용해주세요!
-![권한허용]
-<br/>(https://user-images.githubusercontent.com/66404477/229356221-b4fd6d4a-7f21-4b30-b2e4-b49b1ca57479.jpg)
+제품 검색 시, 카메라 권한을 허용해주세요!<br/>
+![권한허용](https://user-images.githubusercontent.com/66404477/229356221-b4fd6d4a-7f21-4b30-b2e4-b49b1ca57479.jpg)
+
 
 ## 프로젝트 구조
 ![stack](https://user-images.githubusercontent.com/66404477/229356303-b11d7de8-637d-4750-8e3a-5773309321f2.png)
