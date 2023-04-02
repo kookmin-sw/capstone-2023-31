@@ -10,9 +10,7 @@ A-Pang!은 사용자가 자신의 알레르기 상태를 파악하고, 안전한
 
 ### 2. 소개 영상
 
-<video src="https://youtu.be/C-NUh5lUpSo" width="500" height="300" controls>
-  Your browser does not support the video tag.
-</video>
+[소개 영상](https://youtu.be/C-NUh5lUpSo)
 
 ### 3. 팀 소개
 
