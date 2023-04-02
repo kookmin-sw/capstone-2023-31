@@ -17,10 +17,9 @@
   - Source를 marster branch
   - Theme Chooser에서 태마선택
   - 수정후 팀페이지 확인하여 점검.
-
-**팀페이지 주소** -> https://kookmin-sw.github.io/ '{{자신의 리파지토리 아이디}}'
-
-**예시)** 2023년 0조  https://kookmin-sw.github.io/capstone-2023-00/
+# A.Pang!
+![logo](https://user-images.githubusercontent.com/66404477/229354966-186aef8a-58ce-458b-ba41-ed0fe1b1c78e.png)
+**팀페이지 주소** -> https://kookmin-sw.github.io/capstone-2023-31/
 
 
 ## 내용에 아래와 같은 내용들을 추가하세요.
