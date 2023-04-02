@@ -14,12 +14,14 @@ A-Pang!은 사용자가 자신의 알레르기 상태를 파악하고, 안전한
 
 ### 3. 팀 소개
 
-| | 이름 | 학번 | 역할 | 개인 Github |
-| | --- | --- | --- | --- |
-| ![subeen](https://user-images.githubusercontent.com/66404477/229356224-a1cfb936-59c2-4947-aa18-1f92d04884ef.png){: width="50" height="50"}| 김수빈 | 20192218 | 팀장, Back-end (검색 페이지), Data (제품 데이터 수집 및 원재료 수집) | [subeen's Github](https://github.com/soosbk) |
-|![soeun](https://user-images.githubusercontent.com/66404477/229356219-1b09f8bb-4a2d-48da-86b5-eeba6b67e0e9.png) | 김소은 | 20192217 | Front-end, 레이아웃 설계 | [soeun's Github] (https://github.com/silver0108) |
-|![sieun](https://user-images.githubusercontent.com/66404477/229356217-e26e6f80-6623-451a-8572-0db11249a138.png)| 김시은 | 20192219 | Back-end (알레르기 일기 기능), Data (재료 데이터 수집 및 데이터 분석 후 맞춤 추천) | [sieun's Github] (https://github.com/se0983) |
-
+| 이름 | 학번 | 역할 | 개인 Github |
+| --- | --- | --- | --- |
+| 김수빈 | 20192218 | 팀장, Back-end (검색 페이지), Data (제품 데이터 수집 및 원재료 수집) | [subeen's Github](https://github.com/soosbk) |
+| 김소은 | 20192217 | Front-end, 레이아웃 설계 | [soeun's Github] (https://github.com/silver0108) |
+| 김시은 | 20192219 | Back-end (알레르기 일기 기능), Data (재료 데이터 수집 및 데이터 분석 후 맞춤 추천) | [sieun's Github] (https://github.com/se0983) |
+![subeen](https://user-images.githubusercontent.com/66404477/229356224-a1cfb936-59c2-4947-aa18-1f92d04884ef.png){: width="50" height="50"}
+![soeun](https://user-images.githubusercontent.com/66404477/229356219-1b09f8bb-4a2d-48da-86b5-eeba6b67e0e9.png) {: width="50" height="50"}
+![sieun](https://user-images.githubusercontent.com/66404477/229356217-e26e6f80-6623-451a-8572-0db11249a138.png){: width="50" height="50"}
 ### 4. 사용법
 
 제품 검색 시, 카메라 권한을 허용해주세요!
