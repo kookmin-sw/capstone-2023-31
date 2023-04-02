@@ -17,8 +17,8 @@ A-Pang!은 사용자가 자신의 알레르기 상태를 파악하고, 안전한
 | 이름 | 학번 | 역할 | 개인 Github |
 | --- | --- | --- | --- |
 | 김수빈 | 20192218 | 팀장, Back-end (검색 페이지), Data (제품 데이터 수집 및 원재료 수집) | [subeen's Github](https://github.com/soosbk) |
-| 김소은 | 20192217 | Front-end, 레이아웃 설계 | [soeun's Github] (https://github.com/silver0108) |
-| 김시은 | 20192219 | Back-end (알레르기 일기 기능), Data (재료 데이터 수집 및 데이터 분석 후 맞춤 추천) | [sieun's Github] (https://github.com/se0983) |
+| 김소은 | 20192217 | Front-end, 레이아웃 설계 | [soeun's Github](https://github.com/silver0108) |
+| 김시은 | 20192219 | Back-end (알레르기 일기 기능), Data (재료 데이터 수집 및 데이터 분석 후 맞춤 추천) | [sieun's Github](https://github.com/se0983) |
 
 <br/>
 
