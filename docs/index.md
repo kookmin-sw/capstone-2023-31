@@ -10,13 +10,13 @@ A-Pang!은 사용자가 자신의 알레르기 상태를 파악하고, 안전한
 [소개 영상](https://youtu.be/C-NUh5lUpSo)
 
 ## 팀 소개
-<br/>
+
 | 사진 | 이름 | 학번 | 역할 | 개인 Github |
 | --- | --- | --- | --- | --- |
 | <img src="https://user-images.githubusercontent.com/66404477/229358314-5537125b-0a28-4ba3-9f79-64f01f4c65a5.png" width="30" height="30"/> | 김수빈 | 20192218 | 팀장, Back-end (검색 페이지), Data (제품 데이터 수집 및 원재료 수집) | [subeen's Github](https://github.com/soosbk) |
 | <img src="https://user-images.githubusercontent.com/66404477/229358312-ac729795-7298-42e7-a7bc-81581f9ed242.png" width="30" height="30"/> | 김소은 | 20192217 | Front-end, 레이아웃 설계 | [soeun's Github](https://github.com/silver0108) |
 | <img src="https://user-images.githubusercontent.com/66404477/229358307-fa2fce06-7696-4495-bca7-0397fa9d6c29.png" width="30" height="30"/> | 김시은 | 20192219 | Back-end (알레르기 일기 기능), Data (재료 데이터 수집 및 데이터 분석 후 맞춤 추천) | [sieun's Github](https://github.com/se0983) |
-<br/>
+
 
 ## 사용법
 <br/>
