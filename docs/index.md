@@ -10,7 +10,7 @@ A-Pang!은 사용자가 자신의 알레르기 상태를 파악하고, 안전한
 [소개 영상](https://youtu.be/C-NUh5lUpSo)
 
 ## 팀 소개
-< br/>
+<br/>
 | 사진 | 이름 | 학번 | 역할 | 개인 Github |
 | --- | --- | --- | --- | --- |
 | <img src="https://user-images.githubusercontent.com/66404477/229358314-5537125b-0a28-4ba3-9f79-64f01f4c65a5.png" width="30" height="30"/> | 김수빈 | 20192218 | 팀장, Back-end (검색 페이지), Data (제품 데이터 수집 및 원재료 수집) | [subeen's Github](https://github.com/soosbk) |
@@ -19,7 +19,7 @@ A-Pang!은 사용자가 자신의 알레르기 상태를 파악하고, 안전한
 <br/>
 
 ## 사용법
-< br/>
+<br/>
 제품 검색 시, 카메라 권한을 허용해주세요!<br/>
 ![권한허용](https://user-images.githubusercontent.com/66404477/229356221-b4fd6d4a-7f21-4b30-b2e4-b49b1ca57479.jpg)
 
