@@ -19,7 +19,6 @@ A-Pang!은 사용자가 자신의 알레르기 상태를 파악하고, 안전한
 
 
 ## 사용법
-<br/>
 제품 검색 시, 카메라 권한을 허용해주세요!<br/>
 ![권한허용](https://user-images.githubusercontent.com/66404477/229356221-b4fd6d4a-7f21-4b30-b2e4-b49b1ca57479.jpg)
 
