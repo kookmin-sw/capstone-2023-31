@@ -1,91 +1,61 @@
-import { Button, Calendar, Badge } from "antd";
-import { useState } from "react";
+import { Button, Badge, Select } from "antd";
+import { forwardRef, useEffect, useRef, useState } from "react";
 import ModalComponent from '../Modal/ModalComponent';
 import dayjs from 'dayjs';
-import RecordAllergy from "./RecordAllergy";
+import AddRecord from "./AddRecord";
 import "./Record.css"
 import "../Modal/Modal.css"
+import Calendar from 'react-calendar';
+import 'react-calendar/dist/Calendar.css';
+import ListRecord from "./ListRecord";
+import { useNavigate } from "react-router-dom";
+import DetailRecord from "./DetailRecord";
+
 
 function Record(){
 
-  const [selectedValue, setSelectedValue] = useState(() => dayjs());
-
-  const onPanelChange = (value, mode) => {
-    console.log(value);
-    console.log(mode);
-    console.log(value.format('YYYY-MM-DD'), mode);
-  };
-
-  const onSelect = (newValue) => {
-    setSelectedValue(newValue);
-    setIsModalOpen(true);
-
-  }
-
-  const [isModalOpen, setIsModalOpen] = useState(false);
+  const navigate = useNavigate();
   
+  const [selectedValue, setSelectedValue] = useState(() => dayjs());
+  const [isModalOpen, setIsModalOpen] = useState(false);
+  const [type, setType] = useState('list');
+  const [date, setDate] = useState(new Date());
+  const [selectedItemName, setSelectedItemName] = useState(null);
+
   const showModal = () => {
     setIsModalOpen(true);
-    
   };
-  const handleOk = () => {
-    setIsModalOpen(false);
-  };
+
   const handleCancel = () => {
     setIsModalOpen(false);
   };
 
-
-
-
-
-  const getListData = (value) => {
-    let listData;
-    switch (value.date()) {
-      case 8:
-        listData = [
-          {
-            type: 'warning',
-            content: 'This is warning event.',
-          },
-          {
-            type: 'success',
-            content: 'This is usual event.',
-          },
-        ];
-        break;
-      
-      default:
-        break;
+  const tileClassName = ({ date, view }) => {
+    if (view === 'month' && date.getDay() === 0) {
+      return 'sunday';
     }
-    return listData || [];
   };
-  
 
-  const DateCellRender = (value) => {
-    const listData = getListData(value);
-    const [count, setCount] = useState(0);
-    const [s, setData] = useState();
+  const [dataList, setDataList] = useState([
+    { name: "1", sympton: "Item 1" },
+    { name: "2", sympton: "Item 2" },
+    { name: "3", sympton: "Item 3" },
+  ]);
 
-    // useEffect(() => {
-    //   listData.map((item) => (
-    //     console.log(item.type)
-    //   ))
-    // }, [])
+  const handleAdd = (item) => {
+    setDataList([...dataList, item]);
+  };
 
-    return (
-      <div>
-        {listData.map((item) => (
-          <Badge key={item.content} size="small" status={item.content} />
-          
-        ))}
-      
-      </div>
-    );
+  const selectItem = (itemName) => {
+    setSelectedItemName(itemName);
   }
-
-
-
+  const changeType = (newType) => {
+    setType(newType);
+  }
+  const select = (itemName, type2) => {
+    selectItem(itemName);
+    changeType(type2);
+  }
 
   return(
     <div className="record-container">
@@ -93,21 +63,47 @@ function Record(){
         알러지 일기
       </div>
       <div className="record">
-        {/* <Calendar className="calendar" fullscreen={false}
+        {/* <Calendar 
+          className="calendar" 
+          headerRender={""}
+          fullscreen={false}
           dateCellRender={DateCellRender}
-          onPanelChange={onPanelChange} onSelect={onSelect}/> */}
-        {/* <Modal title={`알러지 일기 목록 (${selectedValue.format("YYYY-MM-DD")})`}
-          open={isModalOpen} onOk={handleOk} onCancel={handleCancel}>
-          리스트
-        </Modal> */}
+          onPanelChange={OnPanelChange} 
+          onSelect={calendarMode == 'year' ? null : onSelect}
+          onChange={(value)=> onChange(value)}>
+        </Calendar> */}
+
+        <Calendar 
+          onChange={setDate} 
+          value={date}
+          onClickDay={showModal}
+          tileClassName={tileClassName}
+          calendarType={'US'}
+          formatDay={(locale, date) => dayjs(date).format('D')}
+         />
         
-        <Button className="btn3" type="primary" onClick={showModal}>추가하기</Button>
-        <ModalComponent title={`알러지 일기 (${selectedValue.format("YYYY-MM-DD")})`}
-          isOpen={isModalOpen} onCancel={handleCancel}>
-          <div style={{ marginBottom: "20px", display: "inline-block"}}>알러지 일기</div>
-          <button className="modal-close-btn" onClick={handleCancel}>X</button>
-          <RecordAllergy/>
-          <Button onClick={handleCancel} style={{ float:"right"}}>추가하기</Button>
+        <ModalComponent 
+          title={`알러지 일기 (${selectedValue.format("YYYY-MM-DD")})`}
+          isOpen={isModalOpen} 
+          onCancel={handleCancel}
+        >
+          <>
+          {type == "list" ? 
+            <> 
+            <ListRecord data={dataList} onClick={handleCancel} onSelect={(itemName, newType)=>select(itemName, newType)}/>
+            <Button onClick={()=> {setType("add")}} style={{ float:"right"}}>추가하기</Button>
+            </>
+          : type == "add" ? 
+            <>
+            <AddRecord onSubmit={handleAdd} onClick={()=>{setType("list")}}/>
+           
+            </>
+          : type == "detail" ? 
+            <>
+            <DetailRecord item={dataList.find((item) => item.name === selectedItemName)} changeType={changeType} onClick={()=>{setType("list")}}/>
+            </>
+          : null }
+          </>
         </ModalComponent>
       </div>
     </div>
@@ -115,99 +111,3 @@ function Record(){
 }
 
 export default Record;
-
-
-// import { Badge, Calendar } from 'antd';
-// const getListData = (value) => {
-//   let listData;
-//   switch (value.date()) {
-//     case 8:
-//       listData = [
-//         {
-//           type: 'warning',
-//           content: 'This is warning event.',
-//         },
-//         {
-//           type: 'success',
-//           content: 'This is usual event.',
-//         },
-//       ];
-//       break;
-//     case 10:
-//       listData = [
-//         {
-//           type: 'warning',
-//           content: 'This is warning event.',
-//         },
-//         {
-//           type: 'success',
-//           content: 'This is usual event.',
-//         },
-//         {
-//           type: 'error',
-//           content: 'This is error event.',
-//         },
-//       ];
-//       break;
-//     case 15:
-//       listData = [
-//         {
-//           type: 'warning',
-//           content: 'This is warning event',
-//         },
-//         {
-//           type: 'success',
-//           content: 'This is very long usual event。。....',
-//         },
-//         {
-//           type: 'error',
-//           content: 'This is error event 1.',
-//         },
-//         {
-//           type: 'error',
-//           content: 'This is error event 2.',
-//         },
-//         {
-//           type: 'error',
-//           content: 'This is error event 3.',
-//         },
-//         {
-//           type: 'error',
-//           content: 'This is error event 4.',
-//         },
-//       ];
-//       break;
-//     default:
-//   }
-//   return listData || [];
-// };
-// const getMonthData = (value) => {
-//   if (value.month() === 8) {
-//     return 1394;
-//   }
-// };
-// const Record = () => {
-//   const monthCellRender = (value) => {
-//     const num = getMonthData(value);
-//     return num ? (
-//       <div className="notes-month">
-//         <section>{num}</section>
-//         <span>Backlog number</span>
-//       </div>
-//     ) : null;
-//   };
-//   const dateCellRender = (value) => {
-//     const listData = getListData(value);
-//     return (
-//       <ul className="events">
-//         {listData.map((item) => (
-//           <li key={item.content}>
-//             <Badge status={item.type} text={item.content} />
-//           </li>
-//         ))}
-//       </ul>
-//     );
-//   };
-//   return <Calendar dateCellRender={dateCellRender} monthCellRender={monthCellRender} />;
-// };
-// export default Record;

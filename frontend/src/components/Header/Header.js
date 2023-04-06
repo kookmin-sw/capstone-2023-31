@@ -42,11 +42,6 @@ function Header() {
             <Avatar size={64} icon={<UserOutlined />} />
         </div>
       </div>
-      {/* <div style={{
-        backgroundColor: "whitesmoke",
-        height: "2vh",
-      }}>
-      </div> */}
     </div>
   )
 }

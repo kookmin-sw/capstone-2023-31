@@ -27,30 +27,27 @@ function MyPage(){
     <div className="mypage-container">
       <Header/>
       <div className="profile-edit">
-      <Button className="btn" onClick={showModal}
-      style={{
-          marginBottom: "20px"
-        }}>프로필 편집하기
-      </Button>
+        <Button className="btn" onClick={showModal}
+        style={{
+            marginBottom: "20px"
+          }}>프로필 편집하기
+        </Button>
 
-      <ModalComponent 
-        title="프로필 편집" isOpen={isModalOpen} onCancel={handleCancel}>
-        <span style={{ marginBottom: "30px"}}>프로필 편집</span>
-        <button className="modal-close-btn" onClick={handleCancel}>X</button>
-        <EditProfile/>
-        <Button onClick={handleCancel} style={{ float:"right"}}>변경하기</Button>
-        
-      </ModalComponent>
-      
- 
-    
-
-      
-        
-        
-        
-      </div>
+        <ModalComponent 
+          title="프로필 편집" isOpen={isModalOpen} onCancel={handleCancel}>
+          <span style={{ marginBottom: "30px"}}>프로필 편집</span>
+          <button className="modal-close-btn" onClick={handleCancel}>X</button>
+          <EditProfile/>
+          <Button onClick={handleCancel} style={{ float:"right"}}>변경하기</Button>
+          
+        </ModalComponent>
+        </div>
       <Record/>
+
+      <div className="danger">
+      <Button className="btn" type="primary" style={{margin: "20px"}}>위험성분 분석</Button>
+      </div>
+      
       
       <Footer name="mypage"/>
     </div>

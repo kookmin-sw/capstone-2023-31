@@ -4,6 +4,8 @@ function ModalComponent({isOpen, onCancel, title, children}){
 
   const customStyles = {
     content: {
+      maxHeight: '50vh',
+      minWidth: '60vw',
       top: '50%',
       left: '50%',
       right: 'auto',

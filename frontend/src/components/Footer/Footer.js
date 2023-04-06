@@ -9,12 +9,11 @@ function Footer(props) {
 
   return (
     <div className="footer-container">
-      {/* <Icon className="btn2"component={HomeOutlined} style={{color: setClick ? "blue" : "black"}}/> */}
-      <HomeOutlined className={props.name ==="main"? 'btn2 click':'btn2'} onClick={() => {
-        navigate('/')
-      }}/>
       <SwapOutlined className={props.name ==="alter"? 'btn2 click':'btn2'} onClick={() => {
         navigate('/alter')
+      }}/>
+      <HomeOutlined className={props.name ==="main"? 'btn2 click':'btn2'} onClick={() => {
+        navigate('/')
       }}/>
       <UserOutlined className={props.name ==="mypage"? 'btn2 click':'btn2'} onClick={() => {
         navigate('/mypage')
