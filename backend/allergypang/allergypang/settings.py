@@ -11,7 +11,7 @@ https://docs.djangoproject.com/en/3.2/ref/settings/
 """
 
 from pathlib import Path
-
+import os
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
 
@@ -37,6 +37,9 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'searchfood',
+    'record',
+
 ]
 
 MIDDLEWARE = [
@@ -49,12 +52,22 @@ MIDDLEWARE = [
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
 ]
 
+DATABASES = {
+    'default': {
+        'ENGINE': 'django.db.backends.mysql',
+        'NAME': 'foodnutrition', #제품의 원재료성분을 보관하는 DB
+        'USER': 'root',
+        'PASSWORD': '1234',
+        'HOST': 'localhost',
+        'PORT': '3306',
+    }
+}
 ROOT_URLCONF = 'allergypang.urls'
 
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [],
+        'DIRS': ["searchfood/templates"],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
@@ -103,23 +116,41 @@ AUTH_PASSWORD_VALIDATORS = [
 # Internationalization
 # https://docs.djangoproject.com/en/3.2/topics/i18n/
 
-LANGUAGE_CODE = 'en-us'
+LANGUAGE_CODE = 'ko-kr'
 
-TIME_ZONE = 'UTC'
+TIME_ZONE = 'Asia/Seoul'
 
 USE_I18N = True
 
 USE_L10N = True
 
-USE_TZ = True
+USE_TZ = False
 
 
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/3.2/howto/static-files/
 
 STATIC_URL = '/static/'
+STATICFILES_DIRS = [os.path.join(BASE_DIR, 'searchfood', 'static')]
+STATIC_ROOT = os.path.join(BASE_DIR, 'static')
+
+# python manage.py collectstatic 최종적으로 실행시켜주기
+
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/3.2/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
+#AUTH_USER_MODEL = 'user.UserModel' <- 모델이 확정나기 전에는 무조건 주석 xx (migrate xx)
+
+
+
+# 제품 성분 분석
+FOOD_API_KEY = "aee1cfc463594b10a12b"
+FOOD_API_URL = 'http://openapi.foodsafetykorea.go.kr/api/aee1cfc463594b10a12b/C002/xml/1/3/BSSH_NM=오뚜기'
+
+
+
+#네이버 api
+NAVER_CLIENT_ID = "Ijk_lTy1VGslskGRwYiH"
+NAVER_CLIENT_SECRET = "dFNdCSrTuP"
