@@ -1,89 +1,97 @@
+from django.http import StreamingHttpResponse, JsonResponse
+from django.shortcuts import render, HttpResponse
 import numpy as np
 import cv2
 from django.shortcuts import render
 import os
+import asyncio
+import time
+
+face_xml = 'backend/eyeglassy/face_detection/haarcascade_frontalface_default.xml'
+eye_xml = 'backend/eyeglassy/face_detection/haarcascade_eye.xml'
 
 
-#face_xml = 'haarcascades/haarcascade_frontalface_default.xml'
-#eye_xml = 'haarcascades/haarcascade_eye.xml'
 def main(request):
-    return render(request,"main.html")
+    return render(request, "main.html")
 
-def faceDetect(request):
-    BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+'''
+async def camera_stream():
+    capture = cv2.VideoCapture(0)
 
-
-    face_xml = os.path.join(\
-    BASE_DIR, 'face_detection/haarcascades/haarcascade_frontalface_default.xml')
-    eye_xml = os.path.join(\
-    BASE_DIR, 'face_detection/haarcascades/haarcascade_eye.xml')
-
-    font = cv2.FONT_ITALIC
-
-    eye_detect = False
-    face_cascade = cv2.CascadeClassifier(face_xml)
-    eye_cascade = cv2.CascadeClassifier(eye_xml)
-    if face_cascade.empty():
-        print("Error loading face cascade file")
-
-
-    if eye_cascade.empty():
-        print("Error loading eye cascade file")
-
-    try:
-        capture = cv2.VideoCapture(0)  # 노트북 웹캠 카메라
-        capture.set(cv2.CAP_PROP_FRAME_WIDTH, 640)
-        capture.set(cv2.CAP_PROP_FRAME_HEIGHT, 480)
-    except:
-        print('camera loading error')
-        return render(request, 'error.html')
-
-    while(True):
+    while True:
         ret, frame = capture.read()
-        if not ret:
-            break
+        # frame 처리 코드 ...
 
-        if eye_detect:
-            info = 'Eye Detection ON'
-        else:
-            info = 'Eye Detection OFF'
+        _, jpeg = cv2.imencode('.jpg', frame)
+        frame_bytes = jpeg.tobytes()
 
-        frame = cv2.flip(frame, 1)  # 좌우대칭
+        await asyncio.sleep(0)  # 대기
+
+        yield (b'--frame\r\n'
+               b'Content-Type: image/jpeg\r\n\r\n' + frame_bytes + b'\r\n')
+
+        #return render(request, 'camera_stream.html', {'frame': frame_bytes})
+'''
+async def camera_stream():
+    capture = cv2.VideoCapture(0)
+
+      
+    while True:
+        faceCascade = cv2.CascadeClassifier(cv2.data.haarcascades + "haarcascade_frontalface_default.xml")
+        eyeCascade = cv2.CascadeClassifier(cv2.data.haarcascades + 'haarcascade_eye.xml')
+        ret, frame = capture.read()
+
+        # convert frame to grayscale
         gray = cv2.cvtColor(frame, cv2.COLOR_BGR2GRAY)
 
-        faces = face_cascade.detectMultiScale(gray, 1.3, 5)  # 1.05, 5 ?
-        print('Numbers of faces detected: ' + str(len(faces)))
+        # detect faces in the grayscale frame
+        faces = faceCascade.detectMultiScale(gray, scaleFactor=1.3, minNeighbors=5)
 
-        # 카메라 영상 왼쪽 위에 셋팅된 info의 내용 출력
-        cv2.putText(frame, info, (5, 15), font, 0.5, (255, 0, 255), 1)
+        # iterate over all detected faces
+        for (x, y, w, h) in faces:
+            roi_gray = gray[y:y + h, x:x + w]
+            roi_color = frame[y:y + h, x:x + w]
 
-        if len(faces):
-            for (x, y, w, h) in faces:
-                cv2.rectangle(frame, (int(x), int(y)), (int(x+w),
-                              int(y+h)), (255, 0, 0), 2)  # 사각형 범위
-                cv2.putText(frame, 'Detected Face', (x-5, y-5),
-                            font, 0.5, (255, 255, 0), 2)  # 얼굴 찾았다는 메세지
-                if eye_detect:  # 눈 찾기
-                    roi_gray = gray[y:y+h, x:x+w]
-                    roi_color = frame[y:y+h, x:x+w]
-                    eyes = eye_cascade.detectMultiScale(roi_gray)
-                    for (ex, ey, ew, eh) in eyes:
-                        cv2.rectangle(roi_color, (ex, ey),
-                                      (ex+ew, ey+eh), (0, 255, 0), 2)
+            # detect eyes within each detected face
+            eyes = eyeCascade.detectMultiScale(roi_gray)
+            for (ex, ey, ew, eh) in eyes:
+                # get the center point of each eye
+                eye_center = (int(x + ex + 0.5 * ew), int(y + ey + 0.5 * eh))
 
-            # 이미지 프레임을 byte 형식으로 변환
-            _, jpeg = cv2.imencode('.jpg', frame)
-            data = []
-            data.append(jpeg.tobytes())
+                # draw a circle around the center of each eye
+                cv2.circle(frame, eye_center, radius=4,
+                        color=(0, 0, 255), thickness=-1)
 
-            return render(request, 'face_detection.html', {'data': data})
+                # send eye center coordinates to the client using WebSocket or other means
+                # ...
+                print('Eye Center:', eye_center)
 
-            
+        # encode the frame to JPEG format
+        _, jpeg = cv2.imencode('.jpg', frame)
+        frame_bytes = jpeg.tobytes()
 
+        # wait for a short time before capturing the next frame
+        await asyncio.sleep(0.03)
 
-
-
-
-
+        # yield the JPEG frame as an HTTP multipart response
+        yield (b'--frame\r\n'
+            b'Content-Type: image/jpeg\r\n\r\n' + frame_bytes + b'\r\n')
 
 
+async def video_feed(request):
+    print("실행중")
+    return StreamingHttpResponse(
+        camera_stream(),
+        content_type='multipart/x-mixed-replace; boundary=frame'
+    )
+
+
+def eye_info(request):
+    if request.method == "POST":
+        print("넘김")
+        left_eye = request.POST.get("left_eye")
+        right_eye = request.POST.get("right_eye")
+        print(left_eye, right_eye)
+        return JsonResponse({"success": True})
+    else:
+        return JsonResponse({"success": False})

@@ -9,10 +9,9 @@
 
 <body>
     <h1>Face Detection with OpenCV</h1>
-    <form method="POST" action="{% url 'facedetect' %}">
-        {% csrf_token %}
-        <input type="submit" value="Detect">
-    </form>
+    
+    <a href="{% url 'video_feed' %}"> 찍기 </a>
+        
 </body>
 
 </html>

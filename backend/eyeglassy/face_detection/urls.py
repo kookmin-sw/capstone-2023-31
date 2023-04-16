@@ -1,18 +1,5 @@
-"""eyeglassy URL Configuration
 
-The `urlpatterns` list routes URLs to views. For more information please see:
-    https://docs.djangoproject.com/en/3.2/topics/http/urls/
-Examples:
-Function views
-    1. Add an import:  from my_app import views
-    2. Add a URL to urlpatterns:  path('', views.home, name='home')
-Class-based views
-    1. Add an import:  from other_app.views import Home
-    2. Add a URL to urlpatterns:  path('', Home.as_view(), name='home')
-Including another URLconf
-    1. Import the include() function: from django.urls import include, path
-    2. Add a URL to urlpatterns:  path('blog/', include('blog.urls'))
-"""
+from django.urls import re_path
 from django.contrib import admin
 from django.urls import path
 from django.conf.urls.static import static
@@ -22,5 +9,15 @@ from face_detection import views
 
 urlpatterns = [
     path("",views.main,name="main"),
-    path("detect/", views.faceDetect, name="facedetect"),
-]+ static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
+    #path("detect/", views.faceDetect, name="facedetect"),
+    path('camera/', views.video_feed, name='video_feed'),  # 수정된 부분
+    # path('video_feed/', views.video_feed, name='video_feed'),
+    path('eye_info/', views.eye_info, name='eye_info'),
+] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
+
+'''
+websocket_urlpatterns = [
+    re_path(r'ws/video_feed/$', consumers.VideoFeedConsumer.as_asgi()),
+    re_path(r'ws/face_detection/$', consumers.FaceDetectionConsumer.as_asgi()),
+]
+'''
