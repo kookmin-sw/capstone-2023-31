@@ -27,9 +27,9 @@ function Header() {
   return (
     <div className="header-container">
       <div className="app-name">{headerLogo}</div>
-      <div className='info'>
+      {/* <div className='info'>
         
-      </div>
+      </div> */}
     </div>
   )
 }

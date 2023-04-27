@@ -45,7 +45,7 @@ function Webcam(){
       </div>
       <div className="camera-container">
         <Header/>
-        <Button className="face-btn" shape="round" onClick={()=> navigate('/')}>얼굴형 분석</Button>
+        <Button className="face-btn" shape="round" onClick={()=> navigate('/analyze')}>얼굴형 분석</Button>
       </div>
     
     
