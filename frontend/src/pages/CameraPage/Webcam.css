@@ -1,0 +1,13 @@
+.camera-container{
+  
+  display: flex;
+  flex-direction: column;
+  height: 100vh;
+  position: relative;
+}
+
+.face-btn {
+  position: absolute;
+  bottom: 12px;
+  right: 12px;
+}
