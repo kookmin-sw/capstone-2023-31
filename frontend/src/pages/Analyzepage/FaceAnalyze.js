@@ -8,14 +8,11 @@ import { useNavigate } from "react-router-dom";
 function FaceAnalyze(){
   const navigate = useNavigate('');
   const data = [
-    { category: '둥근형', value: 100 },
-    { category: '역삼각형', value: 25 },
-    { category: '삼각형', value: 25 },
-    { category: '긴삼각형', value: 25 },
-    { category: '다이아몬드형', value: 25 },
-    { category: '마름모형', value: 25 },
-    { category: '사각형', value: 25 },
+    { category: '하트형', value: 100 },
+    { category: '직사각형', value: 25 },
     { category: '타원형', value: 25 },
+    { category: '둥근형', value: 25 },
+    { category: '사각형', value: 25 },
   ];
 
   const maxCategory = data.reduce((prev, current) => {
