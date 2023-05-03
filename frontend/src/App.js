@@ -6,10 +6,10 @@ import
    Route,
 } from "react-router-dom";
 import MainPage from './pages/MainPage/MainPage';
-import SearchName from './pages/SearchPage/SearchName';
-import SearchBarcode from './pages/SearchPage/SearchBarcode';
+import SearchName from './pages/CameraPage/SearchName';
+import Webcam from './pages/CameraPage/Webcam';
 import DetailPage from './pages/DetailPage/DetailPage';
-import AlterFoodPage from './pages/AlterFoodPage/AlterFoodPage';
+import FaceAnalyze from './pages/Analyzepage/FaceAnalyze';
 import MyPage from './pages/MyPage/MyPage';
 
 // function App() {
@@ -36,10 +36,10 @@ function App() {
         <Routes>
           <Route path="/" element={<MainPage />}></Route>
           <Route path="/searchname" element={<SearchName />}></Route>
-          <Route path="/searchbarcode" element={<SearchBarcode />}></Route>
+          <Route path="/camera" element={<Webcam />}></Route>
           <Route path="/detail" element={<DetailPage />}></Route>
           <Route path="/mypage" element={<MyPage />}></Route>
-          <Route path="/alter" element={<AlterFoodPage/>}></Route>
+          <Route path="/analyze" element={<FaceAnalyze/>}></Route>
 
         </Routes>
       </Router>

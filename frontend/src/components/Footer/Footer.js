@@ -1,7 +1,7 @@
 import './Footer.css'
-import {HomeOutlined, UserOutlined, SwapOutlined} from '@ant-design/icons';
+import {HomeOutlined, UserOutlined, ChromeFilled} from '@ant-design/icons';
 import { useLocation, useNavigate } from 'react-router-dom';
-
+import { Button } from 'antd';
 function Footer(props) {
 
   const navigate = useNavigate();
@@ -9,13 +9,16 @@ function Footer(props) {
 
   return (
     <div className="footer-container">
-      <SwapOutlined className={props.name ==="alter"? 'btn2 click':'btn2'} onClick={() => {
-        navigate('/alter')
-      }}/>
-      <HomeOutlined className={props.name ==="main"? 'btn2 click':'btn2'} onClick={() => {
+      <HomeOutlined className={props.name ==="main"? 'btn2 click':'btn2'} onClick={(e) => {
+        e.preventDefault();
         navigate('/')
       }}/>
-      <UserOutlined className={props.name ==="mypage"? 'btn2 click':'btn2'} onClick={() => {
+      <ChromeFilled style={{fontSize: "60px"}}className={props.name ==="camera"? 'btn2 click':'btn2'} onClick={(e) => {
+        e.preventDefault();
+        navigate('/camera')
+      }}/>
+      <UserOutlined className={props.name ==="mypage"? 'btn2 click':'btn2'} onClick={(e) => {
+        e.preventDefault();
         navigate('/mypage')
       }}/>
     </div>

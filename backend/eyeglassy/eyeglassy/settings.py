@@ -40,6 +40,7 @@ INSTALLED_APPS = [
     'face_detection',
     'user',
     'channels',
+    'rest_framework',
 ]
 
 MIDDLEWARE = [

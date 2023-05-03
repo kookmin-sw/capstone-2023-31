@@ -1,19 +1,18 @@
 .footer-container {
   height: 80px;
   display: flex;
-  justify-content: center;
+  /* justify-content: center; */
   align-items: center;
   border-top: solid 1px #bebebe;
   position: fixed;
   bottom: 0;
-  left: 0;
+  /* left: 0; */
   width: 100%;
-  background-color: white;
 }
 
 .btn2 {
   flex: 1;
-  font-size: 20px;
+  font-size: 26px;
 }
 .click{
   color: #3875F6
