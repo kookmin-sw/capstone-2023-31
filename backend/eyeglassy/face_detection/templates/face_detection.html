@@ -1,0 +1,19 @@
+<!-- face_detection.html -->
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <title>Face Detection</title>
+</head>
+
+<body>
+    <h1>Face Detection Result</h1>
+    {% if data %}
+    <img src="data:image/jpeg;base64,{{ data.0|safe }}" />
+    {% endif %}
+    <br><br>
+    <a href="{% url 'main' %}">Back</a>
+</body>
+
+</html>
