@@ -19,7 +19,7 @@ function MainPage() {
           음식 또는 상품명으로 검색하기
         </Button>
         <Button id="barcode" className="btn" onClick={() => {
-          navigate("/searchbarcode")
+          navigate("/camera")
         }}>
           바코드로 검색하기
         </Button>

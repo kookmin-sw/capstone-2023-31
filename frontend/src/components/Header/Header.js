@@ -12,9 +12,9 @@ function Header() {
 
   useEffect(()=>{
     if(location.pathname == '/'){
-      setHeaderLogo("Allergy Pang")
+      setHeaderLogo("가상 안경")
     }else if(location.pathname == '/alter') {
-      setHeaderLogo("대체 음식 페이지")
+      setHeaderLogo("분석 페이지")
     }else if(location.pathname == '/mypage'){
       setHeaderLogo("마이 페이지")
     }else{
@@ -27,21 +27,9 @@ function Header() {
   return (
     <div className="header-container">
       <div className="app-name">{headerLogo}</div>
-      <div className='info'>
-        <div className='allergy'>
-          <div style={{
-            flex: 1,
-          }}>
-            나의 알레르기 정보:
-          </div>
-          <div className='allergy-data'>
-            토마토
-          </div>
-        </div>
-        <div className='profile'>
-            <Avatar size={64} icon={<UserOutlined />} />
-        </div>
-      </div>
+      {/* <div className='info'>
+        
+      </div> */}
     </div>
   )
 }

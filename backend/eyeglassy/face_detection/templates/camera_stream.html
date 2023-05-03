@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <title>Real-time Face Detection with OpenCV.js</title>
+    </head>
+
+<body>
+    <script async src="https://docs.opencv.org/4.5.5/opencv.js" onload="onOpenCvReady();" type="text/javascript"></script>
+    <video id="video" width="640" height="480" autoplay></video>
+    <canvas id="canvas" width="640" height="480"></canvas>
+    <script type="text/javascript">
+        async function onOpenCvReady() {
+            let video = document.getElementById("video");
+            navigator.mediaDevices.getUserMedia({ video: true }).then(function (stream) {
+                video.srcObject = stream;
+                video.play();
+            });
+
+            let canvas = document.getElementById("canvas");
+            let context = canvas.getContext("2d");
+
+            let faceCascadeFile = './haarcascades/haarcascade_frontalface_default.xml';
+            let eyeCascadeFile = './haarcascades/haarcascade_eye.xml';
+            let faceCascade = cv.CascadeClassifier.create(faceCascadeFile);
+            let eyeCascade = cv.CascadeClassifier.create(eyeCascadeFile);
+
+            setInterval(function () {
+                context.drawImage(video, 0, 0, canvas.width, canvas.height);
+                let imageData = context.getImageData(0, 0, canvas.width, canvas.height);
+                let gray = new cv.Mat(canvas.height, canvas.width, cv.CV_8UC1);
+                cv.cvtColor(imageData, gray, cv.COLOR_RGBA2GRAY);
+                let faces = new cv.RectVector();
+                faceCascade.detectMultiScale(gray, faces);
+                for (let i = 0; i < faces.size(); i++) {
+                    let face = faces.get(i);
+                    let eyes = new cv.RectVector();
+                    eyeCascade.detectMultiScale(gray.roi(face), eyes);
+                    for (let j = 0; j < eyes.size(); j++) {
+                        let eye = eyes.get(j);
+                        let eyeCenterX = face.x + eye.x + eye.width / 2;
+                        let eyeCenterY = face.y + eye.y + eye.height / 2;
+                        cv.circle(imageData, [eyeCenterX, eyeCenterY], 4, [0, 0, 255, 255], -1);
+                        console.log('Eye Center: ', eyeCenterX, eyeCenterY);
+                        // 눈동자의 중심 위치 전달
+                        sendData({ "left_eye": eyeCenterX, "right_eye": eyeCenterY });
+                    }
+                    cv.rectangle(imageData, [face.x, face.y], [face.x + face.width, face.y + face.height], [255, 0, 0, 255], 2);
+                }
+
+                context.putImageData(imageData, 0, 0);
+                gray.delete();
+                faces.delete();
+                eyes.delete();
+            }, 100);
+        };
+
+
+        function sendData(data) {
+                $.ajax({
+                    url: "/eye_info/",
+                    type: "POST",
+                    data: data,
+                    success: function (response) {
+                        console.log(response);
+                    },
+                    error: function (xhr) {
+                        console.log(xhr);
+                    }
+                });
+            }
+        
+
+        
+    </script>
+
+   
+</body>
+
+</html>
