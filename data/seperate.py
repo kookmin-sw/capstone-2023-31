@@ -15,13 +15,15 @@ for folder in folder_name:
 	#data_path=base_folder_path+folder
 	#train_path=data_path+"/train"
 	#test_path=data_path+"/test"
-	data_path=base_folder_path
+	data_path=base_folder_path+'/'+folder
 	train_path=data_path+"/train"
 	test_path=data_path+"/test"
 	# train set 폴더 생성
 	if not os.path.exists(train_path):
 	    os.makedirs(train_path)
 
+	for file in os.listdir(data_path):
+		print(file)
 	# test set 폴더 생성
 	if not os.path.exists(test_path):
 	    os.makedirs(test_path)
