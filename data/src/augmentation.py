@@ -8,11 +8,13 @@ import os
 #dirlist=["heart","oblong","oval","round","square"]
 #for face_dir in dirlist:
 	#base_dir=os.path.join(root_dir,face_dir)
-base_dir="/Users/gimsubin/Desktop/2023/2023-1/real_capstone/capstone-2023-31/data/dataset/train/heart"
+base_dir="/Users/gimsubin/Desktop/2023/2023-1/real_capstone/capstone-2023-31/data/dataset/dataset/train/oblong"
 for file in os.listdir(base_dir):
+	print(file)
 	# 이미지 증강할 데이터셋 경로 설정
-	file_path=os.getcwd(base_dir,file)
-	p = Augmentor.Pipeline(file_path)
+	file_path=os.path.join(base_dir,file)
+	print(file_path)
+	p = Augmentor.Pipeline(base_dir)
 
 	# 다양한 증강 기법 적용
 	p.rotate(probability=0.5, max_left_rotation=10, max_right_rotation=10)
@@ -23,5 +25,5 @@ for file in os.listdir(base_dir):
 	p.random_distortion(probability=0.5, grid_width=4, grid_height=4, magnitude=8)
 
 	# 증강된 이미지 저장 폴더 경로 설정
-	#save_dir=os.path.join(root_dir,"save/"+face_dir)
-	p.sample(100)    
+
+	p.sample(150)    
