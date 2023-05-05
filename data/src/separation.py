@@ -3,7 +3,7 @@ import shutil
 from sklearn.model_selection import train_test_split
 
 # define directory paths
-root_dir = os.path.join(os.getcwd(),"faceshape_master/published_dataset")
+root_dir = "/Users/gimsubin/Desktop/2023/2023-1/real_capstone/capstone-2023-31/data/dataset/face_dataset"
 train_dir = os.path.join(root_dir,"train")
 test_dir = os.path.join(root_dir,"test")
 
