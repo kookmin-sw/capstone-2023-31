@@ -20,12 +20,10 @@ function FaceAnalyze(){
   }).category;
 
   return(
-
-    
-    <div style={{ height: "100vh"}}>
+    <div className="container">
       <Header/>
       <div className="face-analyze-container">
-        <div style={{ fontSize: "20px",fontWeight: "bold"}}>{maxCategory} 얼굴</div>
+        <div style={{ fontSize: "20px",fontWeight: "bold", marginTop: "20px"}}>{maxCategory} 얼굴</div>
         <div className="chart-wrapper">
           <RadarChart cx={200} cy={200} outerRadius={120} width={400} height={400} data={data}>
             <PolarGrid />
@@ -34,17 +32,18 @@ function FaceAnalyze(){
           </RadarChart>
         </div>
       </div>
-      <div style={{ fontSize: "20px",fontWeight: "bold", marginLeft: "30px"}}>얼굴형 분석 결과</div>
+      <div style={{ fontSize: "20px",fontWeight: "bold", margin: "0 30px"}}>얼굴형 분석 결과</div>
       <div className="face-text">
         얼굴 비율이 OO한 편이에요.
       </div>
-      <div style={{ fontSize: "20px",fontWeight: "bold", marginLeft: "30px"}}>추천 프레임</div>
+      <div style={{ fontSize: "20px",fontWeight: "bold", margin: "0 30px"}}>추천 프레임</div>
       <div className="face-text">
         OOO 프레임 추천!
       </div>
-      <div style={{ display:"flex", flexDirection:"column", marginLeft: "30px", marginRight: "30px"}}>
-        <Button type="primary" onClick={()=>navigate('/camera')}>추천 안경테 적용해보기</Button>
-      </div>
+      {/* <div style={{ display:"flex", flexDirection:"column", marginLeft: "30px", marginRight: "30px"}}> */}
+      <Button style={{margin: "15px 30px"}} type="primary" onClick={()=>navigate('/camera')}>추천 안경테 적용해보기</Button>
+      {/* </div> */}
+      <Footer/>
     </div>
     
   )
