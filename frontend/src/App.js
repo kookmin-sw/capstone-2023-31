@@ -7,10 +7,11 @@ import
 } from "react-router-dom";
 import MainPage from './pages/MainPage/MainPage';
 import SearchName from './pages/CameraPage/SearchName';
-import Webcam from './pages/CameraPage/Webcam';
-import DetailPage from './pages/DetailPage/DetailPage';
+import Camera from './pages/CameraPage/Camera';
+import ListPage from './pages/ListPage/ListPage';
 import FaceAnalyze from './pages/Analyzepage/FaceAnalyze';
 import MyPage from './pages/MyPage/MyPage';
+import Detail from './pages/DetailPage/Detail'
 
 // function App() {
 //   const [msg, setMsg] = useState([]);
@@ -36,10 +37,11 @@ function App() {
         <Routes>
           <Route path="/" element={<MainPage />}></Route>
           <Route path="/searchname" element={<SearchName />}></Route>
-          <Route path="/camera" element={<Webcam />}></Route>
-          <Route path="/detail" element={<DetailPage />}></Route>
+          <Route path="/camera" element={<Camera />}></Route>
+          <Route path="/list/:style" element={<ListPage />}></Route>
           <Route path="/mypage" element={<MyPage />}></Route>
           <Route path="/analyze" element={<FaceAnalyze/>}></Route>
+          <Route path="/detail" element={<Detail/>}></Route>
 
         </Routes>
       </Router>
