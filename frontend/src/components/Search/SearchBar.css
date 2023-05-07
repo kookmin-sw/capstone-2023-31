@@ -1,0 +1,11 @@
+.search{
+  display: flex;
+  justify-content: flex-end;
+  margin: 20px;
+  /* align-items: center; */
+}
+
+.s-bar{
+  /* float: right; */
+  width: 300px;
+}
