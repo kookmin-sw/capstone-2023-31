@@ -4,7 +4,7 @@
 
 ### 1. 프로젝트 소개
 
-<p align="center"><img src="https://user-images.githubusercontent.com/63188042/236893857-af3b387c-4a43-4274-82e4-1fc8a48a77ec.png" width="300" height="300"/></p>
+<p align="center"><img src="https://user-images.githubusercontent.com/63188042/236893857-af3b387c-4a43-4274-82e4-1fc8a48a77ec.png"></p>
 
 Glassify는 가상 안경 피팅 웹서비스 입니다.
 
