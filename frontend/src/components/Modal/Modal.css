@@ -1,6 +1,8 @@
 .modal-close-btn {
-  float: right;
   border: none;
-  background-color: white;
+  margin: 0;
   padding: 0;
+  position: relative;
+  bottom: 15px;
+  left: 5px;
 }
