@@ -10,12 +10,12 @@ SAMPLE_DIR = r'./assets/images/sample1.jpg'
 TEMP_DIR = r'./assets/images/temp1.jpg'
 RES_DIR = r'./assets/images/result1.png'
 
-### 이미지 자르기
-###### 이미지 띄우기
+## 이미지 자르기
+### 이미지 띄우기
 img = cv2.imread(SAMPLE_DIR)
 img_gray = cv2.imread(SAMPLE_DIR, cv2.IMREAD_GRAYSCALE)
 
-##### 가우시안 블러
+### 가우시안 블러
 blur = cv2.GaussianBlur(img_gray, ksize=(3,3), sigmaX=0)
 ret, thresh1 = cv2.threshold(blur, 127, 255, cv2.THRESH_BINARY)
 
@@ -31,7 +31,7 @@ total = 0
 contours_xy = np.array(list(contours), dtype=object)
 # contours_xy = np.vstack(contours).squeeze()
 
-##### x 최솟값 최댓값 찾기
+### x 최솟값 최댓값 찾기
 x_min, x_max = 0, 0
 tmp = list()
 for i in range(len(contours_xy)):
@@ -40,7 +40,7 @@ for i in range(len(contours_xy)):
         x_min = min(tmp)
         x_max = max(tmp)
 
-##### y 최솟값 최댓값 찾기
+### y 최솟값 최댓값 찾기
 y_min, y_max = 0, 0
 tmp = list()
 for i in range(len(contours_xy)):
@@ -49,7 +49,7 @@ for i in range(len(contours_xy)):
         y_min = min(tmp)
         y_max = max(tmp)
 
-##### image trim
+### image trim
 x = x_min
 y = y_min
 w = x_max - x_min
