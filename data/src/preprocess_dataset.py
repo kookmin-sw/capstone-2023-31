@@ -25,6 +25,7 @@ def preprocess_dataset(dataset_path, target_size):
             continue
         print(foldername)
         folderpath = os.path.join(dataset_path, foldername)
+        numpy_folder_path=os.path.join("data",foldername)
         label_images = []
         i = 0
         j = 0
@@ -43,7 +44,8 @@ def preprocess_dataset(dataset_path, target_size):
                 label_images = np.array(label_images)
                 print(label_images[0][0][0])
                 # 레이블 별로 전처리된 이미지 저장 (이어쓰기 모드)
-                np.savez(os.path.join(os.path.join(dataset_path,"data"), foldername + '_preprocessed_data_' + str(j) + '.npz'), images=label_images, label=foldername, append=j != 0)
+
+                np.savez_compressed(os.path.join(os.path.join(dataset_path,numpy_folder_path), foldername + '_preprocessed_data_' + str(j) + '.npz'), images=label_images, label=foldername, append=j != 0)
 
                 label_images = []  # 다음 배치를 위해 초기화
                 j += 1
@@ -54,11 +56,12 @@ def preprocess_dataset(dataset_path, target_size):
             label_images = np.array(label_images)
 
             # 레이블 별로 전처리된 이미지 저장 (이어쓰기 모드)
-            np.savez(os.path.join(os.path.join(dataset_path,"data"), foldername + '_preprocessed_data_' + str(j) + '.npz'), images=label_images, label=foldername, append=j != 0)
+            np.savez_compressed(os.path.join(os.path.join(dataset_path,numpy_folder_path), foldername + '_preprocessed_data_' + str(j) + '.npz'), images=label_images, label=foldername, append=j != 0)
             print(j,end=" ")
 
-#,"round"
-dirlists=["heart","oval","square","oblong","round"]
+#dirlists=["heart","oval","square","oblong","round"]
+
+dirlists=["oval","square","oblong","round"]
 dataset_path="/Users/gimsubin/Desktop/2023/2023-1/real_capstone/capstone-2023-31/data/dataset/dataset/train/"
 
 preprocess_dataset(dataset_path,(224, 224))
