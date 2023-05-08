@@ -6,9 +6,9 @@ import cv2, sys
 from matplotlib import pyplot as plt
 import numpy as np
 
-SAMPLE_DIR = r'./assets/images/sample1.jpg'
-TEMP_DIR = r'./assets/images/temp1.jpg'
-RES_DIR = r'./assets/images/result1.png'
+SAMPLE_DIR = r'./face-detection/assets/images/sample1.jpg'
+TEMP_DIR = r'./face-detection/assets/images/temp1.jpg'
+RES_DIR = r'./face-detection/assets/images/result1.png'
 
 ## 이미지 자르기
 ### 이미지 띄우기
