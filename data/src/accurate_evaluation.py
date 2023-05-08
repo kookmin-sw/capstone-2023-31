@@ -58,7 +58,7 @@ test_labels = np.array(test_labels)
 print("테스트 데이터 준비 완료")
 
 # K-Nearest Neighbors(KNN) 분류기 초기화
-knn = KNeighborsClassifier(n_neighbors=3)
+knn = KNeighborsClassifier(n_neighbors=4)
 
 # 각 카테고리에 대해 KNN 모델 학습 및 테스트
 predictions = []
