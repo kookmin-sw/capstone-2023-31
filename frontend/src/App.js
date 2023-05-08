@@ -6,8 +6,8 @@ import
    Route,
 } from "react-router-dom";
 import MainPage from './pages/MainPage/MainPage';
-import SearchName from './pages/CameraPage/SearchName';
-import Camera from './pages/CameraPage/Camera';
+import AnalyzeCamera from './pages/CameraPage/AnalyzeCamera';
+import FittingCamera from './pages/CameraPage/FittingCamera';
 import ListPage from './pages/ListPage/ListPage';
 import FaceAnalyze from './pages/Analyzepage/FaceAnalyze';
 import MyPage from './pages/MyPage/MyPage';
@@ -36,12 +36,12 @@ function App() {
       <Router>
         <Routes>
           <Route path="/" element={<MainPage />}></Route>
-          <Route path="/searchname" element={<SearchName />}></Route>
-          <Route path="/camera" element={<Camera />}></Route>
+          <Route path="/analyze/camera" element={<AnalyzeCamera />}></Route>
+          <Route path="/product/camera" element={<FittingCamera />}></Route>
           <Route path="/list/:style" element={<ListPage />}></Route>
           <Route path="/mypage" element={<MyPage />}></Route>
-          <Route path="/analyze" element={<FaceAnalyze/>}></Route>
-          <Route path="/detail" element={<Detail/>}></Route>
+          <Route path="/analyze/result" element={<FaceAnalyze/>}></Route>
+          <Route path="/product" element={<Detail/>}></Route>
 
         </Routes>
       </Router>

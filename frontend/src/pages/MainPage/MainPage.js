@@ -17,7 +17,7 @@ function MainPage() {
     if (e == ''){
       alert("입력 필수")
     }else {
-    navigate('/detail', {state: {value: e}});
+    navigate('/product', {state: {value: e}});
     }
   }
 
@@ -64,21 +64,18 @@ function MainPage() {
           <div className="info-text">
             가상 안경 피팅 서비스 !<br/><br/>
             얼굴형 분석으로 안경 추천까지<br/><br/>
-            <Button type="primary" onClick={()=>navigate('/camera')}>얼굴형 분석하러 가기</Button>
+            <Button type="primary" onClick={()=>navigate('/analyze/camera')}>얼굴형 분석하러 가기</Button>
           </div>
           <img className="wear-glass-image" alt="wear-glass" src="/images/frame1.png" />
         </div>
-
         <SearchBar/>
-        {/* <div className="search">
-          <Search className="s-bar" placeholder="안경 검색하기" onSearch={onSearch} />
-        </div> */}
+    
 
         <div className="random-glasses">
           <Slider {...settings}>
             {slideData.map((item) => (
               <div key={item.id}>
-                <Link className="link" to="/detail" state={item}>
+                <Link className="link" to="/product" state={item}>
                   <img style={{ width: "210px", height: "150px"}}src={item.image}></img>
                 </Link>
               </div>

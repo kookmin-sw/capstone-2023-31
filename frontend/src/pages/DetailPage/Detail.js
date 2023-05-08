@@ -1,9 +1,10 @@
-import { useLocation } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
 import Footer from "../../components/Footer/Footer";
 import Header from "../../components/Header/Header";
 import "./Detail.css"
 import { Button } from "antd";
 function Detail(){
+  const navigate = useNavigate();
   const data = useLocation();
   console.log(data.state);
 
@@ -24,7 +25,7 @@ function Detail(){
           </div>
           <div style={{display:"flex", marginTop: "20px"}}>
             <Button>❤</Button>
-            <Button style={{flex:1}}>가상 피팅하러 가기</Button>
+            <Button style={{flex:1}} onClick={()=>navigate('/product/camera')}>가상 피팅하러 가기</Button>
           </div>
           <Button type="primary" style={{marginTop: "10px"}}>구매하기</Button>
       </div>

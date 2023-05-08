@@ -12,7 +12,7 @@ const videoConstraints = {
   facingMode: "user"
 };
 
-function Camera(){
+function FittingCamera(){
   const navigate = useNavigate('');
 
   const webcamRef = useRef(null);
@@ -45,7 +45,7 @@ function Camera(){
             // height={600}
             ref={webcamRef}
             screenshotFormat="image/jpeg"
-            width={650}
+            width={750}
             videoConstraints={videoConstraints}
           />
           <Button 
@@ -62,7 +62,6 @@ function Camera(){
             <img src={imageSrc} alt="Captured" />
           </div>
           )}
-          <Button className="face-btn" shape="round" onClick={()=> navigate('/analyze')}>얼굴형 분석</Button>
         </div>
         <Footer/>
     </div>
@@ -71,4 +70,4 @@ function Camera(){
 }
 
 
-export default Camera;
+export default FittingCamera;

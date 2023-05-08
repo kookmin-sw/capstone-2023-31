@@ -1,20 +1,15 @@
-/* .camera-container{
-  /* display: flex;
-  flex-direction: column; 
-  height: 100vh;
-  /* position: relative; 
-} 
-*/
-
 .webcam-container{
   display: flex;
   flex-direction: column;
   align-items: center;
   flex: 1;
+  margin-top: 20px;
 }
 
-.webcam {
-  margin-top: 20px;
+.display-container{
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 }
 
 .face-btn {
