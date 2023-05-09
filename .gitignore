@@ -434,5 +434,6 @@ data/dataset
 faceshape-master
 *.pkl
 *.h5
+*.rdb
 # End of https://www.toptal.com/developers/gitignore/api/react,python,django,venv,macos,windows,git,sublimetext,visualstudiocode
 
