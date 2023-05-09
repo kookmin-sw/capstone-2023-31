@@ -12,7 +12,7 @@ eye_xml = 'backend/eyeglassy/face_detection/haarcascade_eye.xml'
 
 
 def main(request):
-    return render(request, "main.html")
+    return render(request, "face_detection/main.html")
 
 '''
 async def camera_stream():
@@ -30,7 +30,7 @@ async def camera_stream():
         yield (b'--frame\r\n'
                b'Content-Type: image/jpeg\r\n\r\n' + frame_bytes + b'\r\n')
 
-        #return render(request, 'camera_stream.html', {'frame': frame_bytes})
+        #return render(request, 'face_detection/camera_stream.html', {'frame': frame_bytes})
 '''
 async def camera_stream():
     capture = cv2.VideoCapture(0)
