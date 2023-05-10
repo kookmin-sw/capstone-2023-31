@@ -4,5 +4,5 @@ from django.db import models
 
 
 class Glasses(models.Model):
-    # 안경 모델의 필드 정의
-    pass
+    glasses_id=models.IntegerField()
+    glass_name=models.CharField(max_length=20,null=True, blank=True)
