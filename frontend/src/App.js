@@ -1,4 +1,5 @@
 import './App.css';
+
 import React, { useState, useEffect } from "react";
 import 
 { BrowserRouter as Router,
@@ -37,10 +38,10 @@ function App() {
         <Routes>
           <Route path="/" element={<MainPage />}></Route>
           <Route path="/analyze/camera" element={<AnalyzeCamera />}></Route>
+          <Route path="/analyze/result" element={<FaceAnalyze />}></Route>
           <Route path="/product/camera" element={<FittingCamera />}></Route>
           <Route path="/list/:style" element={<ListPage />}></Route>
           <Route path="/mypage" element={<MyPage />}></Route>
-          <Route path="/analyze/result" element={<FaceAnalyze/>}></Route>
           <Route path="/product" element={<Detail/>}></Route>
 
         </Routes>
