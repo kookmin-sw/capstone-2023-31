@@ -1,6 +1,5 @@
 import React, { useState } from 'react';
-import ReactPaginate from 'react-paginate'
-
+import ReactPaginate from 'react-paginate';
 function Paginator(){
   const [currentPage, setCurrentPage] = useState(0);
   const handlePageClick = (data) => {
