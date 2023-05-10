@@ -38,8 +38,8 @@ with open('sample_products.csv', 'w', encoding='utf-8-sig', newline='') as f:
 # def save_image(image):
 #     image_num = 0
 #     try:
-#         if not os.path.exists('../media/input'):
-#             os.makedirs('../media/input')
+#         if not os.path.exists('../image/input'):
+#             os.makedirs('../image/input')
 #         urllib.request.urlretrieve(image, 'input'+str(image_num)+'.jpg')
 #     except:
 #         print('error:', image_num)
@@ -97,10 +97,10 @@ for page in range(1, 4):
         product_info.append(image)
         
         try:
-            # if not os.path.exists('../media/input'):
-            #     os.makedirs('../media/input')
+            # if not os.path.exists('../image/input'):
+            #     os.makedirs('../image/input')
             img_name = 'img' + str(img_num) + '.jpg'
-            urllib.request.urlretrieve(image, './media/input/'+img_name) # 다른 폴더 저장으로 변경 필요
+            urllib.request.urlretrieve(image, './image/input/'+img_name) # 다른 폴더 저장으로 변경 필요
         except:
             print('error:', idx)
 

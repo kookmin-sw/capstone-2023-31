@@ -6,9 +6,9 @@ import numpy as np
 # SAMPLE_DIR = r'./face-detection/assets/images/sample1.jpg'
 # TEMP_DIR = r'./face-detection/assets/images/temp1.jpg'
 # RES_DIR = r'./face-detection/assets/images/result1.png'
-INPUT_DIR = r'./media/input/'
-TEMP_DIR = r'./media/temp/'
-OUTPUT_DIR = r'./media/output/'
+INPUT_DIR = r'./image/input/'
+TEMP_DIR = r'./image/temp/'
+OUTPUT_DIR = r'./image/output/'
 
 
 ## 이미지 자르기
