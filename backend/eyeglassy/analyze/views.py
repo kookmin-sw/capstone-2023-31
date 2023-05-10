@@ -1,3 +1,5 @@
+from django.http import JsonResponse
+from django.middleware.csrf import get_token
 from django.shortcuts import render
 import cv2
 import numpy as np
@@ -9,8 +11,17 @@ import os
 from django.conf import settings
 import subprocess
 from . import analyze
+from django.views.decorators.csrf import csrf_exempt
+
+from rest_framework.decorators import api_view
+from rest_framework.response import Response
+from rest_framework import status
+from django.conf import settings
 
 static_path = os.path.join(settings.BASE_DIR, 'media')
+
+
+
 
 
 def run_modeling(image_file):
@@ -39,23 +50,25 @@ def upload(request):
     return render(request, 'analyze/upload.html')
 
 
-def show_result(request):
-    if request.method == 'POST':
-        # Get the uploaded image file from the form
+@api_view(['GET'])
+def get_csrf_token(request):
+    # 클라이언트에게 CSRF 토큰을 반환
+    return JsonResponse({'csrfToken': get_token(request)})
+
+
+@api_view(['POST'])
+def analyze_face(request):
+    try:
         image_file = request.FILES['image']
+    except KeyError:
+        return Response(status=status.HTTP_400_BAD_REQUEST)
 
-        # Save the uploaded image file to the media directory
-        image_path = os.path.join('media', image_file.name)
-        with open(image_path, 'wb+') as destination:
-            for chunk in image_file.chunks():
-                destination.write(chunk)
-        
-        # Call the run_modeling function from analyze.py
-        predicted_shape = analyze.run_modeling(static_path, image_path)
+    image_path = os.path.join(settings.MEDIA_ROOT, image_file.name)
 
-        if predicted_shape is not None:
-            return render(request, 'analyze/result.html', {'predicted_shape': predicted_shape})
-        else:
-            return render(request, 'analyze/result.html', {'predicted_shape': 'No face detected'})
+    with open(image_path, 'wb+') as destination:
+        for chunk in image_file.chunks():
+            destination.write(chunk)
 
-   
+    predicted_shape = analyze.run_modeling(static_path, image_path)
+
+    return Response({'predicted_shape': predicted_shape})
