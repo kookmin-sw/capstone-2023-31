@@ -10,7 +10,7 @@ import joblib
 import os
 from django.conf import settings
 import subprocess
-import analyze
+from . import analyze
 from django.views.decorators.csrf import csrf_exempt
 
 from rest_framework.decorators import api_view
