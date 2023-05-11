@@ -68,7 +68,7 @@ function FittingCamera(){
             // height={600}
             ref={webcamRef}
             screenshotFormat="image/jpeg"
-            width={750}
+            width={1000}
             videoConstraints={videoConstraints}
           />
           <Button 

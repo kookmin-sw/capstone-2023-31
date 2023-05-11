@@ -10,7 +10,7 @@
 }
 
 .app-name {
-  font-size: 30px;
+  font-size: 40px;
   margin: 0 2rem;
 }
 
@@ -22,6 +22,7 @@
 .profile ul li{
   list-style: none;
   margin-right: 1rem;
+  font-size: 20px;
 }
 
 .link {

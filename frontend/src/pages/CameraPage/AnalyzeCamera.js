@@ -102,7 +102,7 @@ function AnalyzeCamera() { //카메라
                 audio={false}
                 ref={webcamRef}
                 screenshotFormat="image/jpeg"
-                width={750}
+                width={1000}
                 videoConstraints={videoConstraints}
               />
               <Button
