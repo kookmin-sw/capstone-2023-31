@@ -48,7 +48,7 @@ function ListPage() {
                     >
                     <Link 
                       className="link" 
-                      to={`/detail`}
+                      to={`/product`}
                       state={item}
                       >
                     <div style={{display: "flex", flexDirection:"column"}}>

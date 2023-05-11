@@ -18,14 +18,14 @@ function FittingCamera(){
   
   const webcamRef = useRef(null);
   const [imageSrc, setImageSrc] = useState(null);
-  const [sfile, setFile] = useState(null);
-  // useEffect(() => {
-  //   const interval = setInterval(() => {
-  //     capture();
-  //   }, 100);
+  const [mirror, setMirror] = useState(false);
+  useEffect(() => {
+    const interval = setInterval(() => {
+      capture();
+    }, 100);
 
-  //   return () => clearInterval(interval);
-  // }, []);
+    return () => clearInterval(interval);
+  }, []);
 
   const capture = useCallback(
     () => {
@@ -53,14 +53,6 @@ function FittingCamera(){
     
     <div className="container">
         <Header/>
-        {/* <WebCam
-          audio={false}
-          // video={true}
-          mirrored={true}
-          // style={{ width: '80%', height: '50%' }}
-        /> */}
-        {/* <div className="camera-container"> */}
-            
         <div className="webcam-container">
           <Webcam
             className="webcam"
@@ -70,22 +62,24 @@ function FittingCamera(){
             screenshotFormat="image/jpeg"
             width={1000}
             videoConstraints={videoConstraints}
+            mirrored={mirror}
           />
           <Button 
-            className="capture-btn" 
+            size="large"
             shape="round" 
-            onClick={capture}
+            onClick={()=>setMirror(!mirror)}
             style={{
                marginTop: "20px"
             }}
-          >사진 찍기</Button>
+          >좌우 반전</Button>
+         <div className="captured-image-container">
           {imageSrc && (
-          <div>
-            <h2>Captured Image:</h2>
+          <div className="captured-image">
             <img src={imageSrc} alt="Captured" />
-            <div>{sfile}</div>
+            <div>사진 찍히고 있는 중</div>
           </div>
           )}
+          </div>
         </div>
         <Footer/>
     </div>

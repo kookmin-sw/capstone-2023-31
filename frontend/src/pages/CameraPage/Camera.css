@@ -4,6 +4,7 @@
   align-items: center;
   flex: 1;
   margin-top: 20px;
+  position: relative;
 }
 
 .display-container{
@@ -17,4 +18,8 @@
   /* position: absolute;
   bottom: 12px;
   right: 12px; */
+}
+
+.captured-image-container {
+  position: absolute;
 }

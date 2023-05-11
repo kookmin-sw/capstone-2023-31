@@ -22,26 +22,26 @@
     }
 
     const slideData = [
-      { id: 1, image: '/images/image1.png', brandName: "AAA", name: "BBB", price: "30,000"},
-      { id: 2, image: '/images/image1.png', brandName: "AAA", name: "BBB", price: "30,000"},
-      { id: 3, image: '/images/image1.png', brandName: "AAA", name: "BBB", price: "30,000"},
-      { id: 4, image: '/images/image1.png', brandName: "AAA", name: "BBB", price: "30,000"},
-      { id: 5, image: '/images/image1.png', brandName: "AAA", name: "BBB", price: "30,000"},
-      { id: 6, image: '/images/image1.png', brandName: "AAA", name: "BBB", price: "30,000"},
-      { id: 7, image: '/images/image1.png', brandName: "AAA", name: "BBB", price: "30,000"},
-      { id: 8, image: '/images/image1.png', brandName: "AAA", name: "BBB", price: "30,000"},
-      { id: 9, image: '/images/image1.png', brandName: "AAA", name: "BBB", price: "30,000"},
-      { id: 10, image: '/images/image1.png', brandName: "AAA", name: "BBB", price: "30,000"},
-      { id: 11, image: '/images/image1.png', brandName: "AAA", name: "BBB", price: "30,000"},
-      { id: 12, image: '/images/image1.png', brandName: "AAA", name: "BBB", price: "30,000"},
-      { id: 13, image: '/images/image1.png', brandName: "AAA", name: "BBB", price: "30,000"},
-      { id: 14, image: '/images/image1.png', brandName: "AAA", name: "BBB", price: "30,000"},
+      { id: 1, image: '/images/glasses2.jpg', brandName: "AAA", name: "BBB", price: "30,000"},
+      { id: 2, image: '/images/glasses3.jpg', brandName: "AAA", name: "BBB", price: "30,000"},
+      { id: 3, image: '/images/glasses4.jpg', brandName: "AAA", name: "BBB", price: "30,000"},
+      { id: 4, image: '/images/glasses2.jpg', brandName: "AAA", name: "BBB", price: "30,000"},
+      { id: 5, image: '/images/glasses3.jpg', brandName: "AAA", name: "BBB", price: "30,000"},
+      { id: 6, image: '/images/glasses4.jpg', brandName: "AAA", name: "BBB", price: "30,000"},
+      { id: 7, image: '/images/glasses2.jpg', brandName: "AAA", name: "BBB", price: "30,000"},
+      { id: 8, image: '/images/glasses3.jpg', brandName: "AAA", name: "BBB", price: "30,000"},
+      { id: 9, image: '/images/glasses4.jpg', brandName: "AAA", name: "BBB", price: "30,000"},
+      { id: 10, image: '/images/glasses3.jpg', brandName: "AAA", name: "BBB", price: "30,000"},
+      { id: 11, image: '/images/glasses2.jpg', brandName: "AAA", name: "BBB", price: "30,000"},
+      { id: 12, image: '/images/glasses4.jpg', brandName: "AAA", name: "BBB", price: "30,000"},
+      { id: 13, image: '/images/glasses3.jpg', brandName: "AAA", name: "BBB", price: "30,000"},
+      { id: 14, image: '/images/glasses4.jpg', brandName: "AAA", name: "BBB", price: "30,000"},
     ];
 
     const gridData = [
-      { style: "round", stylename: "둥근형", image: '/images/image1.png'},
-      { style: "square", stylename: "사각형", image: '/images/image1.png'},
-      { style: "etc", stylename: "기타", image: '/images/image1.png'},
+      { style: "round", stylename: "둥근형", image: '/images/glasses2.jpg'},
+      { style: "square", stylename: "사각형", image: '/images/glasses3.jpg'},
+      { style: "etc", stylename: "기타", image: '/images/glasses4.jpg'},
     ]
 
     const settings = {
@@ -73,7 +73,7 @@
               {slideData.map((item) => (
                 <div key={item.id}>
                   <Link className="link" to="/product" state={item}>
-                    <img src={item.image}></img>
+                    <img style={{ width: "250px", height: "250px"}} src={item.image}></img>
                   </Link>
                 </div>
               )) }
