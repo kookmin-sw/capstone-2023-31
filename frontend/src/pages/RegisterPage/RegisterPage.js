@@ -5,6 +5,7 @@ import Footer from "../../components/Footer/Footer";
 import Header from "../../components/Header/Header";
 
 function RegisterPage(props) {
+    const navigate = useNavigate();
     const [Email, setEmail] = useState("");
     const [Nickname, setNickname] = useState("");
     const [Password, setPassword] = useState("");
@@ -45,7 +46,8 @@ function RegisterPage(props) {
                 })
                     .then(response => {
                         if (response.data.success) {
-                            props.history.push('/user/login');
+                            alert(response.data.message);
+                            navigate('/user/login');
                         } else {
                             alert('Error');
                         }
