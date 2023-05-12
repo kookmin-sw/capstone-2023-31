@@ -14,6 +14,8 @@ from PIL import Image
 # from urllib.request import urlopen
 
 
+# 파일 실행 경로 : /crawling
+
 regex = r'\([^)]*\)' # 괄호
 regex2 = r'\[[^]]*\]' # 대괄호
 base_url = 'https://www.top50glasses.com'
@@ -30,7 +32,7 @@ driver = webdriver.Chrome(service= Service(ChromeDriverManager().install()))
 
 header = ['name', 'cost', 'brand', 'url', 'image']
 
-with open('sample_products.csv', 'w', encoding='utf-8-sig', newline='') as f:
+with open('./products.csv', 'w', encoding='utf-8-sig', newline='') as f:
     writer = csv.writer(f)
     writer.writerow(header)
 
@@ -47,10 +49,10 @@ with open('sample_products.csv', 'w', encoding='utf-8-sig', newline='') as f:
 # 크롤링
 img_num = 0
 
-for page in range(1, 4):
+for page in range(1, 69):
     url = product_list_url + str(page)
     driver.get(url)
-    time.sleep(0.5) # 1초 기다림
+    time.sleep(0.5) # 0.5초 기다림
 
     response = requests.get(product_list_url + str(page))
     soup = BeautifulSoup(response.text, 'html.parser')
@@ -88,25 +90,35 @@ for page in range(1, 4):
         # url
         url = product.select_one('div.pd-thumb-rect > a')['href']
         url = re.sub('./store', '/store', url)
-        url = base_url + url
+        url = base_url + '/shop/goods' + url
         product_info.append(url)
 
         # image url
-        image = product.select_one('div.pd-thumb-rect > a > img')['src']
-        image = base_url + image
-        product_info.append(image)
+        image_url = product.select_one('div.pd-thumb-rect > a > img')['src']
+        image_url = base_url + image_url
+        # product_info.append(image) # image url을 append 하지 말고, media 폴더에 저장하는 image이름을 append해주자.
         
         try:
-            # if not os.path.exists('../image/input'):
-            #     os.makedirs('../image/input')
             img_name = 'img' + str(img_num) + '.jpg'
-            urllib.request.urlretrieve(image, './image/input/'+img_name) # 다른 폴더 저장으로 변경 필요
+            # print('***', img_name, os.getcwd())
+            urllib.request.urlretrieve(image_url, './image/input/'+img_name)
+
+            # 이미지 저장 다시 !!! 
+            # img_name = 'img' + str(img_num) + '.jpg'
+            # img = Image.open(image_url)
+            # print(img)
+            # img.save('./image/input/' + img_name, 'JPG')
+
+            # img = Image.open(TEMP_DIR + 'temp' + str(idx) + '.jpg')
+            # img = img.convert('RGBA')
+            # img.save(OUTPUT_DIR + 'res' + str(idx) + '.png', 'PNG') # png로 저장
         except:
             print('error:', idx)
+        product_info.append(img_name)
 
         # 파일 저장
         # writer.writerow(product_info)
-        with open('sample_products.csv', 'a', encoding='utf-8-sig', newline='') as f:
+        with open('./products.csv', 'a', encoding='utf-8-sig', newline='') as f:
             writer = csv.writer(f)
             writer.writerow(product_info)
 
