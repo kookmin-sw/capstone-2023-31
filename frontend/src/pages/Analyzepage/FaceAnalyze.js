@@ -4,24 +4,56 @@ import Footer from "../../components/Footer/Footer";
 import Header from "../../components/Header/Header";
 import './FaceAnalyze.css'
 import { ResponsiveContainer, Radar, RadarChart, PolarGrid, PolarAngleAxis, PolarRadiusAxis } from 'recharts';
-import { useLocation, useNavigate } from "react-router-dom";
+import { Link, useLocation, useNavigate } from "react-router-dom";
+import { useEffect, useState } from "react";
+import ModalComponent from "../../components/Modal/ModalComponent";
 
 function FaceAnalyze() {
   const navigate = useNavigate();
   const location = useLocation();
   const predictedShape = location.state; // backend에서 전달받음
 
+  const [showAlert, setShowAlert] = useState(false);
   const data = [    
     { category: 'heart', categoryName: "하트형", value: 25 },    //하트형
     { category: 'oblong', categoryName: "긴얼굴형", value: 25 }, //긴얼굴형
     { category: 'oval', categoryName: "타원형", value: 25 },     //타원형
     { category: 'round', categoryName: "둥근형", value: 25 },    //둥근형
     { category: 'square', categoryName: "사각형", value: 25 },   //사각형
+    { category: null, value: 0},   //사각형
   ];
+
 
   let updatedData = data;
   const ovalCategory = updatedData.find((obj) => obj.category === predictedShape);
-  ovalCategory.value = 100;
+
+  useEffect(()=>{
+    console.log(predictedShape)
+    if(predictedShape == null){
+      // setShowAlert(true);
+      alert("ㅎㅎ");
+      navigate('/analyze/camera')
+    }
+    else{
+      ovalCategory.value = 100;
+    }
+  }, [predictedShape])
+  
+  const [isModalOpen, setIsModalOpen] = useState(false)
+  
+  
+  const showModal = () => {
+    setIsModalOpen(true);
+  };
+  const handleOk = () => {
+    setIsModalOpen(false);
+  };
+  const handleCancel = () => {
+    setIsModalOpen(false);
+  };
+
+
+  
 
 
   const maxCategory = data.reduce((prev, current) => {
@@ -29,7 +61,11 @@ function FaceAnalyze() {
   }).category;
 
   return(
-    <div className="container">
+    <>
+    { predictedShape == null  ? (
+      null
+    ) : (
+      <div className="container">
       <Header/>
       <div className="face-analyze-container">
         <div style={{ fontSize: "20px",fontWeight: "bold", marginTop: "20px"}}>{ovalCategory.categoryName} 얼굴</div>
@@ -48,10 +84,12 @@ function FaceAnalyze() {
       <div style={{ fontSize: "20px",fontWeight: "bold", margin: "0 30px"}}>추천 프레임</div>
       <div className="face-text">
         OOO 프레임 추천!
-</div>
+      </div>
       <Button style={{ margin: "15px 30px" }} type="primary" onClick={() => navigate(`/list/round`)}>추천 안경테 적용해보기</Button>
       <Footer />
     </div>
+    )}
+    </>
   )
 }
 

@@ -9,6 +9,8 @@ import { Button, Row, Col} from 'antd';
 
 import EditProfile from "../../components/EditProfile";
 import { useNavigate, Link } from "react-router-dom";
+import { Provider, useSelector } from "react-redux";
+import store from "../../_reducer/wishReducer";
 
 
 function MyPage(){
@@ -42,6 +44,8 @@ function MyPage(){
 
   ];
 
+  const wishlist = useSelector(store => store.wishReducer);
+  console.log(wishlist)
   return (
     <div className="container">
       <Header/>
@@ -68,38 +72,44 @@ function MyPage(){
           <Button onClick={handleCancel} style={{ float:"right"}}>변경하기</Button>
         </ModalComponent>
 
-        <div className="dibs">
-          <div style={{fontSize:"20px", margin: "0 30px"}}>찜한 안경</div>
-          <div className="list-glasses" style={{marginBottom:"0"}}>
-          <Row gutter={[8,8]}>
-              {gridData.map((item, index) => (
-                  <Col key={index} lg={6} md={8} sm={12} xs={24}
-                    style={{display:"flex", flexDirection:"column", alignItems:"center", marginBottom:"3rem"}}
-                    >
-                    <Link 
-                      className="link" 
-                      to={`/detail`}
-                      state={item}
-                      >
-                    <div style={{display: "flex", flexDirection:"column"}}>
-                        <img 
-                          style={{ width:'250px', height:"160px"}}
-                          src={item.image}
+
+          <div className="dibs">
+            <div style={{fontSize:"20px", margin: "0 30px"}}>찜한 안경</div>
+            {wishlist.length == 0 ? (
+              <h2>찜한 상품이 없습니다.</h2>
+            ):(
+              <div className="list-glasses" style={{marginBottom:"0"}}>
+              <Row gutter={[8,8]}>
+                  {wishlist.map((item, index) => (
+                      <Col key={index} lg={6} md={8} sm={12} xs={24}
+                        style={{display:"flex", flexDirection:"column", alignItems:"center", marginBottom:"3rem"}}
+                        >
+                        <Link 
+                          className="link" 
+                          to={`/detail`}
+                          state={item}
                           >
-                        </img>
-                        <div>
-                          <div>{item.brandName}</div>
-                          <div>{item.name}</div>
-                          <div>{item.price}원</div>
+                        <div style={{display: "flex", flexDirection:"column"}}>
+                            <img 
+                              style={{ width:'250px', height:"160px"}}
+                              src={item.image}
+                              >
+                            </img>
+                            <div>
+                              <div>{item.brandName}</div>
+                              <div>{item.name}</div>
+                              <div>{item.price}원</div>
+                            </div>
                         </div>
-                    </div>
-                    </Link>
-                    
-                  </Col>
-            ))}
-            </Row>
+                        </Link>
+                        
+                      </Col>
+                ))}
+                </Row>
+            </div>
+            )}
           </div>
-        </div>
+
       </div>
       <Footer name="mypage"/>
     </div>

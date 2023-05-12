@@ -438,3 +438,6 @@ faceshape-master
 *.rdb
 # End of https://www.toptal.com/developers/gitignore/api/react,python,django,venv,macos,windows,git,sublimetext,visualstudiocode
 backend/face-detection(not use)/assets/
+
+blob
+*.blob
