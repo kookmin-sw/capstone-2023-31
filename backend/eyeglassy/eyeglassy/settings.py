@@ -41,6 +41,7 @@ INSTALLED_APPS = [
     'user',
     'analyze',
     'product',
+    'fitting',
     'corsheaders',
     'rest_framework',
 ]
