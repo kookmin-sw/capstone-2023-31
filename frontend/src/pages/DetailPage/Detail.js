@@ -24,10 +24,10 @@ function Detail(){
             <div style={{fontSize:"30px", float:"right"}}>{data.state.price}원</div>
           </div>
           <div style={{display:"flex", marginTop: "20px"}}>
-            <Button>❤</Button>
-            <Button style={{flex:1}} onClick={()=>navigate('/product/camera')}>가상 피팅하러 가기</Button>
+            <Button size="large">❤</Button>
+            <Button style={{flex:1}} size="large" onClick={()=>navigate('/product/camera')}>가상 피팅하러 가기</Button>
           </div>
-          <Button type="primary" style={{marginTop: "10px"}}>구매하기</Button>
+          <Button type="primary" size="large" style={{marginTop: "10px"}}>구매하기</Button>
       </div>
         </div>
       <Footer/>

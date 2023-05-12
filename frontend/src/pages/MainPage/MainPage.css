@@ -29,6 +29,7 @@
   flex: 1;
   text-align: center;
   color: white;
+  font-size: 20px;
   /* flex-shrink: 0;
 	width: 100px; */
 }
@@ -42,10 +43,29 @@
 }
 
 .random-glasses{
-  width: 85%;
-  margin: 1rem auto;
+  width: 80%;
+  margin: auto;
   flex-wrap: wrap;
   /* margin-right: 3rem; */
+  /* display: flex; */
+  /*width: 100%; */
+  margin-bottom: 30px;
+}
+
+.slick-carousel .slick-dots{
+  background-color: black;
+}
+
+.slick-slider {
+  /* width: 80%; */
+  margin: 0 auto;
+}
+.slick-slide {
+  margin: 0;
+}
+
+.link img {
+  margin: auto;
 }
 
 

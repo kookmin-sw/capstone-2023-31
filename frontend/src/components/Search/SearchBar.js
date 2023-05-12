@@ -14,7 +14,7 @@ function SearchBar(){
   }
   return(
     <div className="search">
-      <Search className="s-bar" placeholder="안경 검색하기" onSearch={onSearch} />
+      <Search className="s-bar" placeholder="안경 검색하기" onSearch={onSearch} size="large"/>
     </div>
   )
 }

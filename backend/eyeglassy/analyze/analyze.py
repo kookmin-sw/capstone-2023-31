@@ -10,7 +10,7 @@ import joblib
 
 def load_model_and_knn(static_path):
     model_path = os.path.join(static_path, "face_shape_model.h5")
-    knn_path = os.path.join(static_path, "knn_classifier.pkl")
+    knn_path = os.path.join(static_path,"knn_classifier.pkl")
 
     # Load the face shape classification model
     model = load_model(model_path)

@@ -1,21 +1,14 @@
 from django.http import JsonResponse
 from django.middleware.csrf import get_token
 from django.shortcuts import render
-import cv2
-import numpy as np
-from tensorflow.keras.preprocessing import image
-from tensorflow.keras.applications.vgg16 import preprocess_input
-from tensorflow.keras.models import load_model
-import joblib
-import os
-from django.conf import settings
-import subprocess
-from . import analyze
 from django.views.decorators.csrf import csrf_exempt
-
 from rest_framework.decorators import api_view
 from rest_framework.response import Response
 from rest_framework import status
+import os
+import subprocess
+
+from . import analyze
 from django.conf import settings
 
 static_path = os.path.join(settings.BASE_DIR, 'media')
@@ -55,6 +48,7 @@ def get_csrf_token(request):
 
 
 @api_view(['POST'])
+@csrf_exempt
 def analyze_face(request):
     try:
         image_file = request.FILES['image']
