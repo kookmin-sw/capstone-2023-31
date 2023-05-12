@@ -76,15 +76,15 @@ function FaceAnalyze() {
           </RadarChart>
         </div>
       </div>
-      <div style={{ fontSize: "20px",fontWeight: "bold", margin: "0 30px"}}>얼굴형 분석 결과</div>
+      <div style={{ fontSize: "20px",fontWeight: "bold", margin: "0 300px"}}>얼굴형 분석 결과</div>
       <div className="face-text">
         얼굴 비율이 OO한 편이에요.
       </div>
-      <div style={{ fontSize: "20px",fontWeight: "bold", margin: "0 30px"}}>추천 프레임</div>
+      <div style={{ fontSize: "20px",fontWeight: "bold", margin: "0 300px"}}>추천 프레임</div>
       <div className="face-text">
         OOO 프레임 추천!
       </div>
-      <Button style={{ margin: "15px 30px" }} type="primary" onClick={() => navigate(`/list/round`)}>추천 안경테 적용해보기</Button>
+      <Button style={{ margin: "15px 300px" }} size="large" type="primary" onClick={() => navigate(`/list/round`)}>추천 안경테 적용해보기</Button>
       <Footer />
     </div>
     )}
