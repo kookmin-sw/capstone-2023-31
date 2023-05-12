@@ -22,8 +22,6 @@ static_path = os.path.join(settings.BASE_DIR, 'media')
 
 
 
-
-
 def run_modeling(image_file):
     # 외부 파이썬 파일 실행
     result = subprocess.run(

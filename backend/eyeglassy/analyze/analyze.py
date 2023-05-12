@@ -49,6 +49,8 @@ def extract_features(face_image, model):
 
 
 def predict_face_shape(static_path, image_file):
+    print(static_path)
+
     # Load the saved model and knn classifier
     model, knn = load_model_and_knn(static_path)
     face_shapes = ['heart', 'oblong', 'oval', 'round', 'square']
@@ -74,7 +76,7 @@ def predict_face_shape(static_path, image_file):
 
         # Predict the face shape using the trained k-nearest neighbors classifier
         predicted_label = knn.predict(features)
-
+        
         # Map the predicted label to the face shape name
         predicted_shape = face_shapes[int(predicted_label)]
 
