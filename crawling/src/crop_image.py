@@ -2,23 +2,30 @@ from PIL import Image
 import cv2, sys
 from matplotlib import pyplot as plt
 import numpy as np
+import os
+import warnings
 
 # 실행 경로 /crawling
 
 # SAMPLE_DIR = r'./face-detection/assets/images/sample1.jpg'
 # TEMP_DIR = r'./face-detection/assets/images/temp1.jpg'
 # RES_DIR = r'./face-detection/assets/images/result1.png'
-INPUT_DIR = r'./image/input/'
-TEMP_DIR = r'./image/temp/'
-OUTPUT_DIR = r'./image/output/'
+INPUT_DIR = r'image/input/'
+TEMP_DIR = r'image/temp/'
+OUTPUT_DIR = r'image/output/'
 
+warnings.filterwarnings("ignore") # 경고 메세지 무시
 
 ## 이미지 자르기
 ### 이미지 띄우기
 
-for idx in range(0, 20):
+for idx in range(1, 675):
     try:
-        img = cv2.imread(INPUT_DIR + 'img' + str(idx) + '.jpg')
+        img = cv2.imread(INPUT_DIR + 'img' + str(idx) + '.jpg') # 이미지 없으면 None 반환
+        
+        if img is None: # 이미지가 없으면
+            raise Exception() # 예외 발생시킴
+
         img_gray = cv2.imread(INPUT_DIR + 'img' + str(idx) + '.jpg', cv2.IMREAD_GRAYSCALE)
 
         ### 가우시안 블러
@@ -62,7 +69,13 @@ for idx in range(0, 20):
 
         ##############
         ### 특정 픽셀의 rgb 구하기 -> white일 경우 투명 픽셀로 변경
-        img = Image.open(TEMP_DIR + 'temp' + str(idx) + '.jpg')
+        tmp_img_dir = TEMP_DIR + 'temp' + str(idx) + '.jpg'
+        
+        if os.path.exists(tmp_img_dir): # 이미지 파일 존재하면
+            img = Image.open(tmp_img_dir)
+        else: # 이미지 파일 없으면
+            raise Exception() # 예외 발생시킴
+
         # img = cv2.imread(TEMP_DIR + 'temp' + str(idx) + '.jpg')
         img = img.convert('RGBA')
         datas = img.getdata()
@@ -85,4 +98,4 @@ for idx in range(0, 20):
         # img_cropped = img.crop((0,0,300,300)) # 이미지 자르기
 
     except: # image idx 없는 경우
-        continue # 해당 idx 패스
+        continue # 해당 idx 넘어감
