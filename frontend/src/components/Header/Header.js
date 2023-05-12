@@ -3,6 +3,7 @@ import { ArrowLeftOutlined, UserOutlined } from '@ant-design/icons';
 import { Avatar } from 'antd';
 import { useEffect, useState } from 'react';
 import { Link, useLocation, useNavigate} from 'react-router-dom';
+import axios from 'axios';
 
 function Header() {
   
@@ -32,8 +33,8 @@ function Header() {
     </div>
     <div className="profile">
       <ul>
-        <li><Link className="link" to="/">로그인</Link></li>
-        <li><Link className="link" to="/">회원가입</Link></li>
+        <li><Link className="link" to="/user/login">로그인</Link></li>
+        <li><Link className="link" to="/user/register">회원가입</Link></li>
       </ul>
     </div>
   </div>

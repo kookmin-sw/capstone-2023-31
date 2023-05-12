@@ -13,24 +13,9 @@ import ListPage from './pages/ListPage/ListPage';
 import FaceAnalyze from './pages/Analyzepage/FaceAnalyze';
 import MyPage from './pages/MyPage/MyPage';
 import Detail from './pages/DetailPage/Detail'
+import RegisterPage from './pages/RegisterPage/RegisterPage';
+import LoginPage from './pages/LoginPage/LoginPage';
 
-// function App() {
-//   const [msg, setMsg] = useState([]);
-//   useEffect(() => {
-//     fetch("/api/hello")
-//       .then((res) => { return res.json(); })
-//       .then((data) => { setMsg(data); })
-//   }, []);
-//   return (
-//     <div className="App">
-//       <header className="App-header">
-//         <ul>
-//           {msg.map((content, idx) => <li key={`${idx} - ${content}`}>{content}</li>)}
-//         </ul>
-//       </header>
-//     </div>
-//   );
-// }
 
 function App() {
   return (
@@ -43,6 +28,8 @@ function App() {
           <Route path="/list/:style" element={<ListPage />}></Route>
           <Route path="/mypage" element={<MyPage />}></Route>
           <Route path="/product" element={<Detail/>}></Route>
+          <Route path="/user/signup" element={<RegisterPage />}></Route>
+          <Route path="/user/login" element={<LoginPage />}></Route> 
 
         </Routes>
       </Router>
