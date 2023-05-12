@@ -20,24 +20,23 @@ function FaceAnalyze() {
     { category: 'oval', categoryName: "타원형", value: 25 },     //타원형
     { category: 'round', categoryName: "둥근형", value: 25 },    //둥근형
     { category: 'square', categoryName: "사각형", value: 25 },   //사각형
-    { category: null, value: 0},   //사각형
   ];
 
+  const [updatedData, setUpdatedData] = useState(data);
 
-  let updatedData = data;
-  const ovalCategory = updatedData.find((obj) => obj.category === predictedShape);
-
-  useEffect(()=>{
-    console.log(predictedShape)
-    if(predictedShape == null){
-      // setShowAlert(true);
-      alert("ㅎㅎ");
-      navigate('/analyze/camera')
+  useEffect(() => {
+    if (predictedShape) {
+      const updatedDataCopy = [...updatedData];
+      const targetIndex = updatedDataCopy.findIndex((obj) => obj.category === predictedShape);
+      if (targetIndex !== -1) {
+        updatedDataCopy[targetIndex].value = 100;
+        setUpdatedData(updatedDataCopy);
+      }
+    } else {
+      alert("얼굴형을 분석할 수 없습니다. 다시 사진을 찍어주세요.")
+      navigate('/analyze/camera');
     }
-    else{
-      ovalCategory.value = 100;
-    }
-  }, [predictedShape])
+  }, [predictedShape]);
   
   const [isModalOpen, setIsModalOpen] = useState(false)
   
@@ -68,7 +67,7 @@ function FaceAnalyze() {
       <div className="container">
       <Header/>
       <div className="face-analyze-container">
-        <div style={{ fontSize: "20px",fontWeight: "bold", marginTop: "20px"}}>{ovalCategory.categoryName} 얼굴</div>
+        <div style={{ fontSize: "20px",fontWeight: "bold", marginTop: "20px"}}>{updatedData.find((obj) => obj.category === predictedShape)?.categoryName} 얼굴</div>
         <div className="chart-wrapper">
           <RadarChart cx={200} cy={200} outerRadius={120} width={400} height={400} data={updatedData}>
             <PolarGrid />
