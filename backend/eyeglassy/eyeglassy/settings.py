@@ -40,6 +40,7 @@ INSTALLED_APPS = [
     'face_detection',
     'user',
     'analyze',
+    'fitting',
     'corsheaders',
     'rest_framework',
 ]
