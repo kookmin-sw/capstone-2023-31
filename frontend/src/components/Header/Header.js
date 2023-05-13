@@ -7,8 +7,7 @@ import axios from 'axios';
 
 function Header() {
   
-  const navigate = useNavigate()
-  const location = useLocation();
+  const isLogIn = true; // 로그인 여부에 따른 상태를 설정해주세요
   // const [headerLogo, setHeaderLogo] = useState("")
 
   // useEffect(()=>{
@@ -33,8 +32,14 @@ function Header() {
     </div>
     <div className="profile">
       <ul>
-        <li><Link className="link" to="/user/login">로그인</Link></li>
-          <li><Link className="link" to="/user/signup">회원가입</Link></li>
+          {isLogIn ? (
+            <li><Link className="link" to="/mypage">마이페이지</Link></li>
+          ) : (
+              <>
+                <li><Link className="link" to="/user/login">로그인</Link></li>
+                <li><Link className="link" to="/user/signup">회원가입</Link></li>
+              </>
+            )}
       </ul>
     </div>
   </div>
