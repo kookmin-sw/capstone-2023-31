@@ -34,7 +34,7 @@ function Header() {
     <div className="profile">
       <ul>
         <li><Link className="link" to="/user/login">로그인</Link></li>
-        <li><Link className="link" to="/user/register">회원가입</Link></li>
+          <li><Link className="link" to="/user/signup">회원가입</Link></li>
       </ul>
     </div>
   </div>

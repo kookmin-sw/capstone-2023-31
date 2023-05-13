@@ -8,47 +8,40 @@ function Login() {
     const [password, setPassword] = useState('');
     const [isFormValid, setIsFormValid] = useState(true); // 입력값 유효성 상태를 관리하는 상태 변수
 
-    const onEmailChange = (event) => {
+    const onEmailHandler = (event) => {
         setEmail(event.target.value);
     };
 
-    const onPasswordChange = (event) => {
+    const onPasswordHandler = (event) => {
         setPassword(event.target.value);
     };
 
     const onSubmitHandler = (event) => {
         event.preventDefault();
 
-        // 입력값 유효성 검사
-        if (!email || !password) {
-            setIsFormValid(false);
-            return;
-        }
+        
 
-        axios
-            .get('/user/get-csrf-token/')
-            .then((responseToken) => {
-                const csrfToken = responseToken.data.csrfToken;
+        axios.get('/user/get-csrf-token/') // Get CSRF token from the server
+            .then(response => {
+                const csrfToken = response.data.csrfToken;
 
-                axios
-                    .post(
-                        '/user/login/',
-                        {
-                            email: email,
-                            password: password,
-                        },
-                        {
-                            headers: {
-                                'X-CSRFToken': csrfToken,
-                            },
-                        }
-                    )
-                    .then((responseLogin) => {
-                        if (responseLogin.data.success) {
-                            alert(responseLogin.data.message);
+                // Send registration data to the backend
+                axios.post('/user/login/', {
+                    email: email,
+                    password: password,
+                },
+                {
+                    headers: {
+                        'X-CSRFToken': csrfToken
+                    }
+                })
+
+                    .then((response) => {
+                        if (response.data.success) {
+                            alert(response.data.message);
                             navigate('/');
                         } else {
-                            alert('Error');
+                            alert(response.data.message);
                         }
                     })
                     .catch((error) => {
@@ -68,9 +61,9 @@ function Login() {
                 onSubmit={onSubmitHandler}
             >
                 <label>Email</label>
-                <input type="email" value={email} onChange={onEmailChange} />
+                <input type="email" value={email} onChange={onEmailHandler} />
                 <label>Password</label>
-                <input type="password" value={password} onChange={onPasswordChange} />
+                <input type="password" value={password} onChange={onPasswordHandler} />
                 {!isFormValid && <p>모든 값을 입력해주세요</p>} {/* 입력값 유효성 에러 메시지 표시 */}
                 <br />
                 <button type="submit">Login</button>
