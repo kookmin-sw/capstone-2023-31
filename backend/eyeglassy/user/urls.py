@@ -11,4 +11,5 @@ urlpatterns = [
     path("logout/",views.logout,name="logout"),
     path('get-csrf-token/', csrf_exempt(views.get_csrf_token),name='get_csrf_token'),
     path('check-login/', views.check_login,name='check-login'),  # 어느 앱에서나 접근 가능
+    path("edit-profile/",views.edit_profile,name="edit-profile"),
 ]
