@@ -1,10 +1,12 @@
+from django.contrib.auth.hashers import make_password
+from django.http import JsonResponse
+from django.contrib.auth import authenticate, login as auth_login
 from django.contrib.auth import authenticate
 from django.contrib.auth import login as auth_login, logout as auth_logout # 충돌 해결
 from django.shortcuts import render
 from django.http import JsonResponse, HttpRequest
 from django.contrib.auth.decorators import login_required
-
-from django.views.decorators.csrf import csrf_exempt
+from django.views.decorators.csrf import ensure_csrf_cookie
 from rest_framework.response import Response
 from rest_framework import status
 
@@ -82,3 +84,72 @@ def logout(request):
         return Response({'success': True, 'message': '로그아웃 되었습니다.'})
     else:
         return Response({'success': False, 'message': '잘못된 접근입니다.'})
+
+
+@api_view(['POST'])
+def set_profile(request):
+    if request.user.is_authenticated:
+        user = request.user
+
+        # 사용자 정보 가져오기
+        nickname = user.nickname
+        email = user.email
+        face_shape = user.face_shape
+        glasses = user.glasses
+
+        response_data={'success': True, 'message': '마이페이지',
+                       'nickname': nickname,
+            'email': email,
+            'face_shape': face_shape,
+            'glasses': glasses
+
+        }
+
+
+        return Response(response_data)
+    else:
+        return Response({'success': False, 'message': '잘못된 접근입니다.'})
+
+
+@ensure_csrf_cookie
+@api_view(["POST"])
+def edit_profile(request):
+    print(">> 1")
+    updated_nickname = request.data.get('nickname')
+    last_password = request.data.get("lastpassword")
+    updated_password = request.data.get('updatedpassword')
+
+    if request.user.is_authenticated:
+        print(">> 2")
+        user = request.user
+        print(">> 3")
+        if user.check_password(last_password):
+            print(">> 4")
+            if hasattr(user, 'nickname'):
+                user.nickname = updated_nickname
+            else:
+                print(">> 5")
+                return JsonResponse({'success': False, 'message': 'User model does not have a "nickname" field.'})
+
+            user.set_password(updated_password)
+            user.save()
+            print(">> 6")
+            # The user will be logged out after password change.
+            # So, re-authenticate the user and log them in again.
+            new_user = authenticate(
+                request, email=user.email, password=updated_password)
+            print(">> 7")
+            if new_user is not None:
+                print(">> 8")
+                auth_login(request, new_user)
+                print(">> 9")
+                return JsonResponse({'success': True, 'message': '정보를 변경했습니다.'})
+            else:
+                print(">> 10")
+                return JsonResponse({'success': False, 'message': '인증 실패'})
+        else:
+            print(">> 11")
+            return JsonResponse({'success': False, 'message': '비밀번호를 다시 입력하세요'})
+    else:
+        print(">> 12")
+        return JsonResponse({'success': False, 'message': '인증되지 않은 사용자입니다.'})
