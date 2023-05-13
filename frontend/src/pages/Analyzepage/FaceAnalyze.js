@@ -11,7 +11,7 @@ function FaceAnalyze() {
   const location = useLocation();
   const predictedShape = location.state; // backend에서 전달받음
 
-  const data = [    
+  const data = [
     { category: 'heart', categoryName: "하트형", value: 25 },    //하트형
     { category: 'oblong', categoryName: "긴얼굴형", value: 25 }, //긴얼굴형
     { category: 'oval', categoryName: "타원형", value: 25 },     //타원형
@@ -28,24 +28,24 @@ function FaceAnalyze() {
     return (prev.value > current.value) ? prev : current;
   }).category;
 
-  return(
+  return (
     <div className="container">
-      <Header/>
+      <Header />
       <div className="face-analyze-container">
-        <div style={{ fontSize: "20px",fontWeight: "bold", marginTop: "20px"}}>{ovalCategory.categoryName} 얼굴</div>
+        <div style={{ fontSize: "20px", fontWeight: "bold", marginTop: "20px" }}>{ovalCategory.categoryName} 얼굴</div>
         <div className="chart-wrapper">
           <RadarChart cx={200} cy={200} outerRadius={120} width={400} height={400} data={updatedData}>
             <PolarGrid />
-            <PolarAngleAxis dataKey="categoryName"/>
+            <PolarAngleAxis dataKey="categoryName" />
             <Radar dataKey="value" stroke="#8884d8" fill="#8884d8" fillOpacity={0.6} />
           </RadarChart>
         </div>
       </div>
-      <div style={{ fontSize: "20px",fontWeight: "bold", margin: "0 30px"}}>얼굴형 분석 결과</div>
+      <div style={{ fontSize: "20px", fontWeight: "bold", margin: "0 30px" }}>얼굴형 분석 결과</div>
       <div className="face-text">
         얼굴 비율이 OO한 편이에요.
       </div>
-      <div style={{ fontSize: "20px",fontWeight: "bold", margin: "0 30px"}}>추천 프레임</div>
+      <div style={{ fontSize: "20px", fontWeight: "bold", margin: "0 30px" }}>추천 프레임</div>
       <div className="face-text">
         OOO 프레임 추천!
 </div>
