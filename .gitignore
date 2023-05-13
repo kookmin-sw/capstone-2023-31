@@ -11,6 +11,10 @@ db.sqlite3
 db.sqlite3-journal
 media
 
+
+#pic
+*.png
+*.jpeg
 # If your build process includes running collectstatic, then you probably don't need or want to include staticfiles/
 # in your Git repository. Update and uncomment the following line accordingly.
 # <django-project-name>/staticfiles/
@@ -416,4 +420,22 @@ $RECYCLE.BIN/
 # Windows shortcuts
 *.lnk
 
+
+# 기타
+*.zip
+*.gif
+*.npz
+*.mov
+data/미사용/
+data/참고/
+data/기타src/
+data/dataset
+data/dataset/dataset
+
+faceshape-master
+*.pkl
+*.h5
+*.rdb
 # End of https://www.toptal.com/developers/gitignore/api/react,python,django,venv,macos,windows,git,sublimetext,visualstudiocode
+backend/face-detection(not use)/assets/
+.DS_Store

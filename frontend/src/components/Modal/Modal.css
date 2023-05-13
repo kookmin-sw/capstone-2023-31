@@ -1,0 +1,8 @@
+.modal-close-btn {
+  border: none;
+  margin: 0;
+  padding: 0;
+  position: relative;
+  bottom: 15px;
+  left: 5px;
+}

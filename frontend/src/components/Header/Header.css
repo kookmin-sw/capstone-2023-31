@@ -1,0 +1,40 @@
+.header-container {
+  /* flex: 2; */
+  display: flex;
+  /* height: 55px; */
+  align-items: center;
+  justify-content: space-between;
+  /* position: relative; */
+  /* background-color: aquamarine; */
+  flex-wrap: wrap;
+  margin: 10px;
+}
+
+.app-name {
+  font-size: 40px;
+  margin: 0 2rem;
+}
+
+.profile ul{
+  display: flex;
+  /* justify-content: flex-end; */
+}
+
+.profile ul li{
+  list-style: none;
+  margin-right: 1rem;
+  font-size: 20px;
+}
+
+.link {
+  text-decoration: none;
+  color: inherit;
+  
+}
+.link:hover{
+  color: gray;
+}
+.link:hover img {
+  opacity: 0.6;
+  /* filter: brightness(95%); */
+}

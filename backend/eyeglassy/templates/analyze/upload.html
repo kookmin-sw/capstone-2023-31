@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Upload Image</title>
+</head>
+
+<body>
+    <h1>Upload an Image</h1>
+    <form method="post" enctype="multipart/form-data" action="{% url 'analyze:result' %}">
+        {% csrf_token %}
+        <input type="file" name="image" accept="image/*" capture="camera" required>
+        <button type="submit">Submit</button>
+    </form>
+</body>
+
+</html>

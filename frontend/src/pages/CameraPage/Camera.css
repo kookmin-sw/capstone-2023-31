@@ -1,0 +1,25 @@
+.webcam-container{
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  flex: 1;
+  margin-top: 20px;
+  position: relative;
+}
+
+.display-container{
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.face-btn {
+  margin-top: 20px;
+  /* position: absolute;
+  bottom: 12px;
+  right: 12px; */
+}
+
+.captured-image-container {
+  position: absolute;
+}

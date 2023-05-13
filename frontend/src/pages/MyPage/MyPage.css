@@ -1,0 +1,29 @@
+.mypage-container {
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+  margin: 3rem;
+  flex-wrap: wrap;
+  margin-bottom: 0px;
+}
+
+.user{
+  display: flex;
+  flex-direction: column;
+  border-bottom: 1px black solid;
+}
+
+.profile-edit {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  margin-top: 20px;
+  margin-bottom: 20px;
+}
+
+.dibs {
+  display: flex;
+  flex-direction: column;
+  margin-top: 20px;
+}

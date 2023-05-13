@@ -1,0 +1,17 @@
+.face-analyze-container{
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  flex: 1;
+}
+.face-text{
+  display: flex;
+  margin: 10px 30px;
+  /* margin-bottom: 20px;
+  margin-top:15px; */
+  border: solid 1px black;
+  height: 10vh;
+  align-items: center;
+  justify-content: center;
+  font-size: 18px;
+}
