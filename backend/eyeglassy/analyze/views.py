@@ -64,3 +64,17 @@ def analyze_face(request):
     predicted_shape = analyze.run_modeling(static_path, image_path)
 
     return Response({'predicted_shape': predicted_shape})
+
+@api_view(["POST"])
+def save_faceshape(request):
+    face_shape = request.data.get("face_shape")
+
+    if not face_shape: #얼굴형 넘어와야함
+        return JsonResponse({'success': False, 'message': '얼굴형이 분석되지 않았습니다.'})
+
+    
+    request.user.face_shape=face_shape
+    request.user.save()  # 모델 필드 값을 저장
+
+    return JsonResponse({'success': True, 'message': '얼굴형 정보가 성공적으로 저장되었습니다.'})
+
