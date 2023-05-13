@@ -1,7 +1,9 @@
 from django.contrib.auth import authenticate
-from django.contrib.auth import login as auth_login # 충돌 해결
+from django.contrib.auth import login as auth_login, logout as auth_logout # 충돌 해결
 from django.shortcuts import render
 from django.http import JsonResponse, HttpRequest
+from django.contrib.auth.decorators import login_required
+
 from django.views.decorators.csrf import csrf_exempt
 from rest_framework.response import Response
 from rest_framework import status
@@ -65,3 +67,18 @@ def login(request):
         else: #비밀번호가 틀릴 경우
             return JsonResponse({'success': False, 'message': '비밀번호가 일치하지 않습니다.'})
   
+
+def check_login(request):
+    if request.user.is_authenticated:
+        return JsonResponse({'isLoggedIn': True})
+    else:
+        return JsonResponse({'isLoggedIn': False})
+
+
+@api_view(['POST'])
+def logout(request):
+    if request.user.is_authenticated:
+        auth_logout(request)
+        return Response({'success': True, 'message': '로그아웃 되었습니다.'})
+    else:
+        return Response({'success': False, 'message': '잘못된 접근입니다.'})
