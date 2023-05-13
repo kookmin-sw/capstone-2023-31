@@ -6,8 +6,6 @@ import { ResponsiveContainer, Radar, RadarChart, PolarGrid, PolarAngleAxis, Pola
 import { Link, useLocation, useNavigate } from "react-router-dom";
 import { useEffect, useState } from "react";
 import ModalComponent from "../../components/Modal/ModalComponent";
-import { useLocation, useNavigate } from "react-router-dom";
-import { useEffect, useState } from "react";
 import axios from "axios";
 
 function FaceAnalyze() {
@@ -64,6 +62,13 @@ function FaceAnalyze() {
       navigate('/user/login');
     }
   };
+  const data = [
+    { category: 'heart', categoryName: "하트형", value: 25 },    //하트형
+    { category: 'oblong', categoryName: "긴얼굴형", value: 25 }, //긴얼굴형
+    { category: 'oval', categoryName: "타원형", value: 25 },     //타원형
+    { category: 'round', categoryName: "둥근형", value: 25 },    //둥근형
+    { category: 'square', categoryName: "사각형", value: 25 },   //사각형
+  ];
 
   const [updatedData, setUpdatedData] = useState(data);
 
