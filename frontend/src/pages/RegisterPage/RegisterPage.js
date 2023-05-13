@@ -62,6 +62,7 @@ function RegisterPage(props) {
     }
 
     return (
+        
         <div style={{
             display: 'flex', justifyContent: 'center', alignItems: 'center',
             width: '100%', height: '100vh'
@@ -83,6 +84,7 @@ function RegisterPage(props) {
                 </button>
             </form>
         </div>
+        //ㅎㅔ더 푸터 추가해야행!!
     )
 }
 
