@@ -7,6 +7,7 @@ urlpatterns = [
     path("admin/", admin.site.urls),
     path("analyze/", include("analyze.urls")),
     path("user/",include("user.urls")),
+    path("",include("mypage.urls")),
     path("fitting/", include("fitting.urls")),
     path("", include("face_detection.urls")),
     

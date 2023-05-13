@@ -82,3 +82,28 @@ def logout(request):
         return Response({'success': True, 'message': '로그아웃 되었습니다.'})
     else:
         return Response({'success': False, 'message': '잘못된 접근입니다.'})
+
+
+@api_view(['POST'])
+def set_profile(request):
+    if request.user.is_authenticated:
+        user = request.user
+
+        # 사용자 정보 가져오기
+        username = user.username
+        email = user.email
+        face_shape = user.face_shape
+        glasses = user.glasses
+
+        response_data={'success': True, 'message': '로그아웃 되었습니다.',
+        'username': username,
+            'email': email,
+            'face_shape': face_shape,
+            'glasses': glasses
+
+        }
+
+
+        return Response(response_data)
+    else:
+        return Response({'success': False, 'message': '잘못된 접근입니다.'})
