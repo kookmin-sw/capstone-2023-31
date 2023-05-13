@@ -114,42 +114,34 @@ def set_profile(request):
 @ensure_csrf_cookie
 @api_view(["POST"])
 def edit_profile(request):
-    print(">> 1")
+    
     updated_nickname = request.data.get('nickname')
     last_password = request.data.get("lastpassword")
     updated_password = request.data.get('updatedpassword')
 
     if request.user.is_authenticated:
-        print(">> 2")
         user = request.user
-        print(">> 3")
         if user.check_password(last_password):
-            print(">> 4")
+            
             if hasattr(user, 'nickname'):
                 user.nickname = updated_nickname
             else:
-                print(">> 5")
                 return JsonResponse({'success': False, 'message': 'User model does not have a "nickname" field.'})
 
             user.set_password(updated_password)
             user.save()
-            print(">> 6")
-            # The user will be logged out after password change.
-            # So, re-authenticate the user and log them in again.
+            
+            #비밀번호가 수정되었으니 다시 로그인하고 인증을 받아와야합니다.
             new_user = authenticate(
                 request, email=user.email, password=updated_password)
-            print(">> 7")
+            
             if new_user is not None:
-                print(">> 8")
                 auth_login(request, new_user)
-                print(">> 9")
                 return JsonResponse({'success': True, 'message': '정보를 변경했습니다.'})
+            
             else:
-                print(">> 10")
                 return JsonResponse({'success': False, 'message': '인증 실패'})
         else:
-            print(">> 11")
             return JsonResponse({'success': False, 'message': '비밀번호를 다시 입력하세요'})
     else:
-        print(">> 12")
         return JsonResponse({'success': False, 'message': '인증되지 않은 사용자입니다.'})
