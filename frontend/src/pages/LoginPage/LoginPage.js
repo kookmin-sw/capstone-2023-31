@@ -6,8 +6,7 @@ function Login() {
     const navigate = useNavigate();
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
-    const [isFormValid, setIsFormValid] = useState(true); // 입력값 유효성 상태를 관리하는 상태 변수
-
+    
     const onEmailHandler = (event) => {
         setEmail(event.target.value);
     };
@@ -19,17 +18,13 @@ function Login() {
     const onSubmitHandler = (event) => {
         event.preventDefault();
 
-        // 입력값 유효성 검사
-        if (!email || !password) {
-            setIsFormValid(false);
-            return;
-        }
+        //header , footer x , 유효성 검사(빈칸)는 백엔드에서 처리하는 것으로 변경
 
-        axios.get('/user/get-csrf-token/') // Get CSRF token from the server
+        axios.get('/user/get-csrf-token/') // CSRF token 서버로 부터 불러옴
             .then(response => {
                 const csrfToken = response.data.csrfToken;
 
-                // Send registration data to the backend
+                // login url 설정
                 axios.post('/user/login/', {
                     email: email,
                     password: password,
@@ -68,7 +63,6 @@ function Login() {
                 <input type="email" value={email} onChange={onEmailHandler} />
                 <label>Password</label>
                 <input type="password" value={password} onChange={onPasswordHandler} />
-                {!isFormValid && <p>모든 값을 입력해주세요</p>} {/* 입력값 유효성 에러 메시지 표시 */}
                 <br />
                 <button type="submit">Login</button>
             </form>
