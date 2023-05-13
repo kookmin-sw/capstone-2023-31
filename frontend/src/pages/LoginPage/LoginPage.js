@@ -19,7 +19,11 @@ function Login() {
     const onSubmitHandler = (event) => {
         event.preventDefault();
 
-        
+        // 입력값 유효성 검사
+        if (!email || !password) {
+            setIsFormValid(false);
+            return;
+        }
 
         axios.get('/user/get-csrf-token/') // Get CSRF token from the server
             .then(response => {

@@ -58,7 +58,7 @@ def login(request):
         return JsonResponse({'success': False, 'message': '가입 정보가 존재하지 않습니다.'})
 
     if user is not None:
-        if user.check_password(password):
+        if user.check_password(password): #해쉬화 해서 저장했기 때문에 해당 함수가 필요
             # 인증 성공 시 로그인 처리
             auth_login(request, user)
             return JsonResponse({'success': True, 'message': user.nickname+'님 반갑습니다.'})
