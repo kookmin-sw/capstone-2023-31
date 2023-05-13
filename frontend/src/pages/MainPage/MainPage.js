@@ -1,4 +1,4 @@
-  import React, { Fragment } from "react";
+  import React, { Fragment, useEffect, useState } from "react";
   import { useNavigate, Link} from "react-router-dom";
   import { Input, Row, Col, Button } from 'antd';
   import Header from "../../components/Header/Header";
@@ -13,6 +13,17 @@
 
     const navigate = useNavigate();
     const { Search } = Input;
+
+    const [images, setImages] = useState([]);
+
+    useEffect(() => { // 안경 랜덤 16개 추출
+      const importAll = (r) => r.keys().map(r);
+      const imageFiles = importAll(require.context('../../../../crawling/image/input', false, /\.(png|jpg|svg)$/));
+      const randomImages = imageFiles.sort(() => Math.random() - 0.5).slice(0, 32);
+      setImages(randomImages);
+    }, []);
+
+
     const onSearch = (e) => {
       if (e == ''){
         alert("입력 필수")
@@ -41,7 +52,8 @@
     const gridData = [
       { style: "round", stylename: "둥근형", image: '/images/glasses2.jpg'},
       { style: "square", stylename: "사각형", image: '/images/glasses3.jpg'},
-      { style: "etc", stylename: "기타", image: '/images/glasses4.jpg'},
+      { style: "oval", stylename: "타원형", image: '/images/glasses4.jpg'},
+      { style: "etc", stylename: "기타형", image: '/images/glasses4.jpg'},
     ]
 
     const settings = {
@@ -70,11 +82,11 @@
 
           <div className="random-glasses">
             <Slider {...settings}>
-              {slideData.map((item) => (
-                <div key={item.id}>
-                  <Link className="link" to="/product" state={item}>
-                    <img style={{ width: "250px", height: "250px"}} src={item.image}></img>
-                  </Link>
+              {images.map((item, index) => (
+                <div key={index}>
+                  {/* <Link className="link" to="/product" state={item}> */}
+                    <img style={{ width: "250px", height: "250px"}} src={item}></img>
+                  {/* </Link> */}
                 </div>
               )) }
             </Slider>

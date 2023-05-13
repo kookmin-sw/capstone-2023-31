@@ -1,4 +1,4 @@
-import React, { Fragment, useState } from "react";
+import React, { Fragment, useEffect, useState } from "react";
 import { useLocation, useParams, Link } from "react-router-dom";
 import Header from "../../components/Header/Header"
 import "./ListPage.css"
@@ -7,6 +7,10 @@ import {Row, Col, Pagination} from "antd";
 import Paginator from "../../components/Paginator/Paginator";
 import SearchBar from "../../components/Search/SearchBar";
 function ListPage() {
+
+  useEffect(()=>{ // 페이지 이동 시 스크롤 위치 초기화
+    window.scrollTo(0, 0);
+  }, [])
 
   const { style } = useParams();
   const styleName = useLocation();

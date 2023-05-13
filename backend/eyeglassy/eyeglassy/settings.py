@@ -39,6 +39,7 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'face_detection',
     'user',
+    'mypage',
     'analyze',
     'product',
     'fitting',
@@ -153,3 +154,5 @@ REST_FRAMEWORK = {
         'rest_framework.authentication.SessionAuthentication',
     ],
 }
+AUTH_USER_MODEL="user.User"
+LOGIN_URL = '/user/login/'
