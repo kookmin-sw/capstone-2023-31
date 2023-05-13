@@ -19,6 +19,7 @@ function FittingCamera(){
   const webcamRef = useRef(null);
   const [imageSrc, setImageSrc] = useState(null);
   const [mirror, setMirror] = useState(false);
+
   useEffect(() => {
     const interval = setInterval(() => {
       capture();
@@ -26,6 +27,17 @@ function FittingCamera(){
 
     return () => clearInterval(interval);
   }, []);
+
+  const dataURItoBlob = (dataURI) => {
+    const byteString = atob(dataURI.split(',')[1]);
+    const ab = new ArrayBuffer(byteString.length);
+    const ia = new Uint8Array(ab);
+    for (let i = 0; i < byteString.length; i++) {
+      ia[i] = byteString.charCodeAt(i);
+    }
+    const blob = new Blob([ab], { type: 'image/jpeg' });
+    return blob;
+  }
 
   const capture = useCallback(
     () => {
@@ -44,13 +56,24 @@ function FittingCamera(){
       // setImageSrc(imageUrl);
       setImageSrc(capturedImageSrc);
 
-  
-      
+      const formData = new FormData();
+      const blob = dataURItoBlob(capturedImageSrc);
+      formData.append('image', blob, 'captured_image.jpg');
+
+      console.log(blob);
+      console.log(formData);
+
+
     },
     [webcamRef]
   );
-  return(
-    
+
+
+  
+  
+  
+  
+    return(
     <div className="container">
         <Header/>
         <div className="webcam-container">

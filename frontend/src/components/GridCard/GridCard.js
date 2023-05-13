@@ -20,7 +20,7 @@ function GridCard(props){
             </img>
         </div>
         </Link>
-        <div>{props.name}</div>
+        <div style={{fontSize:"20px"}}>{props.name}</div>
       </Col>
   )
 }
