@@ -8,11 +8,17 @@ from rest_framework import status
 import os
 import subprocess
 import re
+import django
 
 from . import fitting
 from django.conf import settings
 
+os.environ.setdefault("DJANGO_SETTINGS_MODULE", "config.settings")
+django.setup()
+
 from product.models import Glasses
+
+
 
 static_path = os.path.join(settings.BASE_DIR, 'media')
 
