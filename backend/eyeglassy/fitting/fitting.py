@@ -6,6 +6,11 @@ import os
 from django.core.files.storage import default_storage
 from django.conf import settings
 
+import os
+import django
+os.environ.setdefault("DJANGO_SETTINGS_MODULE", "config.settings")
+django.setup()
+
 static_eyeglassy_path = os.path.join(settings.DEFAULT_DIR, 'crawling/img/')
 
 ## media 폴더에 68.dat 추가해주기 !
