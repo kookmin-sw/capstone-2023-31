@@ -3,8 +3,9 @@ const wishReducer = (state = [], action) => {
     case "ADD_ITEM":
       return [ ...state, action.payload ];
 
-    // case "DELETE_ITEM":
-    //   return {...action.payload};
+    case "DELETE_ITEM":
+      // return {...action.payload};
+      return state.filter(item => item.id !== action.payload);
 
     default:
       return state;

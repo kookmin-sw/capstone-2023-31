@@ -51,30 +51,6 @@ function AnalyzeCamera() { //카메라
     const formData = new FormData();
     formData.set('image', dataURItoBlob(imageSrc));
 
-    // fetch('/analyze/get-csrf-token/') //django와 통신하기 위해 csrf-token 을 미리 교환한다. 
-    //   .then(response => response.json())
-    //   .then(data => {
-    //     const csrfToken = data.csrfToken;
-    //     // fetch 요청에 csrfToken 헤더 추가
-    //     fetch('/analyze/analyze-face/', { //장고의 urls.py 와 일치하게 set
-    //       method: 'POST',
-    //       body: formData,
-    //       headers: {
-    //         'X-CSRFToken': csrfToken
-    //       }
-    //     })
-    //       .then(response => response.json())
-    //       .then(data => {
-    //         navigate('/analyze/result', { state: data.predicted_shape });
-    //       })
-    //       .catch(error => {
-    //         console.error(error);
-    //       });
-    //   })
-    //   .catch(error => {
-    //     console.error(error);
-    //   });
-
     try {
       const csrfResponse = await fetch('/analyze/get-csrf-token/');
       const csrfData = await csrfResponse.json();
@@ -106,11 +82,12 @@ function AnalyzeCamera() { //카메라
     const interval = setInterval(() => {
       setText((prevText) => {
         let resultText = prevText ? prevText + txt[count] : txt[0];
-        setCount(count + 1);
-
+        
         if(count >= txt.length){
           setCount(0);
           setText('');
+        } else{
+          setCount(count+1);
         }
         return resultText;
       });

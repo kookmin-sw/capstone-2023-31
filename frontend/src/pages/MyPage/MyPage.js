@@ -10,7 +10,7 @@ import EditProfile from "../../components/EditProfile";
 import { useNavigate, Link } from "react-router-dom";
 import axios from "axios";
 import { Provider, useSelector } from "react-redux";
-import store from "../../_reducer/wishReducer";
+// import store from "../../_reducer/wishReducer";
 
 
 function MyPage() {
@@ -96,6 +96,8 @@ function MyPage() {
   useEffect(() => {
     sendSetProfileRequest();
   }, []);
+
+
   const gridData = [
     { id: 1, image: '/images/image1.png', brandName: "AAA", name: "BBB", price: "30,000" },
     { id: 2, image: '/images/image1.png', brandName: "AAA", name: "BBB", price: "30,000" },
@@ -115,7 +117,13 @@ function MyPage() {
   ];
 
 
-  const wishlist = useSelector(store => store.wishReducer);
+  const wishlist = useSelector(store => store.wishReducer || []);
+  // const [myList, setMyList] = useState([]);
+
+  // useEffect(()=>{
+  //   setMyList([...myList, wishlist])
+  // }, wishlist);
+
   console.log(wishlist)
 
   return (
@@ -151,9 +159,9 @@ function MyPage() {
           onCancel={handleCancel}
         >
           <EditProfile onUpdate={handleProfileUpdate} />
-          <Button onClick={handleProfileUpdate} style={{ float: "right" }}>
+          {/* <Button onClick={handleProfileUpdate} style={{ float: "right" }}>
             변경하기
-        </Button>
+        </Button> */}
         </ModalComponent>
 
 
@@ -172,7 +180,7 @@ function MyPage() {
                         >
                         <Link 
                           className="link" 
-                          to={`/detail`}
+                          to={`/product/${item.id}`}
                           state={item}
                           >
                         <div style={{display: "flex", flexDirection:"column"}}>

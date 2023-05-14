@@ -1,23 +1,44 @@
-import { useLocation, useNavigate } from "react-router-dom";
+import { useLocation, useNavigate, useParams } from "react-router-dom";
 import Footer from "../../components/Footer/Footer";
 import Header from "../../components/Header/Header";
 import "./Detail.css"
 import { Button } from "antd";
-import { useDispatch } from 'react-redux';
-import { addWishList } from "../../_actions";
+import { HeartOutlined, HeartFilled } from '@ant-design/icons';
+import { useDispatch, useSelector } from 'react-redux';
+import { addWishList, deleteWishList } from "../../_actions";
+import { useEffect, useState } from "react";
 
 function Detail(){
+  // let { id } = useParams();
   const navigate = useNavigate();
   const location = useLocation();
-  const data = location.state
-  console.log(data);
+  const data = location.state;
 
   const dispatch = useDispatch();
+  const wishList = useSelector(state => state.wishlist || []);
+  console.log(wishList)
+  const [isWish, setIsWish] = useState(false);
 
-  function handleAddToWishlist() {
+  useEffect(() => {
+    const isProductInWishList = wishList.some(
+      (product) => product.id === data.id
+    );
+    setIsWish(isProductInWishList);
+  }, [data.id]);
+
+
+  const handleAddToWishlist = () => {
+    setIsWish(true);
     dispatch(addWishList(data));
     console.log("상품 찜")
   }
+
+  const handleDeleteToWishlist = () => {
+    setIsWish(false);
+    dispatch(deleteWishList(data));
+    console.log("상품 삭제");
+  }
+
 
   return(
     <div className="container">
@@ -35,7 +56,11 @@ function Detail(){
             <div style={{fontSize:"30px", float:"right"}}>{data.price}원</div>
           </div>
           <div style={{display:"flex", marginTop: "20px"}}>
-            <Button size="large" onClick={handleAddToWishlist}>♥</Button>
+            {isWish ? (
+              <Button size="large" style={{ color: "red"}} onClick={handleDeleteToWishlist}><HeartFilled /></Button>
+            ): (
+              <Button size="large" style={{ color: "red"}} onClick={handleAddToWishlist}><HeartOutlined /></Button>
+            )}
             <Button style={{flex:1}} size="large" onClick={()=>navigate('/product/camera')}>가상 피팅하러 가기</Button>
           </div>
           <Button type="primary" size="large" style={{marginTop: "10px"}}>구매하기</Button>

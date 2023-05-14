@@ -27,7 +27,7 @@ function App() {
           <Route path="/product/camera" element={<FittingCamera />}></Route>
           <Route path="/list/:style" element={<ListPage />}></Route>
           <Route path="/mypage" element={<MyPage />}></Route>
-          <Route path="/product" element={<Detail/>}></Route>
+          <Route path="/product/:id" element={<Detail/>}></Route>
           <Route path="/user/signup" element={<RegisterPage />}></Route>
           <Route path="/user/login" element={<LoginPage />}></Route> 
 

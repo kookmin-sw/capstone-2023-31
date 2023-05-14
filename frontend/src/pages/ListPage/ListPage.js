@@ -12,7 +12,7 @@ function ListPage() {
     window.scrollTo(0, 0);
   }, [])
 
-  const { style } = useParams();
+  // const { style } = useParams();
   const styleName = useLocation();
 
   const gridData = [
@@ -52,7 +52,7 @@ function ListPage() {
                     >
                     <Link 
                       className="link" 
-                      to={`/product`}
+                      to={`/product/${item.id}`}
                       state={item}
                       >
                     <div style={{display: "flex", flexDirection:"column"}}>
