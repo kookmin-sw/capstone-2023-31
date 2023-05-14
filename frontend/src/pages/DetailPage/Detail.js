@@ -15,7 +15,7 @@ function Detail(){
   const data = location.state;
 
   const dispatch = useDispatch();
-  const wishList = useSelector(state => state.wishlist || []);
+  const wishList = useSelector(state => state.wishReducer || []);
   console.log(wishList)
   const [isWish, setIsWish] = useState(false);
 
