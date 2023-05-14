@@ -19,4 +19,4 @@ with open('final_products.csv') as csvfile:
             image = row[4],
             shape = row[5]
         )
-        print(row)
+        # print(row)
