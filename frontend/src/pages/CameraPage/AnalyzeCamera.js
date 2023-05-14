@@ -82,7 +82,6 @@ function AnalyzeCamera() { //카메라
     const interval = setInterval(() => {
       setText((prevText) => {
         let resultText = prevText ? prevText + txt[count] : txt[0];
-        
         if(count >= txt.length){
           setCount(0);
           setText('');

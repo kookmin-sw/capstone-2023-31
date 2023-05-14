@@ -23,6 +23,8 @@ function Detail(){
     const isProductInWishList = wishList.some(
       (product) => product.id === data.id
     );
+
+    console.log(isProductInWishList)
     setIsWish(isProductInWishList);
   }, [data.id]);
 
@@ -61,7 +63,7 @@ function Detail(){
             ): (
               <Button size="large" style={{ color: "red"}} onClick={handleAddToWishlist}><HeartOutlined /></Button>
             )}
-            <Button style={{flex:1}} size="large" onClick={()=>navigate('/product/camera')}>가상 피팅하러 가기</Button>
+            <Button style={{flex:1}} size="large" onClick={()=>navigate('/product/camera', {state: data})}>가상 피팅하러 가기</Button>
           </div>
           <Button type="primary" size="large" style={{marginTop: "10px"}}>구매하기</Button>
       </div>

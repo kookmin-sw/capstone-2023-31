@@ -4,7 +4,7 @@ import Footer from "../../components/Footer/Footer";
 import { Button } from "antd";
 import "./Camera.css"
 import Webcam from 'react-webcam';
-import { useNavigate } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
 import axios from 'axios'
 
 const videoConstraints = {
@@ -15,6 +15,12 @@ const videoConstraints = {
 
 function FittingCamera(){
   const navigate = useNavigate('');
+  const location = useLocation();
+  const glassesImgSrc = location.state.image;
+
+  useEffect(()=>{
+    console.log(glassesImgSrc)
+  }, [])
   
   const webcamRef = useRef(null);
   const [imageSrc, setImageSrc] = useState(null);
@@ -39,39 +45,38 @@ function FittingCamera(){
     return blob;
   }
 
-  const capture = useCallback(
-    () => {
+  const capture = async () => {
       const capturedImageSrc = webcamRef.current.getScreenshot();
-      // const byteString = atob(capturedImageSrc.split(',')[1]);
-      // const ab = new ArrayBuffer(byteString.length);
-      // const ia = new Uint8Array(ab);
-      // for (let i = 0; i < byteString.length; i++) {
-      //   ia[i] = byteString.charCodeAt(i);
-      // }
-      // const blob = new Blob([ab], { type: 'image/jpeg' });
-      // const file = new File([blob], 'captured_image.jpg', { type: 'image/jpeg' });
-      // const imageUrl = URL.createObjectURL(blob);
-      // console.log(`ㅎㅇㅎㅇㅎㅇㅎ${file.name}`);
-      // console.log(imageUrl);
-      // setImageSrc(imageUrl);
       setImageSrc(capturedImageSrc);
 
-      const formData = new FormData();
-      const blob = dataURItoBlob(capturedImageSrc);
-      formData.append('image', blob, 'captured_image.jpg');
 
-      console.log(blob);
-      console.log(formData);
+      // 통신하는 코드 !!! 잠깐 주석 처리
 
+      // const formData = new FormData();
+      // const blob = dataURItoBlob(capturedImageSrc);
+      // formData.append('image', blob, 'captured_image.jpg');
+      // formData.append('glassesImg', glassesImgSrc)
 
-    },
-    [webcamRef]
-  );
-
-
+      // try {
+      //   const csrfResponse = await fetch('/fitting/get-csrf-token/');
+      //   const csrfData = await csrfResponse.json();
+      //   const csrfToken = csrfData.csrfToken;
+    
+      //   const fittingResponse = await axios.post('/fitting/fitting-face/', formData, {
+      //     headers: {
+      //       'X-CSRFToken': csrfToken,
+      //       // 'Content-Type': 'multipart/form-data'
+      //     }
+      //   });
+        
+      //   const { data } = fittingResponse;
+      //   const imageUrl = URL.createObjectURL(data);
+      //   setImageSrc(imageUrl);
   
-  
-  
+      // } catch (error) {
+      //   console.log(error)
+      // }
+    };
   
     return(
     <div className="container">

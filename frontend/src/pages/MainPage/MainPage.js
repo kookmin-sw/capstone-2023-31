@@ -49,11 +49,13 @@
       { id: 14, image: '/images/glasses4.jpg', brandName: "AAA", name: "BBB", price: "30,000"},
     ];
 
-    const gridData = [
-      { style: "round", stylename: "둥근형", image: '/images/glasses2.jpg'},
-      { style: "square", stylename: "사각형", image: '/images/glasses3.jpg'},
+    const styleData = [
+      { style: "round", stylename: "둥근테", image: '/images/glasses2.jpg'},
+      { style: "square", stylename: "사각테", image: '/images/glasses3.jpg'},
       { style: "oval", stylename: "타원형", image: '/images/glasses4.jpg'},
-      { style: "etc", stylename: "기타형", image: '/images/glasses4.jpg'},
+      { style: "half", stylename: "하금테", image: '/images/glasses4.jpg'},
+      { style: "wellington", stylename: "웰링턴", image: '/images/glasses4.jpg'},
+      { style: "etc", stylename: "기타", image: '/images/glasses4.jpg'},
     ]
 
     const settings = {
@@ -96,7 +98,7 @@
             <div style={{fontSize:"20px", fontWeight:"bold"}}>스타일별 안경</div>
             <div>
               <Row gutter={[8, 8]} style={{ borderRadius: '50%'}}>
-                {gridData.map((item, index) => (
+                {styleData.map((item, index) => (
                   <GridCard key={index} image={item.image} name={item.stylename} st={item.style}></GridCard>
                 ))}
               </Row>
