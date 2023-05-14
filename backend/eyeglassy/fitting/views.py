@@ -54,9 +54,9 @@ def get_csrf_token(request):
 
 @api_view(['POST'])
 @csrf_exempt
-def put_eyeglassy(request):
+def fitting_face(request):
     try:
-        image_file = request.FILES['image']
+        image_file = request.FILES.get('image') # 이미지 리액트에서 받아오기
     except KeyError:
         return Response(status=status.HTTP_400_BAD_REQUEST)
 
@@ -66,6 +66,7 @@ def put_eyeglassy(request):
         for chunk in image_file.chunks():
             destination.write(chunk)
 
-    fitting_eyeglassy = fitting.run_fitting(static_path, image_path)
+    # 이미지 위에 안경 이미지 붙여서 반환
+    put_eyeglassy = fitting.run_fitting(static_path, image_path)
 
-    return Response({'fitting_eyeglassy': fitting_eyeglassy})
+    return Response({'put_eyeglassy': put_eyeglassy})
