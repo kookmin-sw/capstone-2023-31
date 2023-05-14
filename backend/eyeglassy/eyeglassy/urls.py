@@ -5,11 +5,11 @@ from django.conf import settings
 
 urlpatterns = [
     path("admin/", admin.site.urls),
+    path("product/", include("product.urls")),
     path("analyze/", include("analyze.urls")),
     path("user/",include("user.urls")),
     path("",include("mypage.urls")),
     path("fitting/", include("fitting.urls")),
     # path("", include("face_detection.urls")),
-    path("product/", include("product.urls")),
-    
+
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

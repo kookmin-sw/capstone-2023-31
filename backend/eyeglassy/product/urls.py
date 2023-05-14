@@ -4,6 +4,6 @@ from product import views
 app_name = 'product'
 
 urlpatterns = [
-    path('load_glasses_data/', views.load_glasses_data, name='load_glasses_data'),
-    # path('analyze-face/', views.analyze_face, name='analyze_face'),
+    path('', views.ListPost.as_view(), name='product_list'), # list, url 수정 필요
+    path('<int:id>/', views.DetailPost.as_view(), name='product_detail'), # 안됨
 ]
