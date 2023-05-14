@@ -7,6 +7,7 @@ from rest_framework.response import Response
 from rest_framework import status
 import os
 import subprocess
+import re
 
 from . import fitting
 from django.conf import settings
@@ -16,11 +17,10 @@ from product.models import Glasses
 static_path = os.path.join(settings.BASE_DIR, 'media')
 
 
-
-def run_fitting(static_path, image_file):
+def run_fitting(static_path, image_file, eyeglassy_num):
     # 외부 파이썬 파일 실행
     result = subprocess.run(
-        ['python', 'fitting.py', static_path, image_file], capture_output=True, text=True)
+        ['python', 'fitting.py', static_path, image_file, eyeglassy_num], capture_output=True, text=True)
 
     # 실행 결과 확인
     output = result.stdout
@@ -37,7 +37,6 @@ def run_fitting(static_path, image_file):
 
 def main(request):
     return render(request, "fitting/home.html")
-
 
 def fitting_camera(request):
     return render(request, 'fitting/fitting_camera.html')
@@ -66,7 +65,13 @@ def fitting_face(request):
         for chunk in image_file.chunks():
             destination.write(chunk)
 
-    # 이미지 위에 안경 이미지 붙여서 반환
-    put_eyeglassy = fitting.run_fitting(static_path, image_path)
+   
+    # 해당 안경 이미지 정보 리액트에서 받아오기
+    eyeglassy_num = request.FILES.get('char') # img3.jpg
+    eyeglassy_num = re.sub(r'[^0-9]', '', eyeglassy_num) # 3
 
-    return Response({'put_eyeglassy': put_eyeglassy})
+    # 이미지 위에 안경 이미지 붙여서 반환
+    fitted_face = fitting.run_fitting(static_path, image_path, eyeglassy_num) # 안경 씌운 이미지 경로
+
+    # return Response({'fitted_face': fitted_face})
+    return JsonResponse({'fitted_face': fitted_face})
