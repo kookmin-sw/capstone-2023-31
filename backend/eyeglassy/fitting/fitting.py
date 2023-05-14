@@ -6,23 +6,20 @@ import os
 
 ## media 폴더에 68.dat 추가해주기 !
 
-def put_eyeglassy(static_path):
+def put_eyeglassy(static_path, image_file):
     # 얼굴 인식기와 랜드마크 인식기 초기화
     predictor_path = os.path.join(static_path, 'shape_predictor_68_face_landmarks.dat')
 
     detector = dlib.get_frontal_face_detector()
     predictor = dlib.shape_predictor(predictor_path)
 
-def run_fitting(static_path):
     # 안경 이미지 불러오기
-    glass_img = Image.open('./face-detection/assets/images/result1.png')
+    # 리액트에서 받은 안경 정보 불러오기 TO DO
+    # glass_img = Image.open('./face-detection/assets/images/result1.png')
 
-    # 웹캠 초기화
-    cap = cv2.VideoCapture(0)
-
+    '''
     while True:
-        # 웹캠에서 프레임 읽기
-        ret, frame = cap.read()
+        # 리액트에서 받은 이미지 읽어오기 TO DO
 
         # 그레이스케일로 변환
         gray = cv2.cvtColor(frame, cv2.COLOR_BGR2GRAY)
@@ -61,12 +58,7 @@ def run_fitting(static_path):
             draw.bitmap(glass_region[:2], glass_img)
             frame = cv2.cvtColor(np.array(frame_pil), cv2.COLOR_RGB2BGR)
 
-        # 이미지 출력
-        cv2.imshow('frame', frame)
+        # 이미지 저장 후 리액트 전달 TO DO
+        '''
 
-        # 종료하기
-        if cv2.waitKey(1) & 0xFF == ord('q'):
-            break
-
-    cap.release()
-    cv2.destroyAllWindows()
+# def run_fitting(static_path)
