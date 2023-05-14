@@ -58,52 +58,39 @@ function MyPage() {
 
   };
 
-  const handleProfileUpdate = (updatedNickname, lastPassword, updatedPassword) => {
+  const handleProfileUpdate = async (updatedNickname, lastPassword, updatedPassword) => {
     try {
-      axios.get('/user/get-csrf-token/')
-        .then(response => {
-          const csrfToken = response.data.csrfToken;
+      const response = await axios.get('/user/get-csrf-token/');
+      const csrfToken = response.data.csrfToken;
 
-          axios.post('/user/edit-profile/', {
-            nickname: updatedNickname,
-            lastpassword: lastPassword,
-            updatedpassword: updatedPassword
-          }, {
-            headers: {
-              'X-CSRFToken': csrfToken
-            }
-          })
-            .then(response => {
-              if (response.data.success) {
-                // 업데이트 성공한 경우 처리
-                const data = response.data;
-                alert(data.message);
-                // Assuming setNickname and setUpdatePassword are defined somewhere else in your code.
-                if (data.nickname) {
-                  setNickname(data.nickname);
-                }
-                if (data.updatedpassword) {
-                  setUpdatePassword(data.updatedpassword);
-                }
+      const updateResponse = await axios.post('/user/edit-profile/', {
+        nickname: updatedNickname,
+        lastpassword: lastPassword,
+        updatedpassword: updatedPassword
+      }, {
+        headers: {
+          'X-CSRFToken': csrfToken
+        }
+      });
 
-                handleCancel();
-                window.location.reload();
-              }
-              else {
-                // 업데이트 실패한 경우 처리
-                alert(response.data.message);
-              }
-            })
-            .catch(error => {
-              console.error(error);
-            });
-        });
-    }
-    catch (error) {
+      if (updateResponse.data.success) {
+        const data = updateResponse.data;
+        alert(data.message);
+        if (data.nickname) {
+          setNickname(data.nickname);
+        }
+        if (data.updatedpassword) {
+          setUpdatePassword(data.updatedpassword);
+        }
+        handleCancel();
+        window.location.reload();
+      } else {
+        alert(updateResponse.data.message);
+      }
+    } catch (error) {
       console.error(error);
     }
   };
-
 
 
   useEffect(() => {
