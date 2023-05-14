@@ -116,7 +116,7 @@ function MyPage() {
 
   ];
 
-
+  
   const wishlist = useSelector(store => store.wishReducer || []);
   // const [myList, setMyList] = useState([]);
 
@@ -163,9 +163,6 @@ function MyPage() {
             변경하기
         </Button> */}
         </ModalComponent>
-
-
-
 
           <div className="dibs">
             <div style={{fontSize:"20px", margin: "0 30px"}}>찜한 안경</div>
