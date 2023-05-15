@@ -6,6 +6,7 @@ import Footer from "../../components/Footer/Footer";
 import {Row, Col, Pagination} from "antd";
 import Paginator from "../../components/Paginator/Paginator";
 import SearchBar from "../../components/Search/SearchBar";
+import axios from "axios";
 function ListPage() {
 
   useEffect(()=>{ // 페이지 이동 시 스크롤 위치 초기화
@@ -13,7 +14,19 @@ function ListPage() {
   }, [])
 
   // const { style } = useParams();
-  const styleName = useLocation();
+  const location = useLocation();
+  const { name , shape} = location.state;
+  const [glassesData, setGlassesData] = useState([]);
+
+  useEffect(()=>{
+    const fetchGlassesData = async () => {
+      const glasses = await axios.get(`/product/${shape}?shape=${shape}`,)
+      setGlassesData(glasses.data);
+    }
+    fetchGlassesData();
+  }, [shape]);
+
+  console.log(glassesData);
 
   const gridData = [
     { id: 1, image: '/images/image1.png', brandName: "AAA", name: "BBB", price: "30,000"},
@@ -42,7 +55,7 @@ function ListPage() {
     <div className="container">
       <Header/>
       <div className="list-container">
-        <div className="style-name">{styleName.state}</div>
+        <div className="style-name">{name}</div>
         <SearchBar/>
         <div className="list-glasses">
             <Row gutter={[8,8]}>
