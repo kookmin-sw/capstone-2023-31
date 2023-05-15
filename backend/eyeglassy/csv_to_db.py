@@ -7,7 +7,7 @@ django.setup()
 
 from product.models import Glasses
 
-with open('final_products.csv') as csvfile:
+with open('final_products.csv', encoding='utf-8') as csvfile:
     rows = csv.reader(csvfile)
     next(rows, None) # 헤더 제외
     for row in rows:
