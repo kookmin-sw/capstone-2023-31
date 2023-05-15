@@ -16,10 +16,10 @@ const videoConstraints = {
 function FittingCamera(){
   const navigate = useNavigate('');
   const location = useLocation();
-  const glassesImgSrc = location.state.image;
+  const glassesImg = location.state.image;
 
   useEffect(()=>{
-    console.log(glassesImgSrc)
+    console.log(glassesImg)
   }, [])
   
   const webcamRef = useRef(null);
@@ -55,7 +55,7 @@ function FittingCamera(){
       // const formData = new FormData();
       // const blob = dataURItoBlob(capturedImageSrc);
       // formData.append('image', blob, 'captured_image.jpg');
-      // formData.append('glassesImg', glassesImgSrc)
+      // formData.append('glassesImg', glassesImg)
 
       // try {
       //   const csrfResponse = await fetch('/fitting/get-csrf-token/');
