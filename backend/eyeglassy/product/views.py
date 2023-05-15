@@ -12,11 +12,16 @@ from django.http import JsonResponse
 from .models import Glasses
 from .serializers import ProductSerializer
 
-def process_shape(request):
+from django.forms.models import model_to_dict
+
+
+def process_shape(request, shape):
     if request.method == 'GET':
-        shape = request.GET.get('shape')
-        glasses_shape = Glasses.objects.filter(shape=shape) # 특정 shape 인 안경 정보 반환
-    return JsonResponse({'glasses_shape': glasses_shape})
+        print('shape@@', shape)
+        glasses_shape = Glasses.objects.filter(shape=shape)
+        glasses_data = [model_to_dict(glass) for glass in glasses_shape]
+        return JsonResponse({'glasses_shape': glasses_data}, safe=False)
+
 
 class ListProduct(generics.ListAPIView):
     queryset = Glasses.objects.all()

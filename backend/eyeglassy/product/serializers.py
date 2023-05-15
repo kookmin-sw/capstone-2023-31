@@ -12,3 +12,10 @@ class ProductSerializer(serializers.ModelSerializer):
             'shape',
         )
         model = Glasses
+
+class ProductShapeSerializer(serializers.ModelSerializer):
+    class Meta:
+        fields = (
+            'shape',
+        )
+        model = Glasses

@@ -19,14 +19,19 @@ function ListPage() {
   const [glassesData, setGlassesData] = useState([]);
 
   useEffect(()=>{
-    const fetchGlassesData = async () => {
-      const glasses = await axios.get(`/product/${shape}?shape=${shape}`,)
-      setGlassesData(glasses.data);
-    }
-    fetchGlassesData();
+      axios.get(`/product/${shape}?shape=${shape}`)
+        .then(response => {
+          console.log(response.data)
+        })
+        .catch(error => {
+          console.log(error);
+        })
+      // setGlassesData(glasses.data);
+    
+    // fetchGlassesData();
   }, [shape]);
 
-  console.log(glassesData);
+  // console.log(glassesData);
 
   const gridData = [
     { id: 1, image: '/images/image1.png', brandName: "AAA", name: "BBB", price: "30,000"},

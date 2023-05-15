@@ -9,7 +9,7 @@ function GridCard(props){
         style={{display:"flex", flexDirection:"column", alignItems:"center"}}>
         <Link 
           className="link" 
-          to={`/list/${props.shape}`}
+          to={`/product/${props.shape}`}
           state={{ name: props.name, shape: props.shape}}
           >
         <div style={{display: "flex", alignItems:"center", borderRadius: "50%", width: "200px", height: "200px", justifyContent: "center", margin: "2rem", border: "1px solid gray"}}>
