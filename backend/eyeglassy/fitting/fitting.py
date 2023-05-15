@@ -11,11 +11,13 @@ import django
 os.environ.setdefault("DJANGO_SETTINGS_MODULE", "config.settings")
 django.setup()
 
-static_eyeglassy_path = os.path.join(settings.DEFAULT_DIR, 'crawling/img/')
 
 ## media 폴더에 68.dat 추가해주기 !
+static_path = os.path.join(settings.BASE_DIR, 'media')
+# static_eyeglassy_path = os.path.join(settings.DEFAULT_DIR, 'crawling/img/')
 
 
+'''
 # 해당 안경 이미지 반환하는 함수
 def specific_eyeglassy_img(eyeglassy_num):
     # eyeglassy_num은 3 같은 형식 일 것. (img3.jpg 에서 숫자 빼고 다 지워서)
@@ -25,10 +27,11 @@ def specific_eyeglassy_img(eyeglassy_num):
     print('eyeglassy_path : ', eyeglassy_path)
     
     return eyeglassy_path
-
+'''
+    
 
 # 안경 씌우고 이미지 반환하는 함수
-def put_eyeglassy(static_path, image_file, eyeglassy_num):
+def put_eyeglassy(glasses_path, image_file):
     predictor_path = os.path.join(static_path, 'shape_predictor_68_face_landmarks.dat')
 
     # 얼굴 인식기와 랜드마크 인식기 초기화
@@ -53,7 +56,7 @@ def put_eyeglassy(static_path, image_file, eyeglassy_num):
         eye_center = ((left_eye[0] + right_eye[0]) // 2, (left_eye[1] + right_eye[1]) // 2)
 
         # 해당 안경 이미지 가져오기
-        glass_img = specific_eyeglassy_img(eyeglassy_num) # res.png 경로가 되겠지
+        glass_img = glasses_path
 
         # 안경 이미지 크기 조정
         glass_width = right_eye[0] - left_eye[0]
@@ -95,6 +98,6 @@ def put_eyeglassy(static_path, image_file, eyeglassy_num):
     ## 3. 얼굴 이미지에 2번 이미지 씌우고 반환하기
 
 
-def run_fitting(static_path, image_file, eyeglassy_num):
-    fitted_face = put_eyeglassy(static_path, image_file, eyeglassy_num) # 안경 쓴 이미지 경로
+def run_fitting(fittting_path, glasses_path, image_file):
+    fitted_face = put_eyeglassy(glasses_path, image_file)
     return fitted_face

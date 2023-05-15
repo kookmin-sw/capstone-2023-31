@@ -17,7 +17,7 @@ from django.forms.models import model_to_dict
 
 def process_shape(request, shape):
     if request.method == 'GET':
-        print('shape@@', shape)
+        # print('shape@@', shape)
         glasses_shape = Glasses.objects.filter(shape=shape)
         glasses_data = [model_to_dict(glass) for glass in glasses_shape]
         return JsonResponse({'glasses_shape': glasses_data}, safe=False)
