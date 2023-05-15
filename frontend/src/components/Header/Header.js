@@ -4,7 +4,9 @@ import { Avatar } from 'antd';
 import { useEffect, useState } from 'react';
 import { Link, useLocation, useNavigate} from 'react-router-dom';
 import axios from 'axios';
+
 function Header() {
+  const navigate = useNavigate();
   
   const [isLoggedIn, setIsLoggedIn] = useState(false);
 
@@ -37,6 +39,7 @@ function Header() {
       if (logoutResponse.data.success) {
         alert(logoutResponse.data.message);
         setIsLoggedIn(false); // 로그인 상태 업데이트
+        navigate('/');
       } else {
         alert(logoutResponse.data.message);
       }
