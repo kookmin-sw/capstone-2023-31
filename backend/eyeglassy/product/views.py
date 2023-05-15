@@ -12,13 +12,17 @@ from django.http import JsonResponse
 from .models import Glasses
 from .serializers import ProductSerializer
 
+def process_shape(request):
+    if request.method == 'GET':
+        shape = request.GET.get('shape')
+        glasses_shape = Glasses.objects.filter(shape=shape) # 특정 shape 인 안경 정보 반환
+    return JsonResponse({'glasses_shape': glasses_shape})
 
-
-class ListProduct(generics.ListCreateAPIView):
+class ListProduct(generics.ListAPIView):
     queryset = Glasses.objects.all()
     serializer_class = ProductSerializer
 
-class DetailProduct(generics.RetrieveUpdateAPIView):
+class DetailProduct(generics.RetrieveAPIView):
     queryset = Glasses.objects.all()
     serializer_class = ProductSerializer
 
