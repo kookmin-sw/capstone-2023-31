@@ -99,7 +99,7 @@
             <div>
               <Row gutter={[8, 8]} style={{ borderRadius: '50%'}}>
                 {styleData.map((item, index) => (
-                  <GridCard key={index} image={item.image} name={item.stylename} st={item.style}></GridCard>
+                  <GridCard key={index} image={item.image} name={item.stylename} shape={item.style}></GridCard>
                 ))}
               </Row>
               
