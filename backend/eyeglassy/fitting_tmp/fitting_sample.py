@@ -3,9 +3,9 @@ import dlib
 import numpy as np
 
 # default dir : backend/eyeglassy
-GLASSES_DIR = './fitting/images/glasses/glasses_sample.png'
-FACE_DIR = './fitting/images/face/face_sample.jpg'
-PREDICTOR_DIR = './fitting/shape_predictor_68_face_landmarks.dat'
+GLASSES_DIR = './fitting_tmp/images/glasses/glasses_sample.png'
+FACE_DIR = './fitting_tmp/images/face/face_sample.jpg'
+PREDICTOR_DIR = './fitting_tmp/shape_predictor_68_face_landmarks.dat'
 
 # 이미지 로드
 img = cv2.imread(FACE_DIR)
