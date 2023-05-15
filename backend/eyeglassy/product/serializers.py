@@ -1,7 +1,7 @@
 from rest_framework import serializers
 from .models import Glasses
 
-class PostSerializer(serializers.ModelSerializer):
+class ProductSerializer(serializers.ModelSerializer):
     class Meta:
         fields = (
             'name',

@@ -10,17 +10,17 @@ from rest_framework import status
 from django.http import JsonResponse
 
 from .models import Glasses
-from .serializers import PostSerializer
+from .serializers import ProductSerializer
 
 
 
-class ListPost(generics.ListCreateAPIView):
+class ListProduct(generics.ListCreateAPIView):
     queryset = Glasses.objects.all()
-    serializer_class = PostSerializer
+    serializer_class = ProductSerializer
 
-class DetailPost(generics.RetrieveUpdateAPIView):
+class DetailProduct(generics.RetrieveUpdateAPIView):
     queryset = Glasses.objects.all()
-    serializer_class = PostSerializer
+    serializer_class = ProductSerializer
 
 @api_view(['GET'])
 def get_csrf_token(request):
