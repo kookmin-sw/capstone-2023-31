@@ -126,27 +126,10 @@ USE_TZ = False
 
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/3.2/howto/static-files/
-if DEBUG:
-    STATIC_URL = '/media/'
-    # STATICFILES_DIRS = [os.path.join(BASE_DIR, 'face_detection', 'media')]
-    STATIC_ROOT = os.path.join(BASE_DIR, 'media')
-else:
-    # AWS Setting
-    AWS_REGION = 'ap-northeast-2'
-    AWS_STORAGE_BUCKET_NAME = 'pklimage'
-    AWS_QUERYSTRING_AUTH = False
-    AWS_S3_HOST = 's3.%s.amazonaws.com' % AWS_REGION
-    AWS_ACCESS_KEY_ID = 'AKIAYROHQ4T6NQ3SXVMB'
-    AWS_SECRET_ACCESS_KEY = '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'
-    AWS_S3_CUSTOM_DOMAIN = '%s.s3.amazonaws.com' % AWS_STORAGE_BUCKET_NAME
 
-    # Static Setting
-    STATIC_URL = "https://%s/" % AWS_S3_CUSTOM_DOMAIN
-    STATICFILES_STORAGE = 'storages.backends.s3boto.S3BotoStorage'
-
-    #Media Setting
-    MEDIA_URL = "https://%s/" % AWS_S3_CUSTOM_DOMAIN
-    DEFAULT_FILE_STORAGE = 'storages.backends.s3boto.S3BotoStorage'
+STATIC_URL = '/media/'
+# STATICFILES_DIRS = [os.path.join(BASE_DIR, 'face_detection', 'media')]
+STATIC_ROOT = os.path.join(BASE_DIR, 'media')
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/3.2/ref/settings/#default-auto-field
