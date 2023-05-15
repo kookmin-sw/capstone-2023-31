@@ -41,7 +41,7 @@ function Login() {
             const csrfResponse = await axios.get('/user/get-csrf-token/');
             const csrfToken = csrfResponse.data.csrfToken;
 
-            await axios.post('/user/login/', {
+            const response=await axios.post('/user/login/', {
                 email: email,
                 password: password,
             }, {
@@ -49,9 +49,17 @@ function Login() {
                     'X-CSRFToken': csrfToken
                 }
             });
+            if (response.data.success) {
+                const data = response.data;
+                console.log(data.message);
+                
+                checkLoginStatus();
+                navigate('/');
 
-            checkLoginStatus();
-            navigate('/');
+            }
+            else {
+                console.log(response.data.message)
+            }
         } catch (error) {
             console.error(error);
         }
