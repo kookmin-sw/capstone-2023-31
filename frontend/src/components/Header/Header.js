@@ -4,7 +4,9 @@ import { Avatar } from 'antd';
 import { useEffect, useState } from 'react';
 import { Link, useLocation, useNavigate} from 'react-router-dom';
 import axios from 'axios';
+
 function Header() {
+  const navigate = useNavigate();
   
   const [isLoggedIn, setIsLoggedIn] = useState(false);
 
@@ -21,34 +23,31 @@ function Header() {
   }, []);
 
 
-  const onLogoutHandler = (event) => { //로그아웃
+  const onLogoutHandler = async (event) => {
     event.preventDefault();
-    axios.get('/user/get-csrf-token/') // Get CSRF token from the server
-      .then(response => {
-        const csrfToken = response.data.csrfToken;
 
-        // Send logout request to the backend
-        axios.post('/user/logout/', null, {
-          headers: {
-            'X-CSRFToken': csrfToken
-          }
-        })
-          .then((response) => {
-            if (response.data.success) {
-              alert(response.data.message);
-              setIsLoggedIn(false); // 로그인 상태 업데이트
-            } else {
-              alert(response.data.message);
-            }
-          })
-          .catch((error) => {
-            console.error(error);
-          });
-      })
-      .catch((error) => {
-        console.error(error);
+    try {
+      const response = await axios.get('/user/get-csrf-token/');
+      const csrfToken = response.data.csrfToken;
+
+      const logoutResponse = await axios.post('/user/logout/', null, {
+        headers: {
+          'X-CSRFToken': csrfToken
+        }
       });
+
+      if (logoutResponse.data.success) {
+        alert(logoutResponse.data.message);
+        setIsLoggedIn(false); // 로그인 상태 업데이트
+        navigate('/');
+      } else {
+        alert(logoutResponse.data.message);
+      }
+    } catch (error) {
+      console.error(error);
+    }
   };
+
 
   return (
   <div className="header-container">
@@ -59,15 +58,15 @@ function Header() {
       <ul>
           {isLoggedIn ? (
             <>
-            <li><Link className="link" to="/mypage">마이페이지</Link></li>
+              <li><Link className="link" to="/mypage">마이페이지</Link></li>
               <li><Link className="link" to="/user/logout" onClick={onLogoutHandler}>로그아웃</Link></li>
             </>
           ) : (
-            <>
-                <li><Link className="link" to="/user/login">로그인</Link></li>
-                <li><Link className="link" to="/user/signup">회원가입</Link></li>
-              </>
-            )}
+            <>  
+              <li><Link className="link" to="/user/login">로그인</Link></li>
+              <li><Link className="link" to="/user/signup">회원가입</Link></li>
+            </>
+          )}
       </ul>
     </div>
   </div>

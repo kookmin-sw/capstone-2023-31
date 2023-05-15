@@ -14,6 +14,7 @@ from pathlib import Path
 import os
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
+DEFAULT_DIR = Path(__file__).resolve().parent.parent.parent.parent # /captstone-2023-31
 
 
 # Quick-start development settings - unsuitable for production
@@ -127,7 +128,7 @@ USE_TZ = False
 # https://docs.djangoproject.com/en/3.2/howto/static-files/
 
 STATIC_URL = '/media/'
-STATICFILES_DIRS = [os.path.join(BASE_DIR, 'face_detection', 'media')]
+# STATICFILES_DIRS = [os.path.join(BASE_DIR, 'face_detection', 'media')]
 STATIC_ROOT = os.path.join(BASE_DIR, 'media')
 
 

@@ -1,4 +1,4 @@
-import React, { Fragment, useState } from "react";
+import React, { Fragment, useEffect, useState } from "react";
 import { useLocation, useParams, Link } from "react-router-dom";
 import Header from "../../components/Header/Header"
 import "./ListPage.css"
@@ -8,7 +8,11 @@ import Paginator from "../../components/Paginator/Paginator";
 import SearchBar from "../../components/Search/SearchBar";
 function ListPage() {
 
-  const { style } = useParams();
+  useEffect(()=>{ // 페이지 이동 시 스크롤 위치 초기화
+    window.scrollTo(0, 0);
+  }, [])
+
+  // const { style } = useParams();
   const styleName = useLocation();
 
   const gridData = [
@@ -48,7 +52,7 @@ function ListPage() {
                     >
                     <Link 
                       className="link" 
-                      to={`/product`}
+                      to={`/product/${item.id}`}
                       state={item}
                       >
                     <div style={{display: "flex", flexDirection:"column"}}>

@@ -12,7 +12,7 @@ function GridCard(props){
           to={`/list/${props.st}`}
           state={props.name}
           >
-        <div style={{display: "flex", alignItems:"center", borderRadius: "50%", width: "200px", height: "200px", justifyContent: "center", margin: "2rem", border: "2px dashed gray"}}>
+        <div style={{display: "flex", alignItems:"center", borderRadius: "50%", width: "200px", height: "200px", justifyContent: "center", margin: "2rem", border: "1px solid gray"}}>
             <img 
               style={{borderRadius: "50%", maxWidth:'200px'}}
               src={props.image}
@@ -20,7 +20,7 @@ function GridCard(props){
             </img>
         </div>
         </Link>
-        <div>{props.name}</div>
+        <div style={{fontSize:"20px"}}>{props.name}</div>
       </Col>
   )
 }

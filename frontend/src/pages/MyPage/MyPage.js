@@ -9,6 +9,8 @@ import { Button, Row, Col } from "antd";
 import EditProfile from "../../components/EditProfile";
 import { useNavigate, Link } from "react-router-dom";
 import axios from "axios";
+import { Provider, useSelector } from "react-redux";
+// import store from "../../_reducer/wishReducer";
 
 
 function MyPage() {
@@ -56,57 +58,46 @@ function MyPage() {
 
   };
 
-  const handleProfileUpdate = (updatedNickname, lastPassword, updatedPassword) => {
+  const handleProfileUpdate = async (updatedNickname, lastPassword, updatedPassword) => {
     try {
-      axios.get('/user/get-csrf-token/')
-        .then(response => {
-          const csrfToken = response.data.csrfToken;
+      const response = await axios.get('/user/get-csrf-token/');
+      const csrfToken = response.data.csrfToken;
 
-          axios.post('/user/edit-profile/', {
-            nickname: updatedNickname,
-            lastpassword: lastPassword,
-            updatedpassword: updatedPassword
-          }, {
-            headers: {
-              'X-CSRFToken': csrfToken
-            }
-          })
-            .then(response => {
-              if (response.data.success) {
-                // 업데이트 성공한 경우 처리
-                const data = response.data;
-                alert(data.message);
-                // Assuming setNickname and setUpdatePassword are defined somewhere else in your code.
-                if (data.nickname) {
-                  setNickname(data.nickname);
-                }
-                if (data.updatedpassword) {
-                  setUpdatePassword(data.updatedpassword);
-                }
+      const updateResponse = await axios.post('/user/edit-profile/', {
+        nickname: updatedNickname,
+        lastpassword: lastPassword,
+        updatedpassword: updatedPassword
+      }, {
+        headers: {
+          'X-CSRFToken': csrfToken
+        }
+      });
 
-                handleCancel();
-                window.location.reload();
-              }
-              else {
-                // 업데이트 실패한 경우 처리
-                alert(response.data.message);
-              }
-            })
-            .catch(error => {
-              console.error(error);
-            });
-        });
-    }
-    catch (error) {
+      if (updateResponse.data.success) {
+        const data = updateResponse.data;
+        alert(data.message);
+        if (data.nickname) {
+          setNickname(data.nickname);
+        }
+        if (data.updatedpassword) {
+          setUpdatePassword(data.updatedpassword);
+        }
+        handleCancel();
+        window.location.reload();
+      } else {
+        alert(updateResponse.data.message);
+      }
+    } catch (error) {
       console.error(error);
     }
   };
 
 
-
   useEffect(() => {
     sendSetProfileRequest();
   }, []);
+
+
   const gridData = [
     { id: 1, image: '/images/image1.png', brandName: "AAA", name: "BBB", price: "30,000" },
     { id: 2, image: '/images/image1.png', brandName: "AAA", name: "BBB", price: "30,000" },
@@ -125,6 +116,15 @@ function MyPage() {
 
   ];
 
+  
+  const wishlist = useSelector(store => store.wishReducer || []);
+  // const [myList, setMyList] = useState([]);
+
+  // useEffect(()=>{
+  //   setMyList([...myList, wishlist])
+  // }, wishlist);
+
+  console.log(wishlist)
 
   return (
     <div className="container">
@@ -159,45 +159,48 @@ function MyPage() {
           onCancel={handleCancel}
         >
           <EditProfile onUpdate={handleProfileUpdate} />
-          <Button onClick={handleProfileUpdate} style={{ float: "right" }}>
+          {/* <Button onClick={handleProfileUpdate} style={{ float: "right" }}>
             변경하기
-        </Button>
+        </Button> */}
         </ModalComponent>
 
-
-
-        <div className="dibs">
-          <div style={{ fontSize: "20px", margin: "0 30px" }}>찜한 안경</div>
-          <div className="list-glasses" style={{ marginBottom: "0" }}>
-            <Row gutter={[8, 8]}>
-              {gridData.map((item, index) => (
-                <Col key={index} lg={6} md={8} sm={12} xs={24}
-                  style={{ display: "flex", flexDirection: "column", alignItems: "center", marginBottom: "3rem" }}
-                >
-                  <Link
-                    className="link"
-                    to={`/detail`}
-                    state={item}
-                  >
-                    <div style={{ display: "flex", flexDirection: "column" }}>
-                      <img
-                        style={{ width: '250px', height: "160px" }}
-                        src={item.image}
-                      >
-                      </img>
-                      <div>
-                        <div>{item.brandName}</div>
-                        <div>{item.name}</div>
-                        <div>{item.price}원</div>
-                      </div>
-                    </div>
-                  </Link>
-
-                </Col>
-              ))}
-            </Row>
+          <div className="dibs">
+            <div style={{fontSize:"20px", margin: "0 30px"}}>찜한 안경</div>
+            {wishlist.length == 0 ? (
+              <h2>찜한 상품이 없습니다.</h2>
+            ):(
+              <div className="list-glasses" style={{marginBottom:"0"}}>
+              <Row gutter={[8,8]}>
+                  {wishlist.map((item, index) => (
+                      <Col key={index} lg={6} md={8} sm={12} xs={24}
+                        style={{display:"flex", flexDirection:"column", alignItems:"center", marginBottom:"3rem"}}
+                        >
+                        <Link 
+                          className="link" 
+                          to={`/product/${item.id}`}
+                          state={item}
+                          >
+                        <div style={{display: "flex", flexDirection:"column"}}>
+                            <img 
+                              style={{ width:'250px', height:"160px"}}
+                              src={item.image}
+                              >
+                            </img>
+                            <div>
+                              <div>{item.brandName}</div>
+                              <div>{item.name}</div>
+                              <div>{item.price}원</div>
+                            </div>
+                        </div>
+                        </Link>
+                        
+                      </Col>
+                ))}
+                </Row>
+            </div>
+            )}
           </div>
-        </div>
+
       </div>
       <Footer name="mypage" />
     </div>
