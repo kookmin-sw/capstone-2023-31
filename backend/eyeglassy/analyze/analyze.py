@@ -1,22 +1,22 @@
 import cv2
 import numpy as np
 from tensorflow.keras.preprocessing import image
-from tensorflow.keras.applications.vgg16 import VGG16, preprocess_input
 from tensorflow.keras.models import load_model
+from tensorflow.keras.applications.vgg16 import preprocess_input
 import os
 from sklearn.neighbors import KNeighborsClassifier
 import joblib
 
 
-def load_knn(static_path):
+def load_model_and_knn(static_path):
     knn_path = os.path.join(static_path,"knn_classifier.pkl")
-
+    model_path = os.path.join(static_path, "face_shape_model.h5")
     # Load the face shape classification model
-
+    model = load_model(model_path)
     # Load the KNN classifier
     knn = joblib.load(knn_path)
 
-    return knn
+    return model, knn
 
 
 def extract_face(image, static_path):
@@ -50,7 +50,7 @@ def predict_face_shape(static_path, image_file):
     print(static_path)
 
     # Load the saved model and knn classifier
-    knn = load_knn(static_path)
+    model, knn = load_model_and_knn(static_path)
     face_shapes = ['heart', 'oblong', 'oval', 'round', 'square']
 
     # Load the input image
