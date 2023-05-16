@@ -148,18 +148,10 @@ def fitting_face(request, id):
     except KeyError:
         return Response(status=status.HTTP_400_BAD_REQUEST)
 
-<<<<<<< HEAD
-    # 3) 해당 안경의 누끼 이미지 경로 저장
-    glasses_path = os.path.join(settings.DEFAULT_DIR, output_path, product_img)
-    # glasses_path = '../../crawling/image/output/res' + product_id + '.png'
-    
-    image_path = os.path.join(settings.MEDIA_ROOT, image_file.name)
-=======
 
     ### 2) 이미지 임시 저장 - 경로 만들어주기
     image_path = os.path.join(settings.STATIC_ROOT, image_file.name)
     # print('@@이미지임시경로@@', image_path)
->>>>>>> 0d6a2b2 ([Modify] fitting 연동 전체 수정)
 
     with open(image_path, 'wb+') as destination:
         for chunk in image_file.chunks():
