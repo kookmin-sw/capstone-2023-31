@@ -427,12 +427,12 @@ $RECYCLE.BIN/
 *.gif
 *.npz
 *.mov
-data/미사용/
-data/참고/
-data/기타src/
-data/dataset
-data/dataset/dataset
-data/
+#data/미사용/
+#data/참고/
+#data/기타src/
+#data
+#data/dataset/dataset
+#data/
 faceshape-master
 
 *.h5
