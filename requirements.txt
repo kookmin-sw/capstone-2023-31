@@ -24,8 +24,6 @@ django-filter==21.1
 djangorestframework==3.13.1
 dlib @ file:///Users/runner/miniforge3/conda-bld/dlib_1679613866776/work
 et-xmlfile==1.1.0
-face-recognition @ file:///home/conda/feedstock_root/build_artifacts/face_recognition_1619808233029/work
-face-recognition-models @ file:///home/conda/feedstock_root/build_artifacts/face_recognition_models_1595707436534/work
 GEOparse==2.0.3
 gprofiler-official==1.0.0
 h11==0.13.0
