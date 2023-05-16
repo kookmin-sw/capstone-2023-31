@@ -10,7 +10,8 @@ local_settings.py
 db.sqlite3
 db.sqlite3-journal
 *.pkl
-
+*.pem
+*.ppk
 *.lock
 
 #pic
@@ -427,11 +428,15 @@ $RECYCLE.BIN/
 *.gif
 *.npz
 *.mov
-
+#data/미사용/
+#data/참고/
+#data/기타src/
+#data
+#data/dataset/dataset
+#data/
 faceshape-master
-
 *.pem
-
+*.h5
 *.rdb
 # End of https://www.toptal.com/developers/gitignore/api/react,python,django,venv,macos,windows,git,sublimetext,visualstudiocode
 backend/face-detection(not use)/assets/
