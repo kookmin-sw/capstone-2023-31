@@ -24,9 +24,9 @@ DEFAULT_DIR = Path(__file__).resolve().parent.parent.parent.parent # /captstone-
 SECRET_KEY = 'django-insecure-7o)d2nelki!=rnd(x#(9tfi8rnyyqmbk-!85&a$ihk4#1bnq4d'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = False
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['*']
 
 
 # Application definition
@@ -64,7 +64,7 @@ ROOT_URLCONF = 'eyeglassy.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [BASE_DIR / 'templates'],
+        'DIRS': [BASE_DIR, 'templates'],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
@@ -127,11 +127,17 @@ USE_TZ = False
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/3.2/howto/static-files/
 
-STATIC_URL = '/media/'
+#STATIC_URL = '/media/'
 # STATICFILES_DIRS = [os.path.join(BASE_DIR, 'face_detection', 'media')]
-STATIC_ROOT = os.path.join(BASE_DIR, 'media')
+#STATIC_ROOT = os.path.join(BASE_DIR, 'media')
+STATIC_URL = '/static/'
+BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+ROOT_DIR = os.path.dirname(BASE_DIR)
 
-
+STATICFILES_DIRS = [
+    # 실제 static 파일은 모두 client 측에서 소유
+    os.path.join(ROOT_DIR, 'client/static')
+]
 # Default primary key field type
 # https://docs.djangoproject.com/en/3.2/ref/settings/#default-auto-field
 
@@ -154,6 +160,8 @@ REST_FRAMEWORK = {
         'rest_framework.authentication.TokenAuthentication',
         'rest_framework.authentication.SessionAuthentication',
     ],
+    'DEFAULT_PAGINATION_CLASS' : 'rest_framework.pagination.PageNumberPagination',
+    'PAGE_SIZE' : 16,  # 1 페이지당 보여줄 갯수
 }
 AUTH_USER_MODEL="user.User"
 LOGIN_URL = '/user/login/'
