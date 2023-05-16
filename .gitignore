@@ -427,15 +427,9 @@ $RECYCLE.BIN/
 *.gif
 *.npz
 *.mov
-data/미사용/
-data/참고/
-data/기타src/
-data/dataset
-data/dataset/dataset
-data/
-faceshape-master
 
-*.h5
+faceshape-master
+*.pem
 *.rdb
 # End of https://www.toptal.com/developers/gitignore/api/react,python,django,venv,macos,windows,git,sublimetext,visualstudiocode
 backend/face-detection(not use)/assets/
