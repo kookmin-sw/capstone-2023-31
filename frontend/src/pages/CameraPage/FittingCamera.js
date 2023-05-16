@@ -37,14 +37,23 @@ function FittingCamera(){
   // }, []);
 
   const dataURItoBlob = (dataURI) => {
+    // const byteString = atob(dataURI.split(',')[1]);
+    // const ab = new ArrayBuffer(byteString.length);
+    // const ia = new Uint8Array(ab);
+    // for (let i = 0; i < byteString.length; i++) {
+    //   ia[i] = byteString.charCodeAt(i);
+    // }
+    // const blob = new Blob([ab], { type: 'image/jpeg' });
+    // return blob;
+
     const byteString = atob(dataURI.split(',')[1]);
+    const mimeString = dataURI.split(',')[0].split(':')[1].split(';')[0];
     const ab = new ArrayBuffer(byteString.length);
     const ia = new Uint8Array(ab);
     for (let i = 0; i < byteString.length; i++) {
       ia[i] = byteString.charCodeAt(i);
     }
-    const blob = new Blob([ab], { type: 'image/jpeg' });
-    return blob;
+    return new Blob([ab], { type: mimeString });
   }
 
   const capture = async () => {
@@ -55,14 +64,15 @@ function FittingCamera(){
       // 통신하는 코드 !!! 잠깐 주석 처리
 
       const formData = new FormData();
-      const blob = dataURItoBlob(capturedImageSrc);
-      formData.append('image', blob, 'captured_image.jpg');
+      // const blob = dataURItoBlob(capturedImageSrc);
+      // formData.append('image', blob, 'captured_image.jpg');
+      formData.set('image', dataURItoBlob(capturedImageSrc));
 
       try {
         const csrfResponse = await fetch('/fitting/get-csrf-token/');
         const csrfData = await csrfResponse.json();
         const csrfToken = csrfData.csrfToken;
-        const fittingResponse = await axios.get(`/fitting/camera/${glassesId}/?id=${glassesId}`, formData, {
+        const fittingResponse = await axios.post(`/fitting/camera/${glassesId}/?id=${glassesId}`, formData, {
           'header': csrfToken
         });
 

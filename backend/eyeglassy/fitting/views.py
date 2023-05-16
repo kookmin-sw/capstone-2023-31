@@ -13,6 +13,7 @@ import numpy as np
 import django
 # from . import fitting
 from django.http import HttpResponse
+import base64
 
 from django.conf import settings
 from product.models import Glasses
@@ -44,6 +45,7 @@ def run_fitting(glasses_path, image_file):
 
     # 얼굴 이미지 불러오기 (views.py에서 리액트에서 받아옴.)
     face_img = cv2.imread(image_file)
+    cv2.imshow('test', face_img)
 
     # 얼굴 인식
     faces = detector(face_img)
@@ -97,12 +99,13 @@ def get_csrf_token(request):
     # 클라이언트에게 CSRF 토큰을 반환
     return JsonResponse({'csrfToken': get_token(request)})
 
-@api_view(['GET'])
+@api_view(['POST'])
 @csrf_exempt
 def fitting_face(request, id):
     # 1) 리액트에서 받아온 안경 이미지, 안경 정보
     try:
-        image_file = request.FILES.get('image')
+        # image_file = request.FILES.get('image')
+        image_file = request.FILES['image']
     except KeyError:
         return Response(status=status.HTTP_400_BAD_REQUEST)
     
@@ -114,8 +117,14 @@ def fitting_face(request, id):
     glasses_path = os.path.join(settings.DEFAULT_DIR, output_path, product_img)
     # glasses_path = '../../crawling/image/output/res' + product_id + '.png'
 
+    image_path = os.path.join(settings.MEDIA_ROOT, image_file.name)
+
+    with open(image_path, 'wb+') as destination:
+        for chunk in image_file.chunks():
+            destination.write(chunk)
+
     # 이미지 위에 안경 이미지 붙여서 반환
-    fitted_face = run_fitting(glasses_path, image_file) # fitting앱 경로, 누끼딴 안경 이미지 경로, 얼굴 이미지
+    fitted_face = run_fitting(glasses_path, image_path) # fitting앱 경로, 누끼딴 안경 이미지 경로, 얼굴 이미지
 
     # product_id = re.sub(r'[^0-9]', '', product_id) # 3
 
@@ -125,15 +134,14 @@ def fitting_face(request, id):
     # 이미지 위에 안경 이미지 붙여서 반환
     # fitted_face = fitting.run_fitting(fitting_path, glasses_path, image_file) # fitting앱 경로, 누끼딴 안경 이미지 경로, 얼굴 
     
-    # response_data = {'result': 'success', 'message': '이미지 처리 완료'}
-    # return JsonResponse(response_data)
+    response_data = {'result': 'success', 'message': '이미지 처리 완료'}
+    return JsonResponse(response_data)
     # return Response({'fitted_face': fitted_face})
     # return JsonResponse({'image' : image_file})
     # return HttpResponse(image_file, content_type='image/jpeg')
-    # HttpResponse로 이미지 반환
-    response = HttpResponse(fitted_face, content_type='image/jpeg')
-    return response
+    
+    # # HttpResponse로 이미지 반환
 
-    # return Response({'fitted_face': fitted_face})
-    # return JsonResponse({'fitted_face': fitted_face})
+    # response = HttpResponse(fitted_face, content_type='image/jpeg')
+    # return response
 
