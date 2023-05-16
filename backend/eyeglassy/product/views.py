@@ -32,7 +32,10 @@ def get_random_product(request):
         glasses_data = [model_to_dict(glass) for glass in random_glasses]
         return JsonResponse({'random_glasses': glasses_data}, safe=False)
 
-
+class RandomListProduct(generics.ListAPIView):
+    queryset = Glasses.objects.exclude(name__isnull=True).exclude(name__exact='').order_by('?')[:16]
+    serializer_class = ProductSerializer
+    
 class ListProduct(generics.ListAPIView):
     queryset = Glasses.objects.all()
     serializer_class = ProductSerializer

@@ -5,6 +5,7 @@ from .models import Glasses
 
 app_name = 'product'
 
+
 urlpatterns = [
     path('', views.ListProduct.as_view(), name='product_list'), # list, url 수정 필요
     path('<int:pk>/', views.DetailProduct.as_view(), name='product_detail'),
