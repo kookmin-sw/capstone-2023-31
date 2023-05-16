@@ -12,6 +12,7 @@ import dlib
 import numpy as np
 import django
 # from . import fitting
+from django.http import HttpResponse
 
 from django.conf import settings
 from product.models import Glasses
@@ -35,7 +36,7 @@ def fitting_result(request):
 '''
 
 def run_fitting(glasses_path, image_file):
-    predictor_path = 'models/shape_predictor_68_face_landmarks.dat'
+    predictor_path = os.path.join(settings.BASE_DIR, 'fitting/models/shape_predictor_68_face_landmarks.dat')
 
     # 얼굴 인식기와 랜드마크 인식기 초기화
     detector = dlib.get_frontal_face_detector()
@@ -46,6 +47,7 @@ def run_fitting(glasses_path, image_file):
 
     # 얼굴 인식
     faces = detector(face_img)
+    print('@@@@@@@', faces)
     
     # 안경 이미지 불러오기
     glasses_img = cv2.imread(glasses_path, cv2.IMREAD_UNCHANGED)
@@ -82,8 +84,12 @@ def run_fitting(glasses_path, image_file):
                     # face_img[center_y+i,center_x+j,:] = resized_glasses[i,j,:3]
                     face_img[center_y+i,center_x+j,:] = resized_glasses[i,j,:3]
 
-    # 이미지 반환
-    return face_img
+    # 이미지를 바이트로 변환
+    _, encoded_img = cv2.imencode('.jpg', face_img)
+    byte_img = encoded_img.tobytes()
+
+    return byte_img
+
 
 
 @api_view(['GET'])
@@ -96,7 +102,6 @@ def get_csrf_token(request):
 def fitting_face(request, id):
     # 1) 리액트에서 받아온 안경 이미지, 안경 정보
     try:
-        # image_file = request.FILES['image']
         image_file = request.FILES.get('image')
     except KeyError:
         return Response(status=status.HTTP_400_BAD_REQUEST)
@@ -122,6 +127,13 @@ def fitting_face(request, id):
     
     # response_data = {'result': 'success', 'message': '이미지 처리 완료'}
     # return JsonResponse(response_data)
-    return Response({'fitted_face': fitted_face})
+    # return Response({'fitted_face': fitted_face})
     # return JsonResponse({'image' : image_file})
     # return HttpResponse(image_file, content_type='image/jpeg')
+    # HttpResponse로 이미지 반환
+    response = HttpResponse(fitted_face, content_type='image/jpeg')
+    return response
+
+    # return Response({'fitted_face': fitted_face})
+    # return JsonResponse({'fitted_face': fitted_face})
+
