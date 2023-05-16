@@ -26,7 +26,7 @@ SECRET_KEY = 'django-insecure-7o)d2nelki!=rnd(x#(9tfi8rnyyqmbk-!85&a$ihk4#1bnq4d
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = False
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['*']
 
 
 # Application definition
@@ -64,7 +64,7 @@ ROOT_URLCONF = 'eyeglassy.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [client],
+        'DIRS': [BASE_DIR, 'templates'],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
