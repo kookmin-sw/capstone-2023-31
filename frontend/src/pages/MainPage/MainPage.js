@@ -9,19 +9,39 @@
   import "slick-carousel/slick/slick.css";
   import "slick-carousel/slick/slick-theme.css";
   import SearchBar from "../../components/Search/SearchBar";
+  import axios from "axios";
   function MainPage() {
 
     const navigate = useNavigate();
 
     const [images, setImages] = useState([]);
 
-    useEffect(() => { // 안경 랜덤 16개 추출
-      const importAll = (r) => r.keys().map(r);
-      const imageFiles = importAll(require.context('../../../public/images/input', false, /\.(png|jpg|svg)$/));
-      const randomImages = imageFiles.sort(() => Math.random() - 0.5).slice(0, 32);
-      setImages(randomImages);
-      console.log(randomImages)
-    }, []);
+    // useEffect(() => { // 안경 랜덤 16개 추출
+    //   const importAll = (r) => r.keys().map(r);
+    //   const imageFiles = importAll(require.context('../../../public/images/input', false, /\.(png|jpg|svg)$/));
+    //   const randomImages = imageFiles.sort(() => Math.random() - 0.5).slice(0, 32);
+    //   setImages(randomImages);
+    //   console.log(randomImages)
+    // }, []);
+
+    useEffect(()=>{ 
+      const fetchData = async () => {
+        try {
+          axios.get('/ /')
+          .then(response => {
+      console.log(response);
+      })
+      .catch(error => {
+        console.log(error);
+      });
+
+          }
+          catch(error) {
+            console.log(error);
+          }
+        };
+        fetchData();
+      }, []);
 
     const gridData = [
       { style: "round", stylename: "둥근형", image: '/images/glasses2.jpg'},
