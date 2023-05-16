@@ -35,6 +35,19 @@ def get_random_product(request):
 class RandomListProduct(generics.ListAPIView):
     queryset = Glasses.objects.exclude(name__isnull=True).exclude(name__exact='').order_by('?')[:16]
     serializer_class = ProductSerializer
+
+
+# 문자열 검색하면 그 문자열이 포함된 product list를 쭈르륵 반환해주기
+class SearchProduct(generics.ListAPIView):
+    serializer_class = ProductSerializer
+
+    def get_queryset(self):
+        search_query = self.request.query_params.get('query', '')
+
+        queryset = Glasses.objects.filter(name__icontains=search_query)
+
+        return queryset
+
     
 class ListProduct(generics.ListAPIView):
     queryset = Glasses.objects.all()
