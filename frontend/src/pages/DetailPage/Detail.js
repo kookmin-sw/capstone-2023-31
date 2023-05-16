@@ -14,7 +14,7 @@ function Detail(){
   const location = useLocation();
   const data = location.state;
 
-  // console.log(data);
+  console.log(data);
 
   const dispatch = useDispatch();
   const wishList = useSelector(state => state.wishReducer || []);
@@ -41,6 +41,10 @@ function Detail(){
     setIsWish(false);
     dispatch(deleteWishList(data));
     // console.log("상품 삭제");
+  }
+
+  const goToLink = () => {
+    window.location.href = data.url;
   }
 
 
@@ -71,7 +75,7 @@ function Detail(){
             )}
             <Button style={{flex:1}} size="large" onClick={()=>navigate(`/fitting/camera/${data.id}`, {state: data})}>가상 피팅하러 가기</Button>
           </div>
-          <Button type="primary" size="large" style={{marginTop: "10px"}}>구매하기</Button>
+          <Button type="primary" size="large" style={{marginTop: "10px"}} onClick={goToLink}>구매하기</Button>
       </div>
         </div>
       <Footer/>

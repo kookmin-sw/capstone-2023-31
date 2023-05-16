@@ -29,12 +29,11 @@
         try {
           axios.get('/ /')
           .then(response => {
-      console.log(response);
+      setImages(response.data.results);
       })
       .catch(error => {
         console.log(error);
       });
-
           }
           catch(error) {
             console.log(error);
@@ -79,9 +78,9 @@
             <Slider {...settings}>
               {images.map((item, index) => (
                 <div key={index}>
-                  {/* <Link className="link" to="/product" state={item}> */}
-                    <img style={{ width: "250px", height: "250px"}} src={item}></img>
-                  {/* </Link> */}
+                  <Link className="link" to={`/product/${item.shape}/${item.id}`} state={item}>
+                    <img style={{ width: "250px", height: "250px"}} src={`/images/input/${item.image}`}></img>
+                  </Link>
                 </div>
               )) }
             </Slider>

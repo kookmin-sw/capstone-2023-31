@@ -63,11 +63,11 @@ function FaceAnalyze() {
     }
   };
   const data = [
-    { category: 'Heart', categoryName: "하트형", value: 25, info: "" },    //하트형
-    { category: 'Oblong', categoryName: "긴얼굴형", value: 25 }, //긴얼굴형
-    { category: 'Oval', categoryName: "타원형", value: 25 },     //타원형
-    { category: 'Round', categoryName: "둥근형", value: 25 },    //둥근형
-    { category: 'Square', categoryName: "사각형", value: 25 },   //사각형
+    { category: 'Heart', categoryName: "하트형", value: 25, shape: 'wellington', shapeName: "웰링턴" },    //하트형
+    { category: 'Oblong', categoryName: "긴얼굴형", value: 25, shape: 'oval', shapeName: "타원형" }, //긴얼굴형
+    { category: 'Oval', categoryName: "타원형", value: 25, shape: 'half', shapeName: "하금테"  },     //타원형
+    { category: 'Round', categoryName: "둥근형", value: 25, shape: 'square', shapeName: "사각형"  },    //둥근형
+    { category: 'Square', categoryName: "사각형", value: 25, shape: 'round', shapeName: "둥근형"  },   //사각형
   ];
 
   const [updatedData, setUpdatedData] = useState(data);
@@ -86,6 +86,8 @@ function FaceAnalyze() {
     }
   }, [predictedShape]);
 
+  const matchingItem = data.find(item => item.category === predictedShape);
+
   return (
     <>
     { predictedShape == null  ? (
@@ -94,7 +96,7 @@ function FaceAnalyze() {
       <div className="container">
       <Header />
       <div className="face-analyze-container">
-        <div style={{ fontSize: "20px", fontWeight: "bold", marginTop: "20px", textAlign: "center" }}>{updatedData.find((obj) => obj.category === predictedShape)?.categoryName} 얼굴</div>
+        <div style={{ fontSize: "20px", fontWeight: "bold", marginTop: "20px", textAlign: "center" }}>{matchingItem.categoryName} 얼굴</div>
         <div className="chart-wrapper">
           <RadarChart cx={200} cy={200} outerRadius={120} width={400} height={400} data={updatedData}>
             <PolarGrid />
@@ -114,16 +116,12 @@ function FaceAnalyze() {
           <p style={{ fontSize: "18px", fontWeight: "bold" , textAlign:"center"}}>로그인 후 얼굴형 정보를 저장할 수 있습니다.</p>
         )}
       <div style={{ marginTop: "10px", fontSize: "20px", fontWeight: "bold"}}>추천 프레임</div>
-      <div className="face-text">
-        OOO 프레임 추천!
+      <div className="face-text">{matchingItem.shapeName} 프레임 추천!
       </div>
-      <Button style={{margin: "10px 0"}} size="large" type="primary" onClick={() => navigate(`/list/round`)}>추천 안경테 적용해보기</Button>
+      <Button 
+        style={{margin: "10px 0"}} size="large" type="primary" 
+        onClick={() => navigate(`/product/${matchingItem.shape}`, {state:{name: `${matchingItem.shapeName}`, shape: `${matchingItem.shape}`}})}>추천 안경테 적용해보기</Button>
       </div>
-      {/* <div style={{ fontSize: "20px", fontWeight: "bold", margin: "0 300px" }}>얼굴형 분석 결과</div>
-      <div className="face-text">
-        얼굴 비율이 OO한 편이에요.
-      </div> */}
-      
       <Footer />
     </div>
     )}
