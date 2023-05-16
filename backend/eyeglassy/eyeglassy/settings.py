@@ -24,7 +24,7 @@ DEFAULT_DIR = Path(__file__).resolve().parent.parent.parent.parent # /captstone-
 SECRET_KEY = 'django-insecure-7o)d2nelki!=rnd(x#(9tfi8rnyyqmbk-!85&a$ihk4#1bnq4d'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = False
 
 ALLOWED_HOSTS = []
 
@@ -64,7 +64,7 @@ ROOT_URLCONF = 'eyeglassy.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [BASE_DIR / 'templates'],
+        'DIRS': [client],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
@@ -126,28 +126,18 @@ USE_TZ = False
 
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/3.2/howto/static-files/
-if DEBUG:
-    STATIC_URL = '/media/'
-    # STATICFILES_DIRS = [os.path.join(BASE_DIR, 'face_detection', 'media')]
-    STATIC_ROOT = os.path.join(BASE_DIR, 'media')
-else:
-    # AWS Setting
-    AWS_REGION = 'ap-northeast-2'
-    AWS_STORAGE_BUCKET_NAME = 'pklimage'
-    AWS_QUERYSTRING_AUTH = False
-    AWS_S3_HOST = 's3.%s.amazonaws.com' % AWS_REGION
-    AWS_ACCESS_KEY_ID = 'AKIAYROHQ4T6NQ3SXVMB'
-    AWS_SECRET_ACCESS_KEY = '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'
-    AWS_S3_CUSTOM_DOMAIN = '%s.s3.amazonaws.com' % AWS_STORAGE_BUCKET_NAME
 
-    # Static Setting
-    STATIC_URL = "https://%s/" % AWS_S3_CUSTOM_DOMAIN
-    STATICFILES_STORAGE = 'storages.backends.s3boto.S3BotoStorage'
+#STATIC_URL = '/media/'
+# STATICFILES_DIRS = [os.path.join(BASE_DIR, 'face_detection', 'media')]
+#STATIC_ROOT = os.path.join(BASE_DIR, 'media')
+STATIC_URL = '/static/'
+BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+ROOT_DIR = os.path.dirname(BASE_DIR)
 
-    #Media Setting
-    MEDIA_URL = "https://%s/" % AWS_S3_CUSTOM_DOMAIN
-    DEFAULT_FILE_STORAGE = 'storages.backends.s3boto.S3BotoStorage'
-
+STATICFILES_DIRS = [
+    # 실제 static 파일은 모두 client 측에서 소유
+    os.path.join(ROOT_DIR, 'client/static')
+]
 # Default primary key field type
 # https://docs.djangoproject.com/en/3.2/ref/settings/#default-auto-field
 

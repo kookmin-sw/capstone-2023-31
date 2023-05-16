@@ -62,7 +62,7 @@ def analyze_face(request):
             destination.write(chunk)
 
     predicted_shape = analyze.run_modeling(static_path, image_path)
-
+    print(predicted_shape)
     return Response({'predicted_shape': predicted_shape})
 
 @api_view(["POST"])

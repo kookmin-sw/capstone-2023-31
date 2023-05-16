@@ -10,10 +10,32 @@ local_settings.py
 db.sqlite3
 db.sqlite3-journal
 *.pkl
-*.pem
 *.ppk
+*.pem
 *.lock
+# See https://help.github.com/articles/ignoring-files/ for more about ignoring files.
 
+# dependencies
+/node_modules
+/.pnp
+.pnp.js
+
+# testing
+/coverage
+
+# production
+/build
+
+# misc
+.DS_Store
+.env.local
+.env.development.local
+.env.test.local
+.env.production.local
+
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
 #pic
 *.png
 *.jpeg
@@ -428,12 +450,6 @@ $RECYCLE.BIN/
 *.gif
 *.npz
 *.mov
-#data/미사용/
-#data/참고/
-#data/기타src/
-#data
-#data/dataset/dataset
-#data/
 faceshape-master
 *.pem
 *.h5

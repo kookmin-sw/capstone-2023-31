@@ -51,14 +51,14 @@ function Login() {
             });
             if (response.data.success) {
                 const data = response.data;
-                console.log(data.message);
+                alert(data.message);
                 
                 checkLoginStatus();
                 navigate('/');
 
             }
             else {
-                console.log(response.data.message)
+                alert(response.data.message)
             }
         } catch (error) {
             console.error(error);
