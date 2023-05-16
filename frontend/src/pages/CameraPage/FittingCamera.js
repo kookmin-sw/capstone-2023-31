@@ -77,6 +77,8 @@ function FittingCamera(){
         });
 
         console.log(fittingResponse);
+        const base64Data = fittingResponse.data;
+        setImageSrc(`data:image/jpeg;base64,${base64Data}`);
         
         // const { data } = fittingResponse;
         // const imageUrl = URL.createObjectURL(data);
