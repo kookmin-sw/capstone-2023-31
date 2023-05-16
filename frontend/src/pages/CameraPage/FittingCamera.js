@@ -16,66 +16,77 @@ const videoConstraints = {
 function FittingCamera(){
   const navigate = useNavigate('');
   const location = useLocation();
-  const glassesImgSrc = location.state.image;
+  const glassesImg = location.state.image;
+  const glassesId = location.state.id;
 
   useEffect(()=>{
-    console.log(glassesImgSrc)
+    console.log(glassesImg)
+    console.log(typeof(glassesId))
   }, [])
   
   const webcamRef = useRef(null);
   const [imageSrc, setImageSrc] = useState(null);
   const [mirror, setMirror] = useState(false);
 
-  useEffect(() => {
-    const interval = setInterval(() => {
-      capture();
-    }, 100);
+  // useEffect(() => {
+  //   const interval = setInterval(() => {
+  //     capture();
+  //   }, 100);
 
-    return () => clearInterval(interval);
-  }, []);
+  //   return () => clearInterval(interval);
+  // }, []);
 
   const dataURItoBlob = (dataURI) => {
+    // const byteString = atob(dataURI.split(',')[1]);
+    // const ab = new ArrayBuffer(byteString.length);
+    // const ia = new Uint8Array(ab);
+    // for (let i = 0; i < byteString.length; i++) {
+    //   ia[i] = byteString.charCodeAt(i);
+    // }
+    // const blob = new Blob([ab], { type: 'image/jpeg' });
+    // return blob;
+
     const byteString = atob(dataURI.split(',')[1]);
+    const mimeString = dataURI.split(',')[0].split(':')[1].split(';')[0];
     const ab = new ArrayBuffer(byteString.length);
     const ia = new Uint8Array(ab);
     for (let i = 0; i < byteString.length; i++) {
       ia[i] = byteString.charCodeAt(i);
     }
-    const blob = new Blob([ab], { type: 'image/jpeg' });
-    return blob;
+    return new Blob([ab], { type: mimeString });
   }
 
   const capture = async () => {
       const capturedImageSrc = webcamRef.current.getScreenshot();
-      setImageSrc(capturedImageSrc);
+      // setImageSrc(capturedImageSrc);
 
 
       // 통신하는 코드 !!! 잠깐 주석 처리
 
-      // const formData = new FormData();
+      const formData = new FormData();
       // const blob = dataURItoBlob(capturedImageSrc);
       // formData.append('image', blob, 'captured_image.jpg');
-      // formData.append('glassesImg', glassesImgSrc)
+      formData.set('image', dataURItoBlob(capturedImageSrc));
 
-      // try {
-      //   const csrfResponse = await fetch('/fitting/get-csrf-token/');
-      //   const csrfData = await csrfResponse.json();
-      //   const csrfToken = csrfData.csrfToken;
-    
-      //   const fittingResponse = await axios.post('/fitting/fitting-face/', formData, {
-      //     headers: {
-      //       'X-CSRFToken': csrfToken,
-      //       // 'Content-Type': 'multipart/form-data'
-      //     }
-      //   });
+      try {
+        const csrfResponse = await fetch('/fitting/get-csrf-token/');
+        const csrfData = await csrfResponse.json();
+        const csrfToken = csrfData.csrfToken;
+        const fittingResponse = await axios.post(`/fitting/camera/${glassesId}/?id=${glassesId}`, formData, {
+          'X-CSRFToken': csrfToken
+        });
+
+        console.log(fittingResponse);
+        const base64Data = fittingResponse.data;
+        setImageSrc(`data:image/jpeg;base64,${base64Data}`);
         
-      //   const { data } = fittingResponse;
-      //   const imageUrl = URL.createObjectURL(data);
-      //   setImageSrc(imageUrl);
+        // const { data } = fittingResponse;
+        // const imageUrl = URL.createObjectURL(data);
+        // setImageSrc(imageUrl);
   
-      // } catch (error) {
-      //   console.log(error)
-      // }
+      } catch (error) {
+        console.log(error)
+      }
     };
   
     return(
@@ -108,6 +119,7 @@ function FittingCamera(){
           </div>
           )}
           </div>
+          <Button onClick={capture}>찍기</Button>
         </div>
         <Footer/>
     </div>

@@ -1,7 +1,7 @@
 from rest_framework import serializers
 from .models import Glasses
 
-class PostSerializer(serializers.ModelSerializer):
+class ProductSerializer(serializers.ModelSerializer):
     class Meta:
         fields = (
             'name',
@@ -9,6 +9,13 @@ class PostSerializer(serializers.ModelSerializer):
             'brand',
             'url',
             'image',
+            'shape',
+        )
+        model = Glasses
+
+class ProductShapeSerializer(serializers.ModelSerializer):
+    class Meta:
+        fields = (
             'shape',
         )
         model = Glasses

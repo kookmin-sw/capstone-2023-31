@@ -45,7 +45,6 @@ function MyPage() {
 
       if (response.data.success) {
         const data = response.data;
-        console.log(data);
         setNickname(data.nickname);
         setFaceShape(data.face_shape);
         handleCancel();
@@ -96,35 +95,8 @@ function MyPage() {
   useEffect(() => {
     sendSetProfileRequest();
   }, []);
-
-
-  const gridData = [
-    { id: 1, image: '/images/image1.png', brandName: "AAA", name: "BBB", price: "30,000" },
-    { id: 2, image: '/images/image1.png', brandName: "AAA", name: "BBB", price: "30,000" },
-    { id: 3, image: '/images/image1.png', brandName: "AAA", name: "BBB", price: "30,000" },
-    { id: 4, image: '/images/image1.png', brandName: "AAA", name: "BBB", price: "30,000" },
-    { id: 5, image: '/images/image1.png', brandName: "AAA", name: "BBB", price: "30,000" },
-    { id: 6, image: '/images/image1.png', brandName: "AAA", name: "BBB", price: "30,000" },
-    { id: 7, image: '/images/image1.png', brandName: "AAA", name: "BBB", price: "30,000" },
-    { id: 8, image: '/images/image1.png', brandName: "AAA", name: "BBB", price: "30,000" },
-    { id: 9, image: '/images/image1.png', brandName: "AAA", name: "BBB", price: "30,000" },
-    { id: 10, image: '/images/image1.png', brandName: "AAA", name: "BBB", price: "30,000" },
-    { id: 11, image: '/images/image1.png', brandName: "AAA", name: "BBB", price: "30,000" },
-    { id: 12, image: '/images/image1.png', brandName: "AAA", name: "BBB", price: "30,000" },
-    { id: 13, image: '/images/image1.png', brandName: "AAA", name: "BBB", price: "30,000" },
-    { id: 14, image: '/images/image1.png', brandName: "AAA", name: "BBB", price: "30,000" },
-
-  ];
-
-  
+ 
   const wishlist = useSelector(store => store.wishReducer || []);
-  // const [myList, setMyList] = useState([]);
-
-  // useEffect(()=>{
-  //   setMyList([...myList, wishlist])
-  // }, wishlist);
-
-  console.log(wishlist)
 
   return (
     <div className="container">
@@ -177,19 +149,23 @@ function MyPage() {
                         >
                         <Link 
                           className="link" 
-                          to={`/product/${item.id}`}
+                          to={`/product/${item.style}/${item.id}`}
                           state={item}
                           >
                         <div style={{display: "flex", flexDirection:"column"}}>
                             <img 
-                              style={{ width:'250px', height:"160px"}}
-                              src={item.image}
+                              style={{ width:'250px'}}
+                              src={`/images/input/${item.image}`}
                               >
                             </img>
                             <div>
-                              <div>{item.brandName}</div>
-                              <div>{item.name}</div>
-                              <div>{item.price}원</div>
+                              <div style={{fontSize:"15px"}}>{item.brand}</div>
+                              <div style={{fontSize: "20px", fontWeight:"bold"}}>{item.name}</div>
+                              { item.cost == "문의" ? (
+                              <div style={{fontSize:"20px"}}>{item.cost}</div>
+                            ) : (
+                              <div style={{fontSize:"20px"}}>{item.cost}원</div>
+                            )}
                             </div>
                         </div>
                         </Link>

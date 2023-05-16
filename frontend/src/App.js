@@ -24,10 +24,10 @@ function App() {
           <Route path="/" element={<MainPage />}></Route>
           <Route path="/analyze/camera" element={<AnalyzeCamera />}></Route>
           <Route path="/analyze/result" element={<FaceAnalyze />}></Route>
-          <Route path="/product/camera" element={<FittingCamera />}></Route>
-          <Route path="/list/:style" element={<ListPage />}></Route>
+          <Route path="/fitting/camera/:id" element={<FittingCamera />}></Route>
+          <Route path="/product/:style" element={<ListPage />}></Route>
           <Route path="/mypage" element={<MyPage />}></Route>
-          <Route path="/product/:id" element={<Detail/>}></Route>
+          <Route path="/product/:style/:id" element={<Detail/>}></Route>
           <Route path="/user/signup" element={<RegisterPage />}></Route>
           <Route path="/user/login" element={<LoginPage />}></Route> 
 

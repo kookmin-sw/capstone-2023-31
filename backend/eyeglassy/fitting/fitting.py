@@ -5,17 +5,21 @@ import numpy as np
 import os
 from django.core.files.storage import default_storage
 from django.conf import settings
+import base64
+import json
 
 import os
 import django
 os.environ.setdefault("DJANGO_SETTINGS_MODULE", "config.settings")
 django.setup()
 
-static_eyeglassy_path = os.path.join(settings.DEFAULT_DIR, 'crawling/img/')
 
 ## media 폴더에 68.dat 추가해주기 !
+static_path = os.path.join(settings.BASE_DIR, 'media')
+# static_eyeglassy_path = os.path.join(settings.DEFAULT_DIR, 'crawling/img/')
 
 
+'''
 # 해당 안경 이미지 반환하는 함수
 def specific_eyeglassy_img(eyeglassy_num):
     # eyeglassy_num은 3 같은 형식 일 것. (img3.jpg 에서 숫자 빼고 다 지워서)
@@ -25,10 +29,11 @@ def specific_eyeglassy_img(eyeglassy_num):
     print('eyeglassy_path : ', eyeglassy_path)
     
     return eyeglassy_path
-
+'''
+    
 
 # 안경 씌우고 이미지 반환하는 함수
-def put_eyeglassy(static_path, image_file, eyeglassy_num):
+def put_eyeglassy(glasses_path, image_file):
     predictor_path = os.path.join(static_path, 'shape_predictor_68_face_landmarks.dat')
 
     # 얼굴 인식기와 랜드마크 인식기 초기화
@@ -53,7 +58,7 @@ def put_eyeglassy(static_path, image_file, eyeglassy_num):
         eye_center = ((left_eye[0] + right_eye[0]) // 2, (left_eye[1] + right_eye[1]) // 2)
 
         # 해당 안경 이미지 가져오기
-        glass_img = specific_eyeglassy_img(eyeglassy_num) # res.png 경로가 되겠지
+        glass_img = glasses_path
 
         # 안경 이미지 크기 조정
         glass_width = right_eye[0] - left_eye[0]
@@ -83,10 +88,19 @@ def put_eyeglassy(static_path, image_file, eyeglassy_num):
         face = cv2.cvtColor(np.array(face_pil), cv2.COLOR_RGB2BGR)
 
         # 이미지 저장 - 그냥 backend/ 안에?
-        fitted_img = default_storage.save('fitted/' + image_file, face) # imgae.name -to do
-        
+        # fitted_img = default_storage.save('fitted/' + image_file, face) # imgae.name -to do
+        _, img_encoded = cv2.imencode('.jpg', face)
+        img_base64 = base64.b64encode(img_encoded).decode('utf-8')
+
+        # JSON 형태로 데이터 전달
+        data = {
+        'image': img_base64
+        }
+
+        json_data = json.dumps(data)
+   
         # 이미지 경로 반환
-        return fitted_img
+        return json_data
 
 
     # TO DO
@@ -95,6 +109,7 @@ def put_eyeglassy(static_path, image_file, eyeglassy_num):
     ## 3. 얼굴 이미지에 2번 이미지 씌우고 반환하기
 
 
-def run_fitting(static_path, image_file, eyeglassy_num):
-    fitted_face = put_eyeglassy(static_path, image_file, eyeglassy_num) # 안경 쓴 이미지 경로
+def run_fitting(fittting_path, glasses_path, image_file):
+    image = cv2.imdecode(np.fromstring(image_file.read(), np.uint8), cv2.IMREAD_UNCHANGED)
+    fitted_face = put_eyeglassy(glasses_path, image)
     return fitted_face

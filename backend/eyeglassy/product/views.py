@@ -1,17 +1,37 @@
-import json
 from django.shortcuts import render
 from django.http import HttpResponse
-import os
 from django.conf import settings
 from rest_framework import generics
+from django.middleware.csrf import get_token
+from django.views.decorators.csrf import csrf_exempt
+from rest_framework.decorators import api_view
+from rest_framework.response import Response
+from rest_framework import status
+from django.http import JsonResponse
 
 from .models import Glasses
-from .serializers import PostSerializer
+from .serializers import ProductSerializer
 
-class ListPost(generics.ListCreateAPIView):
-    queryset = Glasses.objects.all()
-    serializer_class = PostSerializer
+from django.forms.models import model_to_dict
 
-class DetailPost(generics.RetrieveUpdateAPIView):
+
+def process_shape(request, shape):
+    if request.method == 'GET':
+        # print('shape@@', shape)
+        glasses_shape = Glasses.objects.filter(shape=shape)
+        glasses_data = [model_to_dict(glass) for glass in glasses_shape]
+        return JsonResponse({'glasses_shape': glasses_data}, safe=False)
+
+
+class ListProduct(generics.ListAPIView):
     queryset = Glasses.objects.all()
-    serializer_class = PostSerializer
+    serializer_class = ProductSerializer
+
+class DetailProduct(generics.RetrieveAPIView):
+    queryset = Glasses.objects.all()
+    serializer_class = ProductSerializer
+
+@api_view(['GET'])
+def get_csrf_token(request):
+    # 클라이언트에게 CSRF 토큰을 반환
+    return JsonResponse({'csrfToken': get_token(request)})

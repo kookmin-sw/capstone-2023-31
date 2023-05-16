@@ -63,11 +63,11 @@ function FaceAnalyze() {
     }
   };
   const data = [
-    { category: 'heart', categoryName: "하트형", value: 25, info: "" },    //하트형
-    { category: 'oblong', categoryName: "긴얼굴형", value: 25 }, //긴얼굴형
-    { category: 'oval', categoryName: "타원형", value: 25 },     //타원형
-    { category: 'round', categoryName: "둥근형", value: 25 },    //둥근형
-    { category: 'square', categoryName: "사각형", value: 25 },   //사각형
+    { category: 'Heart', categoryName: "하트형", value: 25, info: "" },    //하트형
+    { category: 'Oblong', categoryName: "긴얼굴형", value: 25 }, //긴얼굴형
+    { category: 'Oval', categoryName: "타원형", value: 25 },     //타원형
+    { category: 'Round', categoryName: "둥근형", value: 25 },    //둥근형
+    { category: 'Square', categoryName: "사각형", value: 25 },   //사각형
   ];
 
   const [updatedData, setUpdatedData] = useState(data);
