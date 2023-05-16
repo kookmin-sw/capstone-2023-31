@@ -73,7 +73,7 @@ function FittingCamera(){
         const csrfData = await csrfResponse.json();
         const csrfToken = csrfData.csrfToken;
         const fittingResponse = await axios.post(`/fitting/camera/${glassesId}/?id=${glassesId}`, formData, {
-          'header': csrfToken
+          'X-CSRFToken': csrfToken
         });
 
         console.log(fittingResponse);

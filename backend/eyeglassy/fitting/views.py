@@ -116,7 +116,7 @@ def fitting_face(request, id):
     # 3) 해당 안경의 누끼 이미지 경로 저장
     glasses_path = os.path.join(settings.DEFAULT_DIR, output_path, product_img)
     # glasses_path = '../../crawling/image/output/res' + product_id + '.png'
-
+    
     image_path = os.path.join(settings.MEDIA_ROOT, image_file.name)
 
     with open(image_path, 'wb+') as destination:
