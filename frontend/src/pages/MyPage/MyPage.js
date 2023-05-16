@@ -154,14 +154,18 @@ function MyPage() {
                           >
                         <div style={{display: "flex", flexDirection:"column"}}>
                             <img 
-                              style={{ width:'250px', height:"160px"}}
+                              style={{ width:'250px'}}
                               src={`/images/input/${item.image}`}
                               >
                             </img>
                             <div>
                               <div style={{fontSize:"15px"}}>{item.brand}</div>
                               <div style={{fontSize: "20px", fontWeight:"bold"}}>{item.name}</div>
-                              <div style={{fontSize: "20px"}}>{item.cost}원</div>
+                              { item.cost == "문의" ? (
+                              <div style={{fontSize:"20px"}}>{item.cost}</div>
+                            ) : (
+                              <div style={{fontSize:"20px"}}>{item.cost}원</div>
+                            )}
                             </div>
                         </div>
                         </Link>

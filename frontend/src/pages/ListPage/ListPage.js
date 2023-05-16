@@ -59,7 +59,7 @@ function ListPage() {
                       >
                     <div style={{display: "flex", flexDirection:"column"}}>
                         <img 
-                          style={{ width:'250px', height:"160px"}}
+                          style={{ width:'250px'}}
                           src={`/images/input/${item.image}`}
                           >
                         </img>

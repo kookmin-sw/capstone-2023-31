@@ -12,42 +12,16 @@
   function MainPage() {
 
     const navigate = useNavigate();
-    const { Search } = Input;
 
     const [images, setImages] = useState([]);
 
     useEffect(() => { // 안경 랜덤 16개 추출
       const importAll = (r) => r.keys().map(r);
-      const imageFiles = importAll(require.context('../../../../crawling/image/input', false, /\.(png|jpg|svg)$/));
+      const imageFiles = importAll(require.context('../../../public/images/input', false, /\.(png|jpg|svg)$/));
       const randomImages = imageFiles.sort(() => Math.random() - 0.5).slice(0, 32);
       setImages(randomImages);
+      console.log(randomImages)
     }, []);
-
-
-    const onSearch = (e) => {
-      if (e == ''){
-        alert("입력 필수")
-      }else {
-      navigate('/product', {state: {value: e}});
-      }
-    }
-
-    const slideData = [
-      { id: 1, image: '/images/glasses2.jpg', brandName: "AAA", name: "BBB", price: "30,000"},
-      { id: 2, image: '/images/glasses3.jpg', brandName: "AAA", name: "BBB", price: "30,000"},
-      { id: 3, image: '/images/glasses4.jpg', brandName: "AAA", name: "BBB", price: "30,000"},
-      { id: 4, image: '/images/glasses2.jpg', brandName: "AAA", name: "BBB", price: "30,000"},
-      { id: 5, image: '/images/glasses3.jpg', brandName: "AAA", name: "BBB", price: "30,000"},
-      { id: 6, image: '/images/glasses4.jpg', brandName: "AAA", name: "BBB", price: "30,000"},
-      { id: 7, image: '/images/glasses2.jpg', brandName: "AAA", name: "BBB", price: "30,000"},
-      { id: 8, image: '/images/glasses3.jpg', brandName: "AAA", name: "BBB", price: "30,000"},
-      { id: 9, image: '/images/glasses4.jpg', brandName: "AAA", name: "BBB", price: "30,000"},
-      { id: 10, image: '/images/glasses3.jpg', brandName: "AAA", name: "BBB", price: "30,000"},
-      { id: 11, image: '/images/glasses2.jpg', brandName: "AAA", name: "BBB", price: "30,000"},
-      { id: 12, image: '/images/glasses4.jpg', brandName: "AAA", name: "BBB", price: "30,000"},
-      { id: 13, image: '/images/glasses3.jpg', brandName: "AAA", name: "BBB", price: "30,000"},
-      { id: 14, image: '/images/glasses4.jpg', brandName: "AAA", name: "BBB", price: "30,000"},
-    ];
 
     const gridData = [
       { style: "round", stylename: "둥근형", image: '/images/glasses2.jpg'},

@@ -26,7 +26,7 @@ function Detail(){
       (product) => product.id === data.id
     );
 
-    console.log(isProductInWishList)
+    // console.log(isProductInWishList)
     setIsWish(isProductInWishList);
   }, [data.id]);
 
@@ -57,7 +57,11 @@ function Detail(){
           <div style={{marginTop: "20px"}}>
             <div>{data.brand}브랜드</div>
             <div style={{fontSize:"30px"}}>{data.name} 안경</div>
-            <div style={{fontSize:"30px", float:"right"}}>{data.cost}원</div>
+            { data.cost == "문의" ? (
+                <div style={{fontSize:"30px", float:"right"}}>{data.cost}</div>
+              ) : (
+                <div style={{fontSize:"30px", float:"right"}}>{data.cost}원</div>
+              )}
           </div>
           <div style={{display:"flex", marginTop: "20px"}}>
             {isWish ? (

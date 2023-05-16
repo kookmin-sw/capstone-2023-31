@@ -17,22 +17,24 @@ function FittingCamera(){
   const navigate = useNavigate('');
   const location = useLocation();
   const glassesImg = location.state.image;
+  const glassesId = location.state.id;
 
   useEffect(()=>{
     console.log(glassesImg)
+    console.log(typeof(glassesId))
   }, [])
   
   const webcamRef = useRef(null);
   const [imageSrc, setImageSrc] = useState(null);
   const [mirror, setMirror] = useState(false);
 
-  useEffect(() => {
-    const interval = setInterval(() => {
-      capture();
-    }, 100);
+  // useEffect(() => {
+  //   const interval = setInterval(() => {
+  //     capture();
+  //   }, 100);
 
-    return () => clearInterval(interval);
-  }, []);
+  //   return () => clearInterval(interval);
+  // }, []);
 
   const dataURItoBlob = (dataURI) => {
     const byteString = atob(dataURI.split(',')[1]);
@@ -47,35 +49,32 @@ function FittingCamera(){
 
   const capture = async () => {
       const capturedImageSrc = webcamRef.current.getScreenshot();
-      setImageSrc(capturedImageSrc);
+      // setImageSrc(capturedImageSrc);
 
 
       // 통신하는 코드 !!! 잠깐 주석 처리
 
-      // const formData = new FormData();
-      // const blob = dataURItoBlob(capturedImageSrc);
-      // formData.append('image', blob, 'captured_image.jpg');
-      // formData.append('glassesImg', glassesImg)
+      const formData = new FormData();
+      const blob = dataURItoBlob(capturedImageSrc);
+      formData.append('image', blob, 'captured_image.jpg');
 
-      // try {
-      //   const csrfResponse = await fetch('/fitting/get-csrf-token/');
-      //   const csrfData = await csrfResponse.json();
-      //   const csrfToken = csrfData.csrfToken;
-    
-      //   const fittingResponse = await axios.post('/fitting/fitting-face/', formData, {
-      //     headers: {
-      //       'X-CSRFToken': csrfToken,
-      //       // 'Content-Type': 'multipart/form-data'
-      //     }
-      //   });
+      try {
+        const csrfResponse = await fetch('/fitting/get-csrf-token/');
+        const csrfData = await csrfResponse.json();
+        const csrfToken = csrfData.csrfToken;
+        const fittingResponse = await axios.get(`/fitting/camera/${glassesId}/?id=${glassesId}`, formData, {
+          'header': csrfToken
+        });
+
+        console.log(fittingResponse);
         
-      //   const { data } = fittingResponse;
-      //   const imageUrl = URL.createObjectURL(data);
-      //   setImageSrc(imageUrl);
+        // const { data } = fittingResponse;
+        // const imageUrl = URL.createObjectURL(data);
+        // setImageSrc(imageUrl);
   
-      // } catch (error) {
-      //   console.log(error)
-      // }
+      } catch (error) {
+        console.log(error)
+      }
     };
   
     return(
@@ -108,6 +107,7 @@ function FittingCamera(){
           </div>
           )}
           </div>
+          <Button onClick={capture}>찍기</Button>
         </div>
         <Footer/>
     </div>

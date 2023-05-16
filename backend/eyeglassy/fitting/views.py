@@ -91,17 +91,19 @@ def get_csrf_token(request):
     # 클라이언트에게 CSRF 토큰을 반환
     return JsonResponse({'csrfToken': get_token(request)})
 
-@api_view(['POST'])
+@api_view(['GET'])
 @csrf_exempt
 def fitting_face(request, id):
     # 1) 리액트에서 받아온 안경 이미지, 안경 정보
     try:
-        image_file = request.FILES['image']
+        # image_file = request.FILES['image']
+        image_file = request.FILES.get('image')
     except KeyError:
         return Response(status=status.HTTP_400_BAD_REQUEST)
     
+    
     # 2) 리액트에서 받아온 안경 데이터에서 id 추출
-    product_img = 'res' + id + '.png'
+    product_img = 'res' + str(id) + '.png'
 
     # 3) 해당 안경의 누끼 이미지 경로 저장
     glasses_path = os.path.join(settings.DEFAULT_DIR, output_path, product_img)
@@ -110,5 +112,16 @@ def fitting_face(request, id):
     # 이미지 위에 안경 이미지 붙여서 반환
     fitted_face = run_fitting(glasses_path, image_file) # fitting앱 경로, 누끼딴 안경 이미지 경로, 얼굴 이미지
 
-    # return Response({'fitted_face': fitted_face})
-    return JsonResponse({'fitted_face': fitted_face})
+    # product_id = re.sub(r'[^0-9]', '', product_id) # 3
+
+    # 3) 해당 안경의 누끼 이미지 경로 저장
+    # glasses_path = '../../crawling/image/output/res' + product_id + '.png'
+
+    # 이미지 위에 안경 이미지 붙여서 반환
+    # fitted_face = fitting.run_fitting(fitting_path, glasses_path, image_file) # fitting앱 경로, 누끼딴 안경 이미지 경로, 얼굴 
+    
+    # response_data = {'result': 'success', 'message': '이미지 처리 완료'}
+    # return JsonResponse(response_data)
+    return Response({'fitted_face': fitted_face})
+    # return JsonResponse({'image' : image_file})
+    # return HttpResponse(image_file, content_type='image/jpeg')

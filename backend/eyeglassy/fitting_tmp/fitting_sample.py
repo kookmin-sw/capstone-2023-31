@@ -4,11 +4,14 @@ import numpy as np
 
 # default dir : backend/eyeglassy
 GLASSES_DIR = './fitting_tmp/images/glasses/glasses_sample.png'
-FACE_DIR = './fitting_tmp/images/face/face_sample.jpg'
+FACE_DIR = './fitting/images/face/face_sample.jpg'
+# FACE_DIR = './fitting_tmp/images/face/face_sample.jpg'
 PREDICTOR_DIR = './fitting_tmp/shape_predictor_68_face_landmarks.dat'
 
 # 이미지 로드
-img = cv2.imread(FACE_DIR)
+# img = cv2.imread(FACE_DIR)
+# img = cv2.imdecode(np.fromstring(image.read(), np.uint8), cv2.IMREAD_UNCHANGED)
+
 sunglasses = cv2.imread(GLASSES_DIR, cv2.IMREAD_UNCHANGED)
 
 # detector, predictor 로드
