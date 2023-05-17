@@ -109,7 +109,7 @@ def run_fitting(glasses_path, image_file):
 
         # 안경 이미지 위치 계산
         center_x = int((left_eye[0] + right_eye[0]) / 2) - int(rotated_glasses.shape[1] / 2)
-        center_y = int((left_eye[1] + right_eye[1]) / 2) - int(rotated_glasses.shape[0] / 4) - int(rotated_glasses.shape[0] / 8)
+        center_y = int((left_eye[1] + right_eye[1]) / 2) - int(rotated_glasses.shape[0] / 4) - int(rotated_glasses.shape[0] / 4)
 
         # 안경 이미지 합성
         for i in range(rotated_glasses.shape[0]):

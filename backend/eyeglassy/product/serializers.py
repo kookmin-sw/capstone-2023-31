@@ -19,3 +19,10 @@ class ProductShapeSerializer(serializers.ModelSerializer):
             'shape',
         )
         model = Glasses
+
+class ProductNameSerializer(serializers.ModelSerializer):
+    class Meta:
+        fields = (
+            'name'
+        )
+        model = Glasses

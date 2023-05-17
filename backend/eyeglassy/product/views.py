@@ -13,6 +13,7 @@ from .models import Glasses
 from .serializers import ProductSerializer
 
 from django.forms.models import model_to_dict
+import random
 
 
 def process_shape(request, shape):
@@ -21,8 +22,33 @@ def process_shape(request, shape):
         glasses_shape = Glasses.objects.filter(shape=shape)
         glasses_data = [model_to_dict(glass) for glass in glasses_shape]
         return JsonResponse({'glasses_shape': glasses_data}, safe=False)
+    
+
+def get_random_product(request):
+    if request.method == 'GET':
+        product_count = 16
+        all_products = list(Glasses.objects.all())
+        random_glasses = random.sample(all_products, product_count)
+        glasses_data = [model_to_dict(glass) for glass in random_glasses]
+        return JsonResponse({'random_glasses': glasses_data}, safe=False)
+
+class RandomListProduct(generics.ListAPIView):
+    queryset = Glasses.objects.exclude(name__isnull=True).exclude(name__exact='').order_by('?')[:16]
+    serializer_class = ProductSerializer
 
 
+# 문자열 검색하면 그 문자열이 포함된 product list를 쭈르륵 반환해주기
+class SearchProduct(generics.ListAPIView):
+    serializer_class = ProductSerializer
+
+    def get_queryset(self):
+        search_query = self.request.query_params.get('query', '')
+
+        queryset = Glasses.objects.filter(name__icontains=search_query)
+
+        return queryset
+
+    
 class ListProduct(generics.ListAPIView):
     queryset = Glasses.objects.all()
     serializer_class = ProductSerializer

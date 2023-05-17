@@ -9,19 +9,38 @@
   import "slick-carousel/slick/slick.css";
   import "slick-carousel/slick/slick-theme.css";
   import SearchBar from "../../components/Search/SearchBar";
+  import axios from "axios";
   function MainPage() {
 
     const navigate = useNavigate();
 
     const [images, setImages] = useState([]);
 
-    useEffect(() => { // 안경 랜덤 16개 추출
-      const importAll = (r) => r.keys().map(r);
-      const imageFiles = importAll(require.context('../../../public/images/input', false, /\.(png|jpg|svg)$/));
-      const randomImages = imageFiles.sort(() => Math.random() - 0.5).slice(0, 32);
-      setImages(randomImages);
-      console.log(randomImages)
-    }, []);
+    // useEffect(() => { // 안경 랜덤 16개 추출
+    //   const importAll = (r) => r.keys().map(r);
+    //   const imageFiles = importAll(require.context('../../../public/images/input', false, /\.(png|jpg|svg)$/));
+    //   const randomImages = imageFiles.sort(() => Math.random() - 0.5).slice(0, 32);
+    //   setImages(randomImages);
+    //   console.log(randomImages)
+    // }, []);
+
+    useEffect(()=>{ 
+      const fetchData = async () => {
+        try {
+          axios.get('/ /')
+          .then(response => {
+      setImages(response.data.results);
+      })
+      .catch(error => {
+        console.log(error);
+      });
+          }
+          catch(error) {
+            console.log(error);
+          }
+        };
+        fetchData();
+      }, []);
 
     const gridData = [
       { style: "round", stylename: "둥근형", image: '/images/glasses2.jpg'},
@@ -59,9 +78,9 @@
             <Slider {...settings}>
               {images.map((item, index) => (
                 <div key={index}>
-                  {/* <Link className="link" to="/product" state={item}> */}
-                    <img style={{ width: "250px", height: "250px"}} src={item}></img>
-                  {/* </Link> */}
+                  <Link className="link" to={`/product/${item.shape}/${item.id}`} state={item}>
+                    <img style={{ width: "250px", height: "250px"}} src={`/images/input/${item.image}`}></img>
+                  </Link>
                 </div>
               )) }
             </Slider>
