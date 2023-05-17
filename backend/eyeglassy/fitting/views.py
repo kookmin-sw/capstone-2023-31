@@ -90,8 +90,8 @@ def cv_prac_fitting(glasses_path, image_file):
     left_eye = ((int(eyes[0][0]) + (int(eyes[0][2])//2)), (int(eyes[0][1]) + (int(eyes[0][3])//2)))
     right_eye = ((int(eyes[1][0]) + (int(eyes[1][2])//2)), (int(eyes[1][1]) + (int(eyes[1][3])//2)))
 
-    cv2.circle(face_img, left_eye, 3, (0, 255, 0), -1) # green
-    cv2.circle(face_img, right_eye, 3, (0, 255, 0), -1)
+    # cv2.circle(face_img, left_eye, 3, (0, 255, 0), -1) # green
+    # cv2.circle(face_img, right_eye, 3, (0, 255, 0), -1)
 
     img_base64 = run_fitting(left_eye, right_eye, glasses_img, face_img)
     
@@ -125,8 +125,8 @@ def dlib_prac_fitting(glasses_path, image_file):
         left_eye = (left_eye_x, left_eye_y)
         right_eye = (right_eye_x, right_eye_y)
 
-        cv2.circle(face_img, left_eye, 3, (0, 0, 255), -1) # red
-        cv2.circle(face_img, right_eye, 3, (0, 0, 255), -1)
+        # cv2.circle(face_img, left_eye, 3, (0, 0, 255), -1) # red
+        # cv2.circle(face_img, right_eye, 3, (0, 0, 255), -1)
 
         img_base64 = run_fitting(left_eye, right_eye, glasses_img, face_img)
     
