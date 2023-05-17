@@ -128,22 +128,18 @@ USE_TZ = False
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/3.2/howto/static-files/
 
-STATIC_URL = '/static/'
+STATIC_URL = '/media/'
+STATICFILES_DIRS = [os.path.join(BASE_DIR), 'face_detection', 'medida']
+STATIC_ROOT = os.path.join(BASE_DIR, 'media')
 
-STATIC_ROOT = BASE_DIR / 'static/'
-STATICFILES_DIRS = []
+# STATIC_URL = '/static/'
+# BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+# ROOT_DIR = os.path.dirname(BASE_DIR)
+# STATICFILES_DIRS = [
+#     # 실제 static 파일은 모두 client 측에서 소유
+#     os.path.join(ROOT_DIR, 'client/static')
+# ]
 
-MEDIA_URL = '/media/'
-MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
-
-'''STATIC_URL = '/static/'
-BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
-ROOT_DIR = os.path.dirname(BASE_DIR)
-
-STATICFILES_DIRS = [
-    # 실제 static 파일은 모두 client 측에서 소유
-    os.path.join(ROOT_DIR, 'client/static')
-]'''
 # Default primary key field type
 # https://docs.djangoproject.com/en/3.2/ref/settings/#default-auto-field
 
