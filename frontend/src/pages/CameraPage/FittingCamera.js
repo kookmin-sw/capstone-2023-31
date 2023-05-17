@@ -28,13 +28,9 @@ function FittingCamera(){
   const [imageSrc, setImageSrc] = useState(null);
   const [mirror, setMirror] = useState(false);
 
-  // useEffect(() => {
-  //   const interval = setInterval(() => {
-  //     capture();
-  //   }, 100);
-
-  //   return () => clearInterval(interval);
-  // }, []);
+  const alertHandler= () => {
+    alert("다시 찍어주세요")
+  }
 
   const dataURItoBlob = (dataURI) => {
     // const byteString = atob(dataURI.split(',')[1]);
@@ -116,7 +112,7 @@ function FittingCamera(){
               <Button 
               size="large"
               shape="round"
-              onClick={()=>navigate(-1)}
+              onClick={()=>setImageSrc(null)}
               style={{
                 margin: "0 10px"
               }}
@@ -135,10 +131,13 @@ function FittingCamera(){
           </div>
           
          <div className="captured-image-container">
-          {imageSrc && (
+          {imageSrc ? (
           <div className="captured-image">
             <img src={imageSrc} alt="Captured" />
-            <div>사진 찍히고 있는 중</div>
+          </div>
+          ):(
+          <div className="captured-image">
+            <div onChange={alertHandler}></div>
           </div>
           )}
           </div>
