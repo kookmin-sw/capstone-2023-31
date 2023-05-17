@@ -10,7 +10,7 @@ from rest_framework import status
 from django.http import JsonResponse
 
 from .models import Glasses
-from .serializers import ProductSerializer
+from .serializers import ProductSerializer, RandomProductSerializer
 
 from django.forms.models import model_to_dict
 import random
@@ -29,12 +29,13 @@ def get_random_product(request):
         product_count = 16
         all_products = list(Glasses.objects.all())
         random_glasses = random.sample(all_products, product_count)
-        glasses_data = [model_to_dict(glass) for glass in random_glasses]
+        glasses_data = [model_to_dict(glass, fields=['id']) for glass in random_glasses]
         return JsonResponse({'random_glasses': glasses_data}, safe=False)
+
 
 class RandomListProduct(generics.ListAPIView):
     queryset = Glasses.objects.exclude(name__isnull=True).exclude(name__exact='').order_by('?')[:16]
-    serializer_class = ProductSerializer
+    serializer_class = RandomProductSerializer
 
 
 # 문자열 검색하면 그 문자열이 포함된 product list를 쭈르륵 반환해주기
