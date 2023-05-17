@@ -165,8 +165,8 @@ def fitting_face(request, id):
 
     ### 4) 이미지 위에 안경 이미지 붙여서 반환
     ### CHOICE : dlib or cv
-    fitted_face = dlib_prac_fitting(glasses_path, image_path) # 누끼딴 안경 이미지 경로, 얼굴 이미지 경로
-    # fitted_face = cv_prac_fitting(glasses_path, image_path)
+    # fitted_face = dlib_prac_fitting(glasses_path, image_path) # 누끼딴 안경 이미지 경로, 얼굴 이미지 경로
+    fitted_face = cv_prac_fitting(glasses_path, image_path)
 
 
     # response_data = {'result': 'success', 'message': '이미지 처리 완료'}
