@@ -90,8 +90,8 @@ def cv_prac_fitting(glasses_path, image_file):
     left_eye = ((int(eyes[0][0]) + (int(eyes[0][2])//2)), (int(eyes[0][1]) + (int(eyes[0][3])//2)))
     right_eye = ((int(eyes[1][0]) + (int(eyes[1][2])//2)), (int(eyes[1][1]) + (int(eyes[1][3])//2)))
 
-    cv2.circle(face_img, left_eye, 3, (0, 255, 0), -1) # green
-    cv2.circle(face_img, right_eye, 3, (0, 255, 0), -1)
+    # cv2.circle(face_img, left_eye, 3, (0, 255, 0), -1) # green
+    # cv2.circle(face_img, right_eye, 3, (0, 255, 0), -1)
 
     img_base64 = run_fitting(left_eye, right_eye, glasses_img, face_img)
     
@@ -125,8 +125,8 @@ def dlib_prac_fitting(glasses_path, image_file):
         left_eye = (left_eye_x, left_eye_y)
         right_eye = (right_eye_x, right_eye_y)
 
-        cv2.circle(face_img, left_eye, 3, (0, 0, 255), -1) # red
-        cv2.circle(face_img, right_eye, 3, (0, 0, 255), -1)
+        # cv2.circle(face_img, left_eye, 3, (0, 0, 255), -1) # red
+        # cv2.circle(face_img, right_eye, 3, (0, 0, 255), -1)
 
         img_base64 = run_fitting(left_eye, right_eye, glasses_img, face_img)
     
@@ -165,8 +165,8 @@ def fitting_face(request, id):
 
     ### 4) 이미지 위에 안경 이미지 붙여서 반환
     ### CHOICE : dlib or cv
-    # fitted_face = dlib_prac_fitting(glasses_path, image_path) # 누끼딴 안경 이미지 경로, 얼굴 이미지 경로
-    fitted_face = cv_prac_fitting(glasses_path, image_path)
+    fitted_face = dlib_prac_fitting(glasses_path, image_path) # 누끼딴 안경 이미지 경로, 얼굴 이미지 경로
+    # fitted_face = cv_prac_fitting(glasses_path, image_path)
 
 
     # response_data = {'result': 'success', 'message': '이미지 처리 완료'}
