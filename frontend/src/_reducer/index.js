@@ -16,10 +16,10 @@ const persistConfig = {
 
 const reducer = combineReducers({wishReducer});
 // console.log(reducer)
-// const persistedReducer = persistReducer(persistConfig, reducer);
+const persistedReducer = persistReducer(persistConfig, reducer);
 // const store = configureStore({
 //   reducer: persistedReducer,
 // })
-// export default persistedReducer;
-export default reducer;
+export default persistedReducer;
+// export default reducer;
 // export default store;
