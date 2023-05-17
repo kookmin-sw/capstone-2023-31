@@ -9,7 +9,7 @@ import EditProfile from "../../components/EditProfile";
 import { useNavigate, Link } from "react-router-dom";
 import axios from "axios";
 import { Provider, useSelector } from "react-redux";
-// import store from "../../_reducer/wishReducer";
+
 
 
 function MyPage() {
