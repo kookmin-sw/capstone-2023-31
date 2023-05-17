@@ -19,7 +19,7 @@ class RandomProductSerializer(serializers.ModelSerializer):
     id = serializers.SerializerMethodField()
 
     def get_id(self, obj):
-        return obj.id - 2
+        return obj.id
     
     class Meta:
         fields = (
