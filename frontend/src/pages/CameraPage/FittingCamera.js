@@ -116,7 +116,7 @@ function FittingCamera(){
               <Button 
               size="large"
               shape="round"
-              onClick={capture}
+              onClick={()=>navigate(-1)}
               style={{
                 margin: "0 10px"
               }}
@@ -125,7 +125,7 @@ function FittingCamera(){
               <Button 
               size="large"
               shape="round"
-              onClick={()=>navigate(-1)}
+              onClick={capture}
               style={{
                 margin: "0 10px"
               }}
