@@ -10,7 +10,7 @@ function EditProfile({ nickname, onUpdate }) {
     <div className="edit-profile-container">
       <Form onFinish={onFinish}>
         <Form.Item
-          label="Nickname"
+          label="닉네임"
           name="nickname"
           initialValue={nickname}
           rules={[
@@ -24,7 +24,7 @@ function EditProfile({ nickname, onUpdate }) {
         </Form.Item>
 
         <Form.Item
-          label="Last Password"
+          label="이전 비밀번호"
           name="lastpassword"
           rules={[
             {
@@ -37,7 +37,7 @@ function EditProfile({ nickname, onUpdate }) {
         </Form.Item>
 
         <Form.Item
-          label="Updated Password"
+          label="새로운 비밀번호"
           name="updatedpassword"
           rules={[
             {
@@ -51,7 +51,7 @@ function EditProfile({ nickname, onUpdate }) {
 
         <Form.Item>
           <Button type="primary" htmlType="submit">
-            Update Profile
+            변경하기
           </Button>
         </Form.Item>
       </Form>

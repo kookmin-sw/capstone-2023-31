@@ -1,6 +1,6 @@
 import Modal from "react-modal";
 
-function ModalComponent({isOpen, onCancel, title, children}){
+function ModalComponent({isOpen, title, children}){
 
   const customStyles = {
     content: {
@@ -21,7 +21,6 @@ function ModalComponent({isOpen, onCancel, title, children}){
         ariaHideApp={false} 
         isOpen={isOpen}
         contentLabel={title}
-        onCancel={onCancel}
         style={customStyles}
       >
         {children}

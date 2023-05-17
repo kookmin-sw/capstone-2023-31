@@ -1,6 +1,5 @@
 import Header from "../../components/Header/Header";
 import Footer from "../../components/Footer/Footer";
-import Record from "../../components/Record/Record";
 import ModalComponent from "../../components/Modal/ModalComponent";
 import "./MyPage.css";
 import "../../components/Modal/Modal.css";
@@ -124,22 +123,22 @@ function MyPage() {
             </div>
           </div>
         </div>
-
+        
         <ModalComponent
           title="프로필 편집"
           isOpen={isModalOpen}
-          onCancel={handleCancel}
         >
+          <div style={{display:"flex", justifyContent:"space-between", marginBottom:"20px"}}>
+            <div style={{fontWeight:"bold", fontSize:"20px"}}>프로필 편집</div>
+            <Button onClick={() => handleCancel(true)}>X</Button>
+          </div>
           <EditProfile onUpdate={handleProfileUpdate} />
-          {/* <Button onClick={handleProfileUpdate} style={{ float: "right" }}>
-            변경하기
-        </Button> */}
         </ModalComponent>
 
           <div className="dibs">
-            <div style={{fontSize:"20px", margin: "0 30px"}}>찜한 안경</div>
+            <div style={{fontSize:"20px", margin: "0 30px", fontWeight:"bold"}}>찜한 안경</div>
             {wishlist.length == 0 ? (
-              <h2>찜한 상품이 없습니다.</h2>
+              <p style={{margin:"20px auto"}}>찜한 상품이 없습니다.</p>
             ):(
               <div className="list-glasses" style={{marginBottom:"0"}}>
               <Row gutter={[8,8]}>
