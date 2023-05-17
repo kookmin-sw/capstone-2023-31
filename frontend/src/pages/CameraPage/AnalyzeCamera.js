@@ -111,6 +111,7 @@ function AnalyzeCamera() { //카메라
             <div style={{ marginTop: "20px" }}>
               <Button
                 className="capture-btn"
+                size="large"
                 shape="round"
                 onClick={() => setImageSrc(null)}
                 style={{
@@ -119,6 +120,7 @@ function AnalyzeCamera() { //카메라
               >다시 찍기</Button>
               <Button
                 className="face-btn"
+                size="large"
                 shape="round"
                 style={{ margin: "0 10px" }}
                 onClick={analyzeFace}>얼굴형 분석</Button>
@@ -136,6 +138,7 @@ function AnalyzeCamera() { //카메라
               />
               <Button
                 className="capture-btn"
+                size="large"
                 shape="round"
                 onClick={capture}
                 style={{

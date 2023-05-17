@@ -103,14 +103,37 @@ function FittingCamera(){
             videoConstraints={videoConstraints}
             mirrored={mirror}
           />
-          <Button 
-            size="large"
-            shape="round" 
-            onClick={()=>setMirror(!mirror)}
-            style={{
-               marginTop: "20px"
-            }}
-          >좌우 반전</Button>
+          <div style={{marginTop: "20px"}}>
+            <Button 
+              size="large"
+              shape="round" 
+              onClick={()=>setMirror(!mirror)}
+              style={{
+                margin: "0 10px"
+              }}
+            >좌우 반전</Button>
+            {imageSrc ? (
+              <Button 
+              size="large"
+              shape="round"
+              onClick={capture}
+              style={{
+                margin: "0 10px"
+              }}
+              >다시 찍기</Button>
+            ):(
+              <Button 
+              size="large"
+              shape="round"
+              onClick={()=>navigate(-1)}
+              style={{
+                margin: "0 10px"
+              }}
+              >사진 찍기</Button>
+            )}
+            
+          </div>
+          
          <div className="captured-image-container">
           {imageSrc && (
           <div className="captured-image">
@@ -119,7 +142,7 @@ function FittingCamera(){
           </div>
           )}
           </div>
-          <Button onClick={capture}>찍기</Button>
+          
         </div>
         <Footer/>
     </div>
