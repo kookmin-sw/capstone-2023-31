@@ -7,6 +7,7 @@ import joblib
 
 def load_model(static_path):
     model_path = os.path.join(static_path, 'face3.joblib')
+    print(model_path)
     model = joblib.load(model_path)
     return model
 

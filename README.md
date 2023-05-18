@@ -1,12 +1,12 @@
-# Glassify
+# Glassfit
 
 **팀페이지 (2023-31)** -> [https://kookmin-sw.github.io/capstone-2023-31/](https://kookmin-sw.github.io/capstone-2023-31/)
 
 ### 1. 프로젝트 소개
 
-<p align="center"><img src="https://github.com/kookmin-sw/capstone-2023-31/assets/63188042/ec21f541-28c6-454b-9865-bfc37fed9a47" width="700"/></p>
+<p align="center"><img src="https://github.com/kookmin-sw/capstone-2023-31/assets/63188042/7829dec5-8297-4236-96d2-4495ba0f6722" width="700"/></p>
 
-Glassify는 가상 안경 피팅 웹서비스 입니다.
+Glassfit은 가상 안경 피팅 웹서비스 입니다.
 
 
 ### 2. 소개 영상
