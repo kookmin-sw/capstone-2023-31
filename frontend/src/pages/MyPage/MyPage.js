@@ -95,9 +95,16 @@ function MyPage() {
         <div className="user">
           <div style={{ fontSize: "25px", fontWeight: "bold" }}>마이페이지</div>
           <div className="profile-edit">
-            <div style={{ margin: "20px" }}>
+            {faceShape == null ? (
+              <div style={{ margin: "20px" }}>
+              {`${nickname}님의 얼굴형: 없음`}
+              </div>
+            ): (
+              <div style={{ margin: "20px" }}>
               {`${nickname}님의 얼굴형: ${faceShape}`}
-            </div>
+              </div>
+            )}
+            
             <div>
               <Button
                 style={{ margin: "10px", width: "200px" }}

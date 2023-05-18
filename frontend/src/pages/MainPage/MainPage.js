@@ -87,7 +87,7 @@
           </div>
           <div className="random-glasses">
             <div className="style-glasses">
-            <div style={{ fontSize: "20px", fontWeight: "bold" }}>이런 안경도 있어요!</div>
+              <div style={{ fontSize: "20px", fontWeight: "bold"}}>이런 안경도 있어요!</div>
             </div>
             <Slider {...settings}>
               {images.map((item, index) => (
