@@ -1,13 +1,13 @@
 import cv2
 import numpy as np
-from tensorflow.keras.preprocessing import image
-from tensorflow.keras.models import load_model as load_keras_model
 import os
+import boto3
+import joblib
 
 
 def load_model(static_path):
-    model_path = os.path.join(static_path, "face_shape_1.h5")
-    model = load_keras_model(model_path)
+    model_path = os.path.join(static_path, 'face3.joblib')
+    model = joblib.load(model_path)
     return model
 
 
@@ -26,13 +26,9 @@ def extract_face(image, static_path):
 
 
 def prepare_image(face_image):
-    # Convert the face region to RGB
     rgb_face = cv2.cvtColor(face_image, cv2.COLOR_BGR2RGB)
-    # Resize the face region to match the input size of the classifier
     resized_face = cv2.resize(rgb_face, (150, 150))
-    # normalize the image pixels
     normalized_image = resized_face / 255.0
-    # Add a batch dimension
     image_batch = np.expand_dims(normalized_image, axis=0)
     return image_batch
 
@@ -44,11 +40,8 @@ def predict_face_shape(static_path, image_file):
     face = extract_face(input_image, static_path)
     if face is not None:
         prepared_image = prepare_image(face)
-        # Predict the face shape using the trained model
         predicted_label = model.predict(prepared_image)
-        # Get the index of the highest predicted label
         predicted_index = np.argmax(predicted_label)
-        # Map the predicted index to the face shape name
         predicted_shape = face_shapes[predicted_index]
         return predicted_shape
     else:

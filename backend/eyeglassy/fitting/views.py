@@ -71,7 +71,6 @@ def run_fitting(left_eye, right_eye, glasses_img, face_img):
     return img_base64
 
 
-
 def cv_prac_fitting(glasses_path, image_file):
     predictor_path = os.path.join(settings.BASE_DIR, cv_model_path)
     eye_cascade = cv2.CascadeClassifier(predictor_path)
@@ -84,29 +83,22 @@ def cv_prac_fitting(glasses_path, image_file):
     glasses_img = cv2.imread(glasses_path, cv2.IMREAD_UNCHANGED)
 
     # 눈 검출 수행
-    eyes = eye_cascade.detectMultiScale(face_img_gray, scaleFactor=1.1, minNeighbors=5, minSize=(30, 30))
+    eyes = eye_cascade.detectMultiScale(
+        face_img_gray, scaleFactor=1.1, minNeighbors=5, minSize=(30, 30))
 
-    # x y w h
-    # left_eye = ((int(eyes[0][0]) + (int(eyes[0][2])//2)), (int(eyes[0][1]) + (int(eyes[0][3])//2)))
-    # right_eye = ((int(eyes[1][0]) + (int(eyes[1][2])//2)), (int(eyes[1][1]) + (int(eyes[1][3])//2)))
+    # 눈이 감지되지 않은 경우 처리
+    if len(eyes) < 2:
+        return None
 
-    left_eye_x = int(eyes[0][0]) + (int(eyes[0][2]) // 2)
-    right_eye_x = int(eyes[1][0]) + (int(eyes[1][2]) // 2)
+    # 눈 좌표 계산
+    left_eye = (eyes[0][0] + (eyes[0][2] // 2), eyes[0][1] + (eyes[0][3] // 2))
+    right_eye = (eyes[1][0] + (eyes[1][2] // 2),
+                 eyes[1][1] + (eyes[1][3] // 2))
 
-    if left_eye_x < right_eye_x:
-        left_eye = (left_eye_x, int(eyes[0][1]) + (int(eyes[0][3]) // 2))
-        right_eye = (right_eye_x, int(eyes[1][1]) + (int(eyes[1][3]) // 2))
-    else:
-        left_eye = (right_eye_x, int(eyes[1][1]) + (int(eyes[1][3]) // 2))
-        right_eye = (left_eye_x, int(eyes[0][1]) + (int(eyes[0][3]) // 2))
-
-    # cv2.circle(face_img, left_eye, 3, (0, 255, 0), -1) # green
-    # cv2.circle(face_img, right_eye, 3, (0, 255, 0), -1)
-
+    # 눈 좌표로 fitting 수행
     img_base64 = run_fitting(left_eye, right_eye, glasses_img, face_img)
-    
-    return img_base64
 
+    return img_base64
 
 
 def dlib_prac_fitting(glasses_path, image_file):
@@ -143,7 +135,6 @@ def dlib_prac_fitting(glasses_path, image_file):
     return img_base64
 
 
-@api_view(['GET'])
 def get_csrf_token(request):
     # 클라이언트에게 CSRF 토큰을 반환
     return JsonResponse({'csrfToken': get_token(request)})

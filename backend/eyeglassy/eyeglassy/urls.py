@@ -9,12 +9,10 @@ urlpatterns = [
     path("admin/", admin.site.urls),
     path(" /", views.RandomListProduct.as_view()),
     path("search/", views.SearchProduct.as_view()),
-    # path("", get_random_product),
     path("product/", include("product.urls")),
     path("analyze/", include("analyze.urls")),
     path("user/",include("user.urls")),
     path("",include("mypage.urls")),
     path("fitting/", include("fitting.urls")),
-    # path("", include("face_detection.urls")),
 
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
