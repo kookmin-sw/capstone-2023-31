@@ -13,24 +13,22 @@
   function MainPage() {
     const navigate = useNavigate();
     const [images, setImages] = useState([]);
+    const [isSliderReady, setIsSliderReady] = useState(false); 
 
     useEffect(()=>{ 
       const fetchData = async () => {
         try {
-          axios.get('/ /')
-          .then(response => {
-      setImages(response.data.results);
-      })
-      .catch(error => {
-        console.log(error);
-      });
-          }
-          catch(error) {
-            console.log(error);
-          }
-        };
-        fetchData();
-      }, []);
+          const response = await axios.get('/ /')
+          setImages(response.data.results);
+          setIsSliderReady(true);
+          window.scrollTo(0, 0);
+        }
+        catch(error) {
+          console.log(error);
+        }
+      };
+      fetchData();
+    }, []);
 
     const gridData = [
       { style: "round", stylename: "둥근형", image: '/images/round.jpg'},
@@ -89,6 +87,7 @@
             <div className="style-glasses">
               <div style={{ fontSize: "20px", fontWeight: "bold"}}>이런 안경도 있어요!</div>
             </div>
+            {isSliderReady ? (
             <Slider {...settings}>
               {images.map((item, index) => (
                 <div key={index}>
@@ -97,7 +96,9 @@
                   </Link>
                 </div>
               ))}
-            </Slider>
+            </Slider>):(
+              <div>로딩 중...</div>
+            )}
           </div>
 
           <div className="style-glasses">
