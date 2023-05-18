@@ -44,7 +44,7 @@ function Header() {
   <div className="header-container">
     <div className="app-name">
       <Link className="link" to="/">
-        <img src='images/logo.png' style={{height: "50px"}}></img>
+        <img src='images/logo.jpg' style={{height: "50px"}}></img>
       </Link>  
     </div>
     <div className="profile">
