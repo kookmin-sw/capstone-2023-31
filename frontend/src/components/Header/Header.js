@@ -44,8 +44,11 @@ function Header() {
   <div className="header-container">
     <div className="app-name">
       <Link className="link" to="/">
-        <img src='images/logo.jpg' style={{height: "50px"}}></img>
-      </Link>  
+        <img 
+          src='https://github.com/kookmin-sw/capstone-2023-31/assets/63188042/26054fe7-1531-4741-9b5b-ab5d14e372ec' 
+          style={{ height: "50px"}}>
+        </img>
+      </Link>
     </div>
     <div className="profile">
       <ul>
