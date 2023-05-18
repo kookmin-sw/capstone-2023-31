@@ -94,7 +94,7 @@ function MyPage() {
   }, []);
  
   const wishlist = useSelector(store => store.wishReducer || []);
-  const matchingShape = data.find(item => item.faceshape === faceShape);
+  const matchingShape = data.find(item => item.faceshape == faceShape);
 
   return (
     <div className="container">
@@ -109,7 +109,7 @@ function MyPage() {
               </div>
             ): (
               <div style={{ margin: "20px" }}>
-              {`${nickname}님의 얼굴형: ${matchingShape.faceshapeName}`}
+                  {`${nickname}님의 얼굴형: ${matchingShape.faceshapeName}`}
               </div>
             )}
             

@@ -7,7 +7,6 @@ from rest_framework.response import Response
 def setprofile(request):
     if request.user.is_authenticated:
         user = request.user
-        print("1")
 
         # 사용자 정보 가져오기
         nickname = user.nickname
