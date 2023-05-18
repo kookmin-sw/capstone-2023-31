@@ -1,4 +1,4 @@
-import { useLocation, useNavigate, useParams } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
 import Footer from "../../components/Footer/Footer";
 import Header from "../../components/Header/Header";
 import "./Detail.css"
@@ -9,24 +9,18 @@ import { addWishList, deleteWishList } from "../../_actions";
 import { useEffect, useState } from "react";
 
 function Detail(){
-  // let { id } = useParams();
   const navigate = useNavigate();
   const location = useLocation();
   const data = location.state;
 
-  console.log(data);
-
   const dispatch = useDispatch();
   const wishList = useSelector(state => state.wishReducer || []);
-  // console.log(wishList)
   const [isWish, setIsWish] = useState(false);
 
   useEffect(() => {
     const isProductInWishList = wishList.some(
       (product) => product.id === data.id
     );
-
-    // console.log(isProductInWishList)
     setIsWish(isProductInWishList);
   }, [data.id]);
 
@@ -34,19 +28,16 @@ function Detail(){
   const handleAddToWishlist = () => {
     setIsWish(true);
     dispatch(addWishList(data));
-    // console.log("상품 찜")
   }
 
   const handleDeleteToWishlist = () => {
     setIsWish(false);
     dispatch(deleteWishList(data));
-    // console.log("상품 삭제");
   }
 
   const goToLink = () => {
     window.location.href = data.url;
   }
-
 
   return(
     <div className="container">

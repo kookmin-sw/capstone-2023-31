@@ -5,7 +5,6 @@
   flex-wrap: wrap;
 }
 
-
 .style-name{
   display: flex;
   justify-content: center;
@@ -18,24 +17,4 @@
 
 .list-glasses{
   margin: 3rem;
-  /* display: flex; */
 }
-
-/* .food-name {
-  background-color: whitesmoke;
-  font-size: x-large;
-  font-weight: bold;
-  text-align: center;
-  margin: 20px;
-  margin-bottom: 0;
-  border: 3px double gray;
-}
-
-
-.contents {
-  display: flex;
-  flex: 2;
-  justify-content: center;
-  align-items: center;
-  border: 1px solid gray;
-} */

@@ -1,6 +1,4 @@
 import './App.css';
-
-import React, { useState, useEffect } from "react";
 import 
 { BrowserRouter as Router,
    Routes, 
@@ -16,7 +14,6 @@ import Detail from './pages/DetailPage/Detail'
 import RegisterPage from './pages/RegisterPage/RegisterPage';
 import LoginPage from './pages/LoginPage/LoginPage';
 
-
 function App() {
   return (
       <Router>
@@ -30,7 +27,6 @@ function App() {
           <Route path="/product/:style/:id" element={<Detail/>}></Route>
           <Route path="/user/signup" element={<RegisterPage />}></Route>
           <Route path="/user/login" element={<LoginPage />}></Route> 
-
         </Routes>
       </Router>
   )

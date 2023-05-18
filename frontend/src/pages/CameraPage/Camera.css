@@ -15,9 +15,6 @@
 
 .face-btn {
   margin-top: 20px;
-  /* position: absolute;
-  bottom: 12px;
-  right: 12px; */
 }
 
 .captured-image-container {
@@ -31,6 +28,4 @@
   justify-content: center;
   align-items: center;
   color: gray;
-  /* background-color: gray; */
-  /* margin: auto; */
 }

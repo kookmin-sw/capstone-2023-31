@@ -1,6 +1,6 @@
-  import React, { Fragment, useEffect, useState } from "react";
+  import React, { useEffect, useState } from "react";
   import { useNavigate, Link} from "react-router-dom";
-  import { Input, Row, Col, Button } from 'antd';
+  import { Row, Button } from 'antd';
   import Header from "../../components/Header/Header";
   import Footer from "../../components/Footer/Footer";
   import GridCard from "../../components/GridCard/GridCard";
@@ -8,21 +8,11 @@
   import Slider from "react-slick";
   import "slick-carousel/slick/slick.css";
   import "slick-carousel/slick/slick-theme.css";
-  import SearchBar from "../../components/Search/SearchBar";
   import axios from "axios";
+
   function MainPage() {
-
     const navigate = useNavigate();
-
     const [images, setImages] = useState([]);
-
-    // useEffect(() => { // 안경 랜덤 16개 추출
-    //   const importAll = (r) => r.keys().map(r);
-    //   const imageFiles = importAll(require.context('../../../public/images/input', false, /\.(png|jpg|svg)$/));
-    //   const randomImages = imageFiles.sort(() => Math.random() - 0.5).slice(0, 32);
-    //   setImages(randomImages);
-    //   console.log(randomImages)
-    // }, []);
 
     useEffect(()=>{ 
       const fetchData = async () => {
@@ -43,11 +33,11 @@
       }, []);
 
     const gridData = [
-      { style: "round", stylename: "둥근형", image: '/images/glasses2.jpg'},
-      { style: "square", stylename: "사각형", image: '/images/glasses3.jpg'},
-      { style: "oval", stylename: "타원형", image: '/images/glasses4.jpg'},
-      { style: "half", stylename: "하금테", image: '/images/glasses4.jpg'},
-      { style: "wellington", stylename: "웰링턴", image: '/images/glasses4.jpg'},
+      { style: "round", stylename: "둥근형", image: '/images/round.jpg'},
+      { style: "square", stylename: "사각형", image: '/images/square.jpg'},
+      { style: "oval", stylename: "타원형", image: '/images/oval.jpg'},
+      { style: "half", stylename: "하금테", image: '/images/half.jpg'},
+      { style: "wellington", stylename: "웰링턴", image: '/images/wellington.jpg'},
     ]
 
     const settings = {
@@ -58,6 +48,29 @@
       slidesToScroll: 1,
       rows: 2,
       arrows: true,
+      responsive: [
+        {
+          breakpoint: 1280,
+          settings: {
+            slidesToScroll: 1,
+            slidesPerRow: 3,
+          }
+        },
+        {
+          breakpoint: 980,
+          settings: {
+            slidesToScroll: 1,
+            slidesPerRow: 2,
+          }
+        },
+        {
+          breakpoint: 650,
+          settings: {
+            slidesToScroll: 1,
+            slidesPerRow: 1,
+          }
+        },
+      ]
     };
 
     return (
@@ -72,7 +85,6 @@
             </div>
             <img className="wear-glass-image" alt="wear-glass" src="/images/frame1.png" />
           </div>
-          <SearchBar/>
 
           <div className="random-glasses">
             <Slider {...settings}>
@@ -94,12 +106,10 @@
                   <GridCard key={index} image={item.image} name={item.stylename} shape={item.style}></GridCard>
                 ))}
               </Row>
-              
             </div>
           </div>
         </div>
         <Footer/>
-        
       </div>
     )
   }

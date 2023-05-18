@@ -81,7 +81,7 @@ def check_login(request):
         return JsonResponse({'isLoggedIn': False})
 
 
-@api_view(['POST'])
+@api_view(['GET'])
 def logout(request):
     if request.user.is_authenticated:
         auth_logout(request)

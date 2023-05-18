@@ -34,20 +34,21 @@ function FittingCamera() {
 
   const dataURItoBlob = (dataURI) => {
     const byteString = atob(dataURI.split(',')[1]);
-    const mimeString = dataURI.split(',')[0].split(':')[1].split(';')[0];
     const ab = new ArrayBuffer(byteString.length);
     const ia = new Uint8Array(ab);
     for (let i = 0; i < byteString.length; i++) {
       ia[i] = byteString.charCodeAt(i);
     }
-    return new Blob([ab], { type: mimeString });
+    const blob = new Blob([ab], { type: 'image/jpeg' });
+    return blob;
   }
 
   const capture = async () => {
     const capturedImageSrc = webcamRef.current.getScreenshot();
 
     const formData = new FormData();
-    formData.set('image', dataURItoBlob(capturedImageSrc));
+    const blob = dataURItoBlob(capturedImageSrc);
+    formData.append('image', blob, 'captured_image.jpg');
 
     try {
       const csrfResponse = await fetch('/fitting/get-csrf-token/');
@@ -60,9 +61,13 @@ function FittingCamera() {
         }
       });
 
-      console.log(fittingResponse);
-      const base64Data = fittingResponse.data;
-      setImageSrc(`data:image/jpeg;base64,${base64Data}`);
+      if(fittingResponse.data.fitted_face == "Not detected"){
+        alert("얼굴을 인식할 수 없습니다. 사진을 다시 찍어주세요.")
+      }else{
+        const base64Data = fittingResponse.data;
+        setImageSrc(`data:image/jpeg;base64,${base64Data}`);
+      }
+
     } catch (error) {
       console.log(error);
     }

@@ -8,9 +8,7 @@ import { Button, Row, Col } from "antd";
 import EditProfile from "../../components/EditProfile";
 import { useNavigate, Link } from "react-router-dom";
 import axios from "axios";
-import { Provider, useSelector } from "react-redux";
-
-
+import { useSelector } from "react-redux";
 
 function MyPage() {
   const navigate = useNavigate();
@@ -21,10 +19,6 @@ function MyPage() {
 
   const showModal = () => {
     setIsModalOpen(true);
-  };
-
-  const handleOk = () => {
-    setIsModalOpen(false);
   };
 
   const handleCancel = () => {
@@ -47,13 +41,10 @@ function MyPage() {
         setNickname(data.nickname);
         setFaceShape(data.face_shape);
         handleCancel();
-        
       }
-      
     } catch (error) {
       console.error(error);
     }
-
   };
 
   const handleProfileUpdate = async (updatedNickname, lastPassword, updatedPassword) => {
@@ -175,12 +166,9 @@ function MyPage() {
             </div>
             )}
           </div>
-
       </div>
       <Footer name="mypage" />
     </div>
-
-
   )
 }
 

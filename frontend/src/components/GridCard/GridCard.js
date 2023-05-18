@@ -1,9 +1,8 @@
 import React from "react";
-import { Row, Col } from "antd";
-import { useNavigate, Link } from "react-router-dom";
+import { Col } from "antd";
+import { Link } from "react-router-dom";
 
 function GridCard(props){
-  const navigate = useNavigate(null);
   return(
       <Col lg={8} md={12} xs={24} 
         style={{display:"flex", flexDirection:"column", alignItems:"center"}}>
