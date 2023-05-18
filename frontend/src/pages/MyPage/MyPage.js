@@ -17,6 +17,14 @@ function MyPage() {
   const [faceShape, setFaceShape] = useState("");
   const [isModalOpen, setIsModalOpen] = useState(false);
 
+  const data = [
+    { faceshape: 'Heart', faceshapeName: "하트형" },    //하트형
+    { faceshape: 'Oblong', faceshapeName: "긴얼굴형" }, //긴얼굴형
+    { faceshape: 'Oval', faceshapeName: "타원형" },     //타원형
+    { faceshape: 'Round', faceshapeName: "둥근형" },    //둥근형
+    { faceshape: 'Square', faceshapeName: "사각형"},   //사각형
+  ];
+
   const showModal = () => {
     setIsModalOpen(true);
   };
@@ -81,12 +89,12 @@ function MyPage() {
     }
   };
 
-
   useEffect(() => {
     sendSetProfileRequest();
   }, []);
  
   const wishlist = useSelector(store => store.wishReducer || []);
+  const matchingShape = data.find(item => item.faceshape === faceShape);
 
   return (
     <div className="container">
@@ -101,7 +109,7 @@ function MyPage() {
               </div>
             ): (
               <div style={{ margin: "20px" }}>
-              {`${nickname}님의 얼굴형: ${faceShape}`}
+              {`${nickname}님의 얼굴형: ${matchingShape.faceshape}`}
               </div>
             )}
             
