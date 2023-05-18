@@ -32,9 +32,7 @@ def register(request):
 
         # 비밀번호를 해시하여 저장
         hashed_password = make_password(password)
-        print("성공")
     except:
-        print("실패")
         return Response({'message': '잘못된 접근입니다'}, status=status.HTTP_400_BAD_REQUEST)
 
     # 사용자 생성
@@ -55,22 +53,17 @@ def login(request):
     if not email or not password:  #빈칸이 존재할 경우
         return JsonResponse({'success': False, 'message': '빈칸을 입력해주세요'})
 
-    print("1")
     try:
-        print("2")
         user = User.objects.get(email=email)
     except User.DoesNotExist: # 가입 정보가 없을 경우
-        print("3")
         return JsonResponse({'success': False, 'message': '가입 정보가 존재하지 않습니다.'})
 
     if user is not None:
         if user.check_password(password): #해쉬화 해서 저장했기 때문에 해당 함수가 필요
             # 인증 성공 시 로그인 처리
-            print("4")
             auth_login(request, user)
             return JsonResponse({'success': True, 'message': user.nickname+'님 반갑습니다.'})
         else: #비밀번호가 틀릴 경우
-            print("5")
             return JsonResponse({'success': False, 'message': '비밀번호가 일치하지 않습니다.'})
   
 
