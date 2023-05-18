@@ -17,6 +17,14 @@ function MyPage() {
   const [faceShape, setFaceShape] = useState("");
   const [isModalOpen, setIsModalOpen] = useState(false);
 
+  const data = [
+    { faceshape: 'Heart', faceshapeName: "하트형" },    //하트형
+    { faceshape: 'Oblong', faceshapeName: "긴얼굴형" }, //긴얼굴형
+    { faceshape: 'Oval', faceshapeName: "타원형" },     //타원형
+    { faceshape: 'Round', faceshapeName: "둥근형" },    //둥근형
+    { faceshape: 'Square', faceshapeName: "사각형" },   //사각형
+  ];
+
   const showModal = () => {
     setIsModalOpen(true);
   };
@@ -81,12 +89,12 @@ function MyPage() {
     }
   };
 
-
   useEffect(() => {
     sendSetProfileRequest();
   }, []);
- 
+
   const wishlist = useSelector(store => store.wishReducer || []);
+  const matchingShape = data.find(item => item.faceshape == faceShape);
 
   return (
     <div className="container">
@@ -95,9 +103,16 @@ function MyPage() {
         <div className="user">
           <div style={{ fontSize: "25px", fontWeight: "bold" }}>마이페이지</div>
           <div className="profile-edit">
-            <div style={{ margin: "20px" }}>
-              {`${nickname}님의 얼굴형: ${faceShape}`}
-            </div>
+            {faceShape == null ? (
+              <div style={{ margin: "20px" }}>
+                {`${nickname}님의 얼굴형: 없음`}
+              </div>
+            ) : (
+                <div style={{ margin: "20px" }}>
+                  {`${nickname}님의 얼굴형: ${matchingShape.faceshapeName}`}
+                </div>
+              )}
+
             <div>
               <Button
                 style={{ margin: "10px", width: "200px" }}
@@ -114,58 +129,58 @@ function MyPage() {
             </div>
           </div>
         </div>
-        
+
         <ModalComponent
           title="프로필 편집"
           isOpen={isModalOpen}
         >
-          <div style={{display:"flex", justifyContent:"space-between", marginBottom:"20px"}}>
-            <div style={{fontWeight:"bold", fontSize:"20px"}}>프로필 편집</div>
+          <div style={{ display: "flex", justifyContent: "space-between", marginBottom: "20px" }}>
+            <div style={{ fontWeight: "bold", fontSize: "20px" }}>프로필 편집</div>
             <Button onClick={() => handleCancel(true)}>X</Button>
           </div>
           <EditProfile onUpdate={handleProfileUpdate} />
         </ModalComponent>
 
-          <div className="dibs">
-            <div style={{fontSize:"20px", margin: "0 30px", fontWeight:"bold"}}>찜한 안경</div>
-            {wishlist.length == 0 ? (
-              <p style={{margin:"20px auto"}}>찜한 상품이 없습니다.</p>
-            ):(
-              <div className="list-glasses" style={{marginBottom:"0"}}>
-              <Row gutter={[8,8]}>
+        <div className="dibs">
+          <div style={{ fontSize: "20px", margin: "0 30px", fontWeight: "bold" }}>찜한 안경</div>
+          {wishlist.length == 0 ? (
+            <p style={{ margin: "20px auto" }}>찜한 상품이 없습니다.</p>
+          ) : (
+              <div className="list-glasses" style={{ marginBottom: "0" }}>
+                <Row gutter={[8, 8]}>
                   {wishlist.map((item, index) => (
-                      <Col key={index} lg={6} md={8} sm={12} xs={24}
-                        style={{display:"flex", flexDirection:"column", alignItems:"center", marginBottom:"3rem"}}
-                        >
-                        <Link 
-                          className="link" 
-                          to={`/product/${item.style}/${item.id}`}
-                          state={item}
+                    <Col key={index} lg={6} md={8} sm={12} xs={24}
+                      style={{ display: "flex", flexDirection: "column", alignItems: "center", marginBottom: "3rem" }}
+                    >
+                      <Link
+                        className="link"
+                        to={`/product/${item.style}/${item.id}`}
+                        state={item}
+                      >
+                        <div style={{ display: "flex", flexDirection: "column" }}>
+                          <img
+                            style={{ width: '250px' }}
+                            src={`/images/input/${item.image}`}
                           >
-                        <div style={{display: "flex", flexDirection:"column"}}>
-                            <img 
-                              style={{ width:'250px'}}
-                              src={`/images/input/${item.image}`}
-                              >
-                            </img>
-                            <div>
-                              <div style={{fontSize:"15px"}}>{item.brand}</div>
-                              <div style={{fontSize: "20px", fontWeight:"bold"}}>{item.name}</div>
-                              { item.cost == "문의" ? (
-                              <div style={{fontSize:"20px"}}>{item.cost}</div>
+                          </img>
+                          <div>
+                            <div style={{ fontSize: "15px" }}>{item.brand}</div>
+                            <div style={{ fontSize: "20px", fontWeight: "bold" }}>{item.name}</div>
+                            {item.cost == "문의" ? (
+                              <div style={{ fontSize: "20px" }}>{item.cost}</div>
                             ) : (
-                              <div style={{fontSize:"20px"}}>{item.cost}원</div>
-                            )}
-                            </div>
+                                <div style={{ fontSize: "20px" }}>{item.cost}원</div>
+                              )}
+                          </div>
                         </div>
-                        </Link>
-                        
-                      </Col>
-                ))}
+                      </Link>
+
+                    </Col>
+                  ))}
                 </Row>
-            </div>
+              </div>
             )}
-          </div>
+        </div>
       </div>
       <Footer name="mypage" />
     </div>
