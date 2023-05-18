@@ -1,8 +1,6 @@
 import './Header.css'
-import { ArrowLeftOutlined, UserOutlined } from '@ant-design/icons';
-import { Avatar } from 'antd';
 import { useEffect, useState } from 'react';
-import { Link, useLocation, useNavigate} from 'react-router-dom';
+import { Link, useNavigate} from 'react-router-dom';
 import axios from 'axios';
 
 function Header() {
@@ -27,14 +25,10 @@ function Header() {
     event.preventDefault();
 
     try {
-      const response = await axios.get('/user/get-csrf-token/');
-      const csrfToken = response.data.csrfToken;
+      // const response = await axios.get('/user/get-csrf-token/');
+      // const csrfToken = response.data.csrfToken;
 
-      const logoutResponse = await axios.post('/user/logout/', null, {
-        headers: {
-          'X-CSRFToken': csrfToken
-        }
-      });
+      const logoutResponse = await axios.get('/user/logout/');
 
       if (logoutResponse.data.success) {
         alert(logoutResponse.data.message);
@@ -52,7 +46,7 @@ function Header() {
   return (
   <div className="header-container">
     <div className="app-name">
-      <Link className="link" to="/">가상 안경</Link>  
+      <Link className="link" to="/">Glassify</Link>  
     </div>
     <div className="profile">
       <ul>

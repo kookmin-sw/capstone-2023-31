@@ -7,7 +7,6 @@ import { Button, Form, Input, Checkbox } from 'antd';
 import Header from '../../components/Header/Header';
 import Footer from '../../components/Footer/Footer';
 
-
 function Login() {
     const navigate = useNavigate();
     const [email, setEmail] = useState('');
@@ -52,10 +51,8 @@ function Login() {
             if (response.data.success) {
                 const data = response.data;
                 alert(data.message);
-                
                 checkLoginStatus();
                 navigate('/');
-
             }
             else {
                 alert(response.data.message)
@@ -70,65 +67,65 @@ function Login() {
             <Header/>
             {isLoggedIn ? (
                 <>
-                    <p>이미 로그인되어 있습니다.</p>
-                    <button onClick={() => navigate('/')}>메인 페이지로 이동</button>
+                <p>이미 로그인되어 있습니다.</p>
+                <button onClick={() => navigate('/')}>메인 페이지로 이동</button>
                 </>
             ) : (
-                    <div className='login-container'>
-                        <h2>로그인</h2>
-                        <Form
-                            name="normal_login"
-                            className="login-form"
-                            initialValues={{
-                                remember: true,
-                            }}
-                            onFinish={onSubmitHandler}
-                            >
-                            <Form.Item
-                                name="email"
-                                rules={[
-                                {
-                                    required: true,
-                                    message: '이메일을 입력해주세요.',
-                                },
-                                ]}
-                            >
-                                <Input prefix={<UserOutlined className="site-form-item-icon" />} 
-                                    placeholder="email" 
-                                    value={email}
-                                    onChange={onEmailHandler} />
+                <div className='login-container'>
+                    <h2>로그인</h2>
+                    <Form
+                        name="normal_login"
+                        className="login-form"
+                        initialValues={{
+                            remember: true,
+                        }}
+                        onFinish={onSubmitHandler}
+                        >
+                        <Form.Item
+                            name="email"
+                            rules={[
+                            {
+                                required: true,
+                                message: '이메일을 입력해주세요.',
+                            },
+                            ]}
+                        >
+                            <Input prefix={<UserOutlined className="site-form-item-icon" />} 
+                                placeholder="email" 
+                                value={email}
+                                onChange={onEmailHandler} />
+                        </Form.Item>
+                        <Form.Item
+                            name="password"
+                            rules={[
+                            {
+                                required: true,
+                                message: '비밀번호를 입력해주세요.',
+                            },
+                            ]}
+                        >
+                            <Input
+                            prefix={<LockOutlined className="site-form-item-icon" />}
+                            type="password"
+                            placeholder="Password"
+                            value={password}
+                            onChange={onPasswordHandler}
+                            />
+                        </Form.Item>
+                        <Form.Item>
+                            <Form.Item name="remember" valuePropName="checked" noStyle>
+                                <Checkbox>정보 기억하기</Checkbox>
                             </Form.Item>
-                            <Form.Item
-                                name="password"
-                                rules={[
-                                {
-                                    required: true,
-                                    message: '비밀번호를 입력해주세요.',
-                                },
-                                ]}
-                            >
-                                <Input
-                                prefix={<LockOutlined className="site-form-item-icon" />}
-                                type="password"
-                                placeholder="Password"
-                                value={password}
-                                onChange={onPasswordHandler}
-                                />
-                            </Form.Item>
-                            <Form.Item>
-                                <Form.Item name="remember" valuePropName="checked" noStyle>
-                                    <Checkbox>정보 기억하기</Checkbox>
-                                </Form.Item>
-                            </Form.Item>
+                        </Form.Item>
 
-                            <Form.Item>
-                                <Button type="primary" htmlType="submit" className="login-form-button">
-                                    로그인
-                                </Button>
-                            </Form.Item>
-                        </Form>
-                    </div>
-                )}
+                        <Form.Item>
+                            <Button type="primary" htmlType="submit" className="login-form-button">
+                                로그인
+                            </Button>
+                        </Form.Item>
+                    </Form>
+                </div>
+            )}
             <Footer/>
         </div>
     );

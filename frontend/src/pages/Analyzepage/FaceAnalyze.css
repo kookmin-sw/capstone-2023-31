@@ -1,21 +1,18 @@
 .face-analyze-container{
   display: flex;
   flex-direction: column;
-  /* align-items: center; */
   flex: 1;
   margin: 0 300px;
 }
 
 .chart-wrapper {
   display: flex;
-  /* align-items: center; */
   justify-content: center;
 }
+
 .face-text{
   display: flex;
   margin: 20px 0;
-  /* margin-bottom: 20px;
-  margin-top:15px; */
   border: solid 1px black;
   height: 10vh;
   align-items: center;

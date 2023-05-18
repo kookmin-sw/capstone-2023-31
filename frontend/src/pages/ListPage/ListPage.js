@@ -1,16 +1,12 @@
-import React, { Fragment, useEffect, useState } from "react";
-import { useLocation, useParams, Link } from "react-router-dom";
+import React, { useEffect, useState } from "react";
+import { useLocation, Link } from "react-router-dom";
 import Header from "../../components/Header/Header"
 import "./ListPage.css"
 import Footer from "../../components/Footer/Footer";
 import {Row, Col, Pagination} from "antd";
-import SearchBar from "../../components/Search/SearchBar";
 import axios from "axios";
-// import myImage from "../../../../crawling/image/input";
+
 function ListPage() {
-
-  // const { shape } = useParams();
-
   const location = useLocation();
   const { name , shape } = location.state;
   const [ glassesData, setGlassesData] = useState([]);
@@ -29,9 +25,6 @@ function ListPage() {
       fetchData();
     }, [shape]);
 
-  // useEffect(()=>{ // 페이지 이동 시 스크롤 위치 초기화
-  //   window.scrollTo(0, 0);
-  // }, [])
 
   const [page, setPage] = useState(1);
 
@@ -48,7 +41,6 @@ function ListPage() {
       <Header/>
       <div className="list-container">
         <div className="style-name">{name}</div>
-        <SearchBar/>
         <div className="list-glasses">
             <Row gutter={[8,8]}>
               {glassesData.slice((page - 1) * pageSize, page * pageSize).map((item, index) => (
@@ -60,7 +52,7 @@ function ListPage() {
                       to={`/product/${shape}/${item.id}`}
                       state={item}
                       >
-                    <div style={{display: "flex", flexDirection:"column"}}>
+                      <div style={{display: "flex", flexDirection:"column"}}>
                         <img 
                           style={{ width:'250px'}}
                           src={`/images/input/${item.image}`}
@@ -74,14 +66,11 @@ function ListPage() {
                           ) : (
                             <div style={{fontSize:"20px"}}>{item.cost}원</div>
                           )}
-                          
                         </div>
-                    </div>
+                      </div>
                     </Link>
-                    
                   </Col>
-
-            ))}
+              ))}
             </Row>
         </div>
       </div>

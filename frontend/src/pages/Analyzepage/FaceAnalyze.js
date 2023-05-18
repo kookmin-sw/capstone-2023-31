@@ -2,10 +2,9 @@ import { Button } from "antd";
 import Footer from "../../components/Footer/Footer";
 import Header from "../../components/Header/Header";
 import './FaceAnalyze.css'
-import { ResponsiveContainer, Radar, RadarChart, PolarGrid, PolarAngleAxis, PolarRadiusAxis } from 'recharts';
-import { Link, useLocation, useNavigate } from "react-router-dom";
+import { Radar, RadarChart, PolarGrid, PolarAngleAxis, PolarRadiusAxis } from 'recharts';
+import { useLocation, useNavigate } from "react-router-dom";
 import { useEffect, useState } from "react";
-import ModalComponent from "../../components/Modal/ModalComponent";
 import axios from "axios";
 
 function FaceAnalyze() {

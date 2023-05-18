@@ -1,11 +1,11 @@
 import React, { useState } from 'react';
 import axios from 'axios';
-import { useLocation, useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import Footer from "../../components/Footer/Footer";
 import Header from "../../components/Header/Header";
 import './RegisterPage.css'
 import { UserOutlined, LockOutlined} from '@ant-design/icons';
-import { Button, Form, Input, Checkbox } from 'antd';
+import { Button, Form, Input } from 'antd';
 
 function RegisterPage(props) {
     const navigate = useNavigate();
@@ -27,8 +27,6 @@ function RegisterPage(props) {
         setConfirmPassword(event.currentTarget.value);
     }
     const onSubmitHandler = () => {
-        // event.preventDefault();
-
         if (Password !== ConfirmPassword) {
             return alert('비밀번호가 일치하지 않습니다.')
         }
@@ -68,22 +66,6 @@ function RegisterPage(props) {
         <div className='container'>
             <Header/>
             <div className='register-container'>
-            {/* <form style={{ display: 'flex', flexDirection: 'column' }}
-                onSubmit={onSubmitHandler}
-            >
-                <label>Email</label>
-                <input type='email' value={Email} onChange={onEmailHandler} />
-                <label>Nickname</label>
-                <input type='text' value={Nickname} onChange={onNicknameHandler} />
-                <label>Password</label>
-                <input type='password' value={Password} onChange={onPasswordHandler} />
-                <label>Confirm Password</label>
-                <input type='password' value={ConfirmPassword} onChange={onConfirmPasswordHandler} />
-                <br />
-                <button type='submit'>
-                    회원가입
-                </button>
-            </form> */}
                 <h2>회원가입</h2>
                 <Form
                     name="normal_register"
@@ -174,7 +156,6 @@ function RegisterPage(props) {
             </div>
             <Footer/>
         </div>
-       
     )
 }
 

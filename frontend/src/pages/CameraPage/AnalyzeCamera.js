@@ -1,12 +1,11 @@
 import React, { useEffect, useRef, useState, useCallback } from "react";
 import Header from "../../components/Header/Header";
 import Footer from "../../components/Footer/Footer";
-import { Button, Spin } from "antd";
+import { Button } from "antd";
 import "./Camera.css";
 import Webcam from 'react-webcam';
 import { useNavigate } from "react-router-dom";
 import { Audio } from "react-loader-spinner";
-import { SketchOutlined } from "@ant-design/icons";
 
 const videoConstraints = {
   width: 1280,
@@ -72,7 +71,6 @@ function AnalyzeCamera() { //카메라
       setIsAnalyzing(false);
     }
   }
-
   
   const txt = "분석 중 입니다...";
   const [text, setText] = useState('');
@@ -149,7 +147,6 @@ function AnalyzeCamera() { //카메라
           )}
       </div>
       )}
-      
       <Footer />
     </div>
   );
