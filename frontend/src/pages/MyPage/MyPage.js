@@ -109,7 +109,7 @@ function MyPage() {
               </div>
             ): (
               <div style={{ margin: "20px" }}>
-              {`${nickname}님의 얼굴형: ${matchingShape.faceshape}`}
+              {`${nickname}님의 얼굴형: ${matchingShape.faceshapeName}`}
               </div>
             )}
             

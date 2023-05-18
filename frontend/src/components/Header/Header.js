@@ -46,7 +46,7 @@ function Header() {
   return (
   <div className="header-container">
     <div className="app-name">
-      <Link className="link" to="/">Glassify</Link>  
+      <Link className="link" to="/">GLASSFIT</Link>  
     </div>
     <div className="profile">
       <ul>
