@@ -14,7 +14,7 @@ function MyPage() {
   const navigate = useNavigate();
   const [nickname, setNickname] = useState("");
   const [updatedpassword, setUpdatePassword] = useState("");
-  const [faceShape, setFaceShape] = useState("");
+  const [faceShape, setFaceShape] = useState(null);
   const [isModalOpen, setIsModalOpen] = useState(false);
 
   const data = [

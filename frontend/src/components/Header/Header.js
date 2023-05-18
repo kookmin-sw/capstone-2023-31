@@ -25,9 +25,6 @@ function Header() {
     event.preventDefault();
 
     try {
-      // const response = await axios.get('/user/get-csrf-token/');
-      // const csrfToken = response.data.csrfToken;
-
       const logoutResponse = await axios.get('/user/logout/');
 
       if (logoutResponse.data.success) {
@@ -46,7 +43,9 @@ function Header() {
   return (
   <div className="header-container">
     <div className="app-name">
-      <Link className="link" to="/">GLASSFIT</Link>  
+      <Link className="link" to="/">
+        <img src='images/logo.png' style={{height: "50px"}}></img>
+      </Link>  
     </div>
     <div className="profile">
       <ul>
