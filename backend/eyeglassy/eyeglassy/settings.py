@@ -78,7 +78,6 @@ TEMPLATES = [
     },
 ]
 
-ASGI_APPLICATION = "face_detection.routing.application"
 
 
 # Database
