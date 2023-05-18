@@ -32,7 +32,7 @@ def run_fitting(left_eye, right_eye, glasses_img, face_img):
 
     # 안경 이미지 사이즈 조정
     eye_distance = np.sqrt((right_eye[1] - left_eye[1])**2 + (right_eye[0] - left_eye[0])**2)
-    scale_factor = eye_distance / glasses_img.shape[1] * 2.25
+    scale_factor = eye_distance / glasses_img.shape[1] * 2.45
     resized_glasses = cv2.resize(glasses_img, (0, 0), fx=scale_factor, fy=scale_factor)
 
     # 안경 이미지를 회전시킬 캔버스(도화지) 생성
