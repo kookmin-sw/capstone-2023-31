@@ -38,7 +38,6 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    'face_detection',
     'user',
     'mypage',
     'analyze',
@@ -78,7 +77,7 @@ TEMPLATES = [
     },
 ]
 
-ASGI_APPLICATION = "face_detection.routing.application"
+
 
 
 # Database
