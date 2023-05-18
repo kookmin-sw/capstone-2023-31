@@ -93,10 +93,10 @@
               {images.map((item, index) => (
                 <div key={index}>
                   <Link className="link" to={`/product/${item.shape}/${item.id}`} state={item}>
-                    <img style={{ width: "250px", height: "250px"}} src={`/images/input/${item.image}`}></img>
+                    <img style={{ width: "250px", height: "250px" }} src={`/images/input/${item.image}`} alt={item.name} />
                   </Link>
                 </div>
-              )) }
+              ))}
             </Slider>
           </div>
 

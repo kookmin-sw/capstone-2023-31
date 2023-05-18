@@ -49,6 +49,7 @@ yarn-error.log*
 *.py[cod]
 *$py.class
 
+captured_image.jpg
 # C extensions
 *.so
 
