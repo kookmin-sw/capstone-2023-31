@@ -19,9 +19,12 @@ from product.models import Glasses
 # os.environ.setdefault("DJANGO_SETTINGS_MODULE", "config.settings")
 # django.setup()
 
+static_path = os.path.join(settings.BASE_DIR, 'static')
+
+
 output_path = 'crawling/image/output'
-model_path = 'fitting/models/shape_predictor_68_face_landmarks.dat'
-cv_model_path = 'fitting/models/haarcascade_eye_tree_eyeglasses.xml'
+# model_path = 'fitting/models/shape_predictor_68_face_landmarks.dat'
+# cv_model_path = 'fitting/models/haarcascade_eye_tree_eyeglasses.xml'
 
 
 def run_fitting(left_eye, right_eye, glasses_img, face_img):
@@ -71,8 +74,8 @@ def run_fitting(left_eye, right_eye, glasses_img, face_img):
     return img_base64
 
 
-def cv_prac_fitting(glasses_path, image_file):
-    predictor_path = os.path.join(settings.BASE_DIR, cv_model_path)
+def cv_prac_fitting(static_path, glasses_path, image_file):
+    predictor_path = os.path.join(static_path, 'haarcascade_eye_tree_eyeglasses.xml')
     eye_cascade = cv2.CascadeClassifier(predictor_path)
 
     # 이미지 cv2로 읽어오기
@@ -101,8 +104,8 @@ def cv_prac_fitting(glasses_path, image_file):
     return img_base64
 
 
-def dlib_prac_fitting(glasses_path, image_file):
-    predictor_path = os.path.join(settings.BASE_DIR, model_path)
+def dlib_prac_fitting(static_path, glasses_path, image_file):
+    predictor_path = os.path.join(static_path, 'shape_predictor_68_face_landmarks.dat')
 
     # 얼굴 인식기와 랜드마크 인식기 초기화
     detector = dlib.get_frontal_face_detector()
@@ -166,8 +169,8 @@ def fitting_face(request, id):
 
     ### 4) 이미지 위에 안경 이미지 붙여서 반환
     ### 모드 선택 CHOICE : dlib or cv
-    # fitted_face = dlib_prac_fitting(glasses_path, image_path) # 누끼딴 안경 이미지 경로, 얼굴 이미지 경로
-    fitted_face = cv_prac_fitting(glasses_path, image_path)
+    # fitted_face = dlib_prac_fitting(static_path, glasses_path, image_path) # 누끼딴 안경 이미지 경로, 얼굴 이미지 경로
+    fitted_face = cv_prac_fitting(static_path, glasses_path, image_path)
 
 
     # response_data = {'result': 'success', 'message': '이미지 처리 완료'}
