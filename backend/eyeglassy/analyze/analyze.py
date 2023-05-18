@@ -1,7 +1,6 @@
 import cv2
 import numpy as np
 import os
-import boto3
 import joblib
 
 
