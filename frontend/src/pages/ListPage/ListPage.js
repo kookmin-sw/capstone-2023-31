@@ -4,7 +4,6 @@ import Header from "../../components/Header/Header"
 import "./ListPage.css"
 import Footer from "../../components/Footer/Footer";
 import {Row, Col, Pagination} from "antd";
-import Paginator from "../../components/Paginator/Paginator";
 import SearchBar from "../../components/Search/SearchBar";
 import axios from "axios";
 // import myImage from "../../../../crawling/image/input";
@@ -30,11 +29,15 @@ function ListPage() {
       fetchData();
     }, [shape]);
 
-  useEffect(()=>{ // 페이지 이동 시 스크롤 위치 초기화
-    window.scrollTo(0, 0);
-  }, [])
+  // useEffect(()=>{ // 페이지 이동 시 스크롤 위치 초기화
+  //   window.scrollTo(0, 0);
+  // }, [])
 
   const [page, setPage] = useState(1);
+
+  useEffect(()=>{ // 페이지 이동 시 스크롤 위치 초기화
+    window.scrollTo(0, 0);
+  }, [page])
 
   const handlePageChange = (page) => {
     setPage(page);
@@ -82,7 +85,6 @@ function ListPage() {
             </Row>
         </div>
       </div>
-      {/* <Paginator/> */}
       <div style={{display:"flex", justifyContent:"center"}}>
       <Pagination current={page} total={glassesData.length} pageSize={pageSize} onChange={handlePageChange}/>
       </div>

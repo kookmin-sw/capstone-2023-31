@@ -11,7 +11,7 @@ import subprocess
 from . import analyze
 from django.conf import settings
 
-static_path = os.path.join(settings.BASE_DIR, 'media')
+static_path = os.path.join(settings.BASE_DIR, 'static')
 
 
 
@@ -55,13 +55,13 @@ def analyze_face(request):
     except KeyError:
         return Response(status=status.HTTP_400_BAD_REQUEST)
 
-    image_path = os.path.join(settings.MEDIA_ROOT, image_file.name)
+    image_path = os.path.join(settings.STATIC_ROOT, image_file.name)
 
     with open(image_path, 'wb+') as destination:
         for chunk in image_file.chunks():
             destination.write(chunk)
 
-    predicted_shape = analyze.run_modeling(static_path, image_path)
+    predicted_shape = analyze.run_modeling(settings.STATIC_ROOT, image_path)
     print(predicted_shape)
     return Response({'predicted_shape': predicted_shape})
 

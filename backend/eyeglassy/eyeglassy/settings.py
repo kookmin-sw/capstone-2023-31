@@ -24,7 +24,7 @@ DEFAULT_DIR = Path(__file__).resolve().parent.parent.parent.parent # /captstone-
 SECRET_KEY = 'django-insecure-7o)d2nelki!=rnd(x#(9tfi8rnyyqmbk-!85&a$ihk4#1bnq4d'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = False
+DEBUG = True
 
 ALLOWED_HOSTS = ['*']
 
@@ -64,7 +64,7 @@ ROOT_URLCONF = 'eyeglassy.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [BASE_DIR, 'templates'],
+        'DIRS': [BASE_DIR/ 'templates'],
         # 'DIRS': [client],
         'APP_DIRS': True,
         'OPTIONS': {
@@ -128,9 +128,12 @@ USE_TZ = False
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/3.2/howto/static-files/
 
-STATIC_URL = '/media/'
-STATICFILES_DIRS = [os.path.join(BASE_DIR), 'face_detection', 'medida']
-STATIC_ROOT = os.path.join(BASE_DIR, 'media')
+STATIC_URL = '/static/'
+#STATICFILES_DIRS = [BASE_DIR/ 'static']
+STATIC_ROOT = os.path.join(BASE_DIR, 'static')
+
+MEDIA_URL='/media/'
+MEDIA_ROOT=BASE_DIR/ 'media'
 
 # STATIC_URL = '/static/'
 # BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
