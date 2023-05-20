@@ -54,7 +54,6 @@
 👩‍🎓 Student ID : ****2218
 📧 E-mail: sb121300@naver.com
 📌 Role: 팀장, ML(얼굴형 분석 모델 생성), Backend(얼굴형 분석 페이지, user, 마이페이지, 회원가입/로그인)
-🔗 Github : https://github.com/soosbk
 ~~~
 <br>
 
@@ -71,7 +70,7 @@
 <br>
 
 #### 김소은
-<img src="https://user-images.githubusercontent.com/66404477/229358312-ac729795-7298-42e7-a7bc-81581f9ed242.png" width="100"/>
+<img src="https://github.com/kookmin-sw/capstone-2023-31/assets/78434676/c76ba299-9878-44e4-870f-00773198fd2b" width="100"/>
 
 [soeun's Github](https://github.com/silver0108)
 
