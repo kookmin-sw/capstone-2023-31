@@ -1,11 +1,10 @@
 # GLASSFIT
 
-**팀페이지 (2023-31)** -> [https://kookmin-sw.github.io/capstone-2023-31/](https://kookmin-sw.github.io/capstone-2023-31/)
+> **팀페이지 (2023-31):** [https://kookmin-sw.github.io/capstone-2023-31/](https://kookmin-sw.github.io/capstone-2023-31/)
 
 ### 🗣️ 안경 사야 하는데 너무 귀찮아 !
 ### 👀 집에서 편하게 써보고 구매하고 싶은데 !! 
 ### 🦊 내 얼굴형에 맞는 안경을 구매하고 싶어 !!! 
-
 
 <p align="center"><img src="https://github.com/kookmin-sw/capstone-2023-31/assets/63188042/7829dec5-8297-4236-96d2-4495ba0f6722" width="600"/></p>
 
