@@ -86,11 +86,11 @@ function FittingCamera() {
     const interval = setInterval(() => {
       setText((prevText) => {
         let resultText = prevText ? prevText + txt[count] : txt[0];
-        if(count >= txt.length){
+        if(count >= txt.length-1){
           setCount(0);
           setText('');
         } else{
-          setCount(count+1);
+          setCount((prvcount) => prvcount + 1);
         }
         return resultText;
       });
@@ -149,7 +149,7 @@ function FittingCamera() {
         <div className="captured-image-container">
           {isCapturing ? (
             <>
-            <h1 style={{color: "black", textShadow: "-1px 0px rgb(172, 174, 174), 0px 1px rgb(172, 174, 174), 1px 0px rgb(172, 174, 174), 0px -1px rgb(172, 174, 174)"}}>{text}</h1>
+            <h3 style={{color: "black", textShadow: "-1px 0px rgb(172, 174, 174), 0px 1px rgb(172, 174, 174), 1px 0px rgb(172, 174, 174), 0px -1px rgb(172, 174, 174)"}}>{text}</h3>
             </>
           ):(
             <>

@@ -105,7 +105,7 @@ function FaceAnalyze() {
         </div>
         {isLoggedIn ? (
         <Button
-          style={{ margin: "15px 300px" }}
+          style={{ margin: "15px 0" }}
           type="primary"
           onClick={() => updateFaceShape(predictedShape)}
         >
