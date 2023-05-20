@@ -1,12 +1,12 @@
 # GLASSFIT
 
-> **팀페이지 (2023-31):** [https://kookmin-sw.github.io/capstone-2023-31/](https://kookmin-sw.github.io/capstone-2023-31/)
+> **팀페이지 (2023-31) :** [https://kookmin-sw.github.io/capstone-2023-31/](https://kookmin-sw.github.io/capstone-2023-31/)
 
 ### 🗣️ 안경 사야 하는데 너무 귀찮아 !
 ### 👀 집에서 편하게 써보고 구매하고 싶은데 !! 
 ### 🦊 내 얼굴형에 맞는 안경을 구매하고 싶어 !!! 
 
-<p align="center"><img src="https://github.com/kookmin-sw/capstone-2023-31/assets/63188042/7829dec5-8297-4236-96d2-4495ba0f6722" width="600"/></p>
+<p align="center"><img src="https://github.com/kookmin-sw/capstone-2023-31/assets/63188042/7829dec5-8297-4236-96d2-4495ba0f6722" width="700"/></p>
 
 <br>
 
@@ -40,6 +40,12 @@
 <code>[안경 가상 피팅]</code>
 
 사용자는 추천된 안경테를 가상으로 착용할 수 있습니다. Web-cam을 통해 자신의 얼굴에 추천된 안경테를 씌워볼 수 있으며, 실제로 착용하지 않고도 어떻게 보일지 미리 확인할 수 있습니다. 이를 통해 사용자는 자신과 잘 어울리는 안경테를 선택하는데 도움을 받을 수 있습니다. 
+<br><br>
+
+#### 페이지별 기능
+<p align="center"><img src="https://github.com/kookmin-sw/capstone-2023-31/assets/63188042/5e2a6d34-0f8b-40d7-b980-a2aa27abd75c" width="800"/></p>
+<p align="center"><img src="https://github.com/kookmin-sw/capstone-2023-31/assets/63188042/36ce1545-bd0c-42da-9a41-6ac1774bfc13" width="800"/></p>
+<p align="center"><img src="https://github.com/kookmin-sw/capstone-2023-31/assets/63188042/5d9b799f-641c-4380-881f-2fae27d20884" width="800"/></p>
 
 <br><br>
 
@@ -53,7 +59,6 @@
 👩‍🎓 Student ID : ****2218
 📧 E-mail: sb121300@naver.com
 📌 Role: 팀장, ML(얼굴형 분석 모델 생성), Backend(얼굴형 분석 페이지, user, 마이페이지, 회원가입/로그인)
-🔗 Github : https://github.com/soosbk
 ~~~
 <br>
 
@@ -93,9 +98,7 @@
 
 
 ## 5. 프로젝트 구조 🗂️
-수정 예정.
-
-![stack](https://user-images.githubusercontent.com/66404477/229356303-b11d7de8-637d-4750-8e3a-5773309321f2.png)
+<img src="https://github.com/kookmin-sw/capstone-2023-31/assets/63188042/1b8d42c6-7b4e-45b4-a408-def9f915b8e0" width="800"/>
 
 <br><br>
 

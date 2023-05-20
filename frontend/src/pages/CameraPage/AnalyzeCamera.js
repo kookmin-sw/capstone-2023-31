@@ -80,11 +80,11 @@ function AnalyzeCamera() { //카메라
     const interval = setInterval(() => {
       setText((prevText) => {
         let resultText = prevText ? prevText + txt[count] : txt[0];
-        if(count >= txt.length){
+        if(count >= txt.length-1){
           setCount(0);
           setText('');
         } else{
-          setCount(count+1);
+          setCount((prvcount) => prvcount + 1);
         }
         return resultText;
       });
