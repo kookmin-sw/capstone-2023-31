@@ -27,6 +27,7 @@ function FittingCamera() {
   const webcamRef = useRef(null);
   const [imageSrc, setImageSrc] = useState(null);
   const [mirror, setMirror] = useState(false);
+  const [isCapturing, setIsCapturing] = useState(false);
 
   const alertHandler = () => {
     alert("다시 찍어주세요");
@@ -44,6 +45,9 @@ function FittingCamera() {
   }
 
   const capture = async () => {
+
+    setIsCapturing(true);
+
     const capturedImageSrc = webcamRef.current.getScreenshot();
 
     const formData = new FormData();
@@ -66,12 +70,33 @@ function FittingCamera() {
       }else{
         const base64Data = fittingResponse.data;
         setImageSrc(`data:image/jpeg;base64,${base64Data}`);
+        setIsCapturing(false);
       }
 
     } catch (error) {
       console.log(error);
     }
   };
+
+  const txt = "가상 피팅 중 입니다...";
+  const [text, setText] = useState('');
+  const [count, setCount] = useState(0);
+
+  useEffect(()=>{
+    const interval = setInterval(() => {
+      setText((prevText) => {
+        let resultText = prevText ? prevText + txt[count] : txt[0];
+        if(count >= txt.length){
+          setCount(0);
+          setText('');
+        } else{
+          setCount(count+1);
+        }
+        return resultText;
+      });
+    }, 150);
+    return () => clearInterval(interval);
+  })
 
   return (
     <div className="container">
@@ -122,15 +147,24 @@ function FittingCamera() {
             )}
         </div>
         <div className="captured-image-container">
-          {imageSrc ? (
-            <div className="captured-image">
-              <img src={imageSrc} alt="Captured" />
-            </div>
-          ) : (
+          {isCapturing ? (
+            <>
+            <h1 style={{color: "black", textShadow: "-1px 0px rgb(172, 174, 174), 0px 1px rgb(172, 174, 174), 1px 0px rgb(172, 174, 174), 0px -1px rgb(172, 174, 174)"}}>{text}</h1>
+            </>
+          ):(
+            <>
+            {imageSrc ? (
+              <div className="captured-image">
+                <img src={imageSrc} alt="Captured" />
+              </div>
+            ) : (
               <div className="captured-image">
                 <div onChange={alertHandler}></div>
               </div>
             )}
+            </>
+          )}
+          
         </div>
       </div>
       <Footer />
