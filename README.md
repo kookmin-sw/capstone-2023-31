@@ -98,9 +98,7 @@
 
 
 ## 5. 프로젝트 구조 🗂️
-수정 예정.
-
-![stack](https://user-images.githubusercontent.com/66404477/229356303-b11d7de8-637d-4750-8e3a-5773309321f2.png)
+<img src="https://github.com/kookmin-sw/capstone-2023-31/assets/63188042/1b8d42c6-7b4e-45b4-a408-def9f915b8e0" width="800"/>
 
 <br><br>
 
