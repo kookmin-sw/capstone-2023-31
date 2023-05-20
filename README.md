@@ -6,7 +6,7 @@
 ### 👀 집에서 편하게 써보고 구매하고 싶은데 !! 
 ### 🦊 내 얼굴형에 맞는 안경을 구매하고 싶어 !!! 
 
-<p align="center"><img src="https://github.com/kookmin-sw/capstone-2023-31/assets/63188042/7829dec5-8297-4236-96d2-4495ba0f6722" width="600"/></p>
+<p align="center"><img src="https://github.com/kookmin-sw/capstone-2023-31/assets/63188042/7829dec5-8297-4236-96d2-4495ba0f6722" width="700"/></p>
 
 <br>
 
@@ -43,9 +43,9 @@
 <br><br>
 
 #### 페이지별 기능
-<p align="center"><img src="https://github.com/kookmin-sw/capstone-2023-31/assets/63188042/5e2a6d34-0f8b-40d7-b980-a2aa27abd75c" width="600"/></p>
-<p align="center"><img src="https://github.com/kookmin-sw/capstone-2023-31/assets/63188042/36ce1545-bd0c-42da-9a41-6ac1774bfc13" width="600"/></p>
-<p align="center"><img src="https://github.com/kookmin-sw/capstone-2023-31/assets/63188042/5d9b799f-641c-4380-881f-2fae27d20884" width="600"/></p>
+<p align="center"><img src="https://github.com/kookmin-sw/capstone-2023-31/assets/63188042/5e2a6d34-0f8b-40d7-b980-a2aa27abd75c" width="800"/></p>
+<p align="center"><img src="https://github.com/kookmin-sw/capstone-2023-31/assets/63188042/36ce1545-bd0c-42da-9a41-6ac1774bfc13" width="800"/></p>
+<p align="center"><img src="https://github.com/kookmin-sw/capstone-2023-31/assets/63188042/5d9b799f-641c-4380-881f-2fae27d20884" width="800"/></p>
 
 <br><br>
 
