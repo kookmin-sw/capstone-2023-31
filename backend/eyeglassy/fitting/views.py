@@ -121,6 +121,10 @@ def dlib_prac_fitting(static_path, glasses_path, image_file):
 
     # 얼굴 인식
     faces = detector(face_img_gray)
+
+    # 얼굴이 감지되지 않은 경우 처리
+    if len(faces) == 0:
+        return no_eyes_alert
     
     # 안경 이미지 불러오기
     glasses_img = cv2.imread(glasses_path, cv2.IMREAD_UNCHANGED)
@@ -138,7 +142,7 @@ def dlib_prac_fitting(static_path, glasses_path, image_file):
         # cv2.circle(face_img, left_eye, 3, (0, 0, 255), -1) # red
         # cv2.circle(face_img, right_eye, 3, (0, 0, 255), -1)
 
-        img_base64 = run_fitting(left_eye, right_eye, glasses_img, face_img)
+    img_base64 = run_fitting(left_eye, right_eye, glasses_img, face_img)
     
     return img_base64
 
@@ -174,8 +178,8 @@ def fitting_face(request, id):
 
     ### 4) 이미지 위에 안경 이미지 붙여서 반환
     ### 모드 선택 CHOICE : dlib or cv
-    # fitted_face = dlib_prac_fitting(static_path, glasses_path, image_path) # 누끼딴 안경 이미지 경로, 얼굴 이미지 경로
-    fitted_face = cv_prac_fitting(static_path, glasses_path, image_path)       
+    fitted_face = dlib_prac_fitting(static_path, glasses_path, image_path) # 누끼딴 안경 이미지 경로, 얼굴 이미지 경로
+    # fitted_face = cv_prac_fitting(static_path, glasses_path, image_path)       
 
     # response_data = {'result': 'success', 'message': '이미지 처리 완료'}
     # return JsonResponse(response_data)
