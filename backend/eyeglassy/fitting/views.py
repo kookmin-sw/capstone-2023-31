@@ -32,17 +32,19 @@ def run_fitting(left_eye, right_eye, glasses_img, face_img):
 
     # 안경 이미지 사이즈 조정
     eye_distance = np.sqrt((right_eye[1] - left_eye[1])**2 + (right_eye[0] - left_eye[0])**2)
-    scale_factor = eye_distance / glasses_img.shape[1] * 2.45
-    resized_glasses = cv2.resize(glasses_img, (0, 0), fx=scale_factor, fy=scale_factor)
+    desired_width = int(eye_distance * 2.3)
+    scale_factor = desired_width / glasses_img.shape[1] # 비율 곱 
+    desired_height = int(glasses_img.shape[0] * scale_factor * 0.8) # MODI
+    resized_glasses = cv2.resize(glasses_img, (desired_width, desired_height))
 
     # 안경 이미지를 회전시킬 캔버스(도화지) 생성
-    canvas_height = int(resized_glasses.shape[0] * 2)
-    canvas_width = int(resized_glasses.shape[1] * 2)
+    canvas_height = face_img.shape[0]
+    canvas_width = face_img.shape[1]
     canvas = np.zeros((canvas_height, canvas_width, 4), dtype=np.uint8)
 
     # 안경 이미지를 캔버스 중앙에 위치시킴
-    start_y = canvas_height // 2 - resized_glasses.shape[0] // 2
-    start_x = canvas_width // 2 - resized_glasses.shape[1] // 2
+    start_y = int((canvas_height - resized_glasses.shape[0]) / 2)
+    start_x = int((canvas_width - resized_glasses.shape[1]) / 2)
     end_y = start_y + resized_glasses.shape[0]
     end_x = start_x + resized_glasses.shape[1]
     canvas[start_y:end_y, start_x:end_x] = resized_glasses
@@ -53,7 +55,7 @@ def run_fitting(left_eye, right_eye, glasses_img, face_img):
 
     # 안경 이미지 위치 계산
     center_x = int((left_eye[0] + right_eye[0]) / 2) - int(rotated_glasses.shape[1] / 2)
-    center_y = int((left_eye[1] + right_eye[1]) / 2) - int(rotated_glasses.shape[0] / 4) - int(rotated_glasses.shape[0] / 4)
+    center_y = int((left_eye[1] + right_eye[1]) / 2) - int(rotated_glasses.shape[0] / 2)
 
     # 안경 이미지 합성
     for i in range(rotated_glasses.shape[0]):
@@ -61,16 +63,12 @@ def run_fitting(left_eye, right_eye, glasses_img, face_img):
             if rotated_glasses[i, j, 3] > 0:
                 face_img[center_y + i, center_x + j, :] = rotated_glasses[i, j, :3]
 
-    # face_img_res = cv2.cvtColor(face_img, cv2.COLOR_GRAY2BGR)
-
-    # TEST - 저장해보기
-    # cv2.imwrite('test.jpg', face_img)
-
     # 이미지를 바이트로 변환
     _, encoded_img = cv2.imencode('.jpg', face_img)
     img_base64 = base64.b64encode(encoded_img).decode('utf-8')
 
     return img_base64
+
 
 
 def cv_prac_fitting(static_path, glasses_path, image_file):
@@ -154,7 +152,7 @@ def get_csrf_token(request):
 @api_view(['POST'])
 @csrf_exempt
 def fitting_face(request, id):
-    ### 1) 리액트에서 받아온 안경 이미지
+    ### 1) 리액트에서 받아온 얼굴 이미지
     try:
         # image_file = request.FILES.get('image')
         image_file = request.FILES['image']
@@ -170,7 +168,7 @@ def fitting_face(request, id):
             destination.write(chunk)
     
 
-    ### 3) 리액트에서 받아온 안경 데이터 이미지 경로 불러오기
+    ### 3) 안경 데이터 이미지 경로 불러오기
     id -= 2
     product_img = 'res' + str(id) + '.png'
     glasses_path = os.path.join(settings.DEFAULT_DIR, output_path, product_img)

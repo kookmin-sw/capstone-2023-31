@@ -19,7 +19,7 @@ warnings.filterwarnings("ignore") # 경고 메세지 무시
 ## 이미지 자르기
 ### 이미지 띄우기
 
-for idx in range(1, 675):
+for idx in range(646, 650): # (1, 675)
     try:
         img = cv2.imread(INPUT_DIR + 'img' + str(idx) + '.jpg') # 이미지 없으면 None 반환
         
@@ -81,7 +81,7 @@ for idx in range(1, 675):
         datas = img.getdata()
 
         newData = []
-        cutOff = 190
+        cutOff = 140
 
         for item in datas:
             if item[0] >= cutOff and item[1] >= cutOff and item[2] >= cutOff:
