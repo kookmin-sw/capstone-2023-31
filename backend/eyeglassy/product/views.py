@@ -25,6 +25,7 @@ def process_shape(request, shape):
     
 
 def get_random_product(request):
+    p#print("2")
     if request.method == 'GET':
         product_count = 16
         all_products = list(Glasses.objects.all())

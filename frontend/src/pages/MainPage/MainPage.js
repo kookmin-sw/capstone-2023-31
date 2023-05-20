@@ -18,7 +18,8 @@
     useEffect(()=>{ 
       const fetchData = async () => {
         try {
-          const response = await axios.get('/ /')
+          const response = await axios.get('/ /');
+          console.log(response);
           setImages(response.data.results);
           setIsSliderReady(true);
           window.scrollTo(0, 0);
@@ -29,7 +30,7 @@
       };
       fetchData();
     }, []);
-
+    console.log(images)
     const gridData = [
       { style: "round", stylename: "둥근형", image: '/images/round.jpg'},
       { style: "square", stylename: "사각형", image: '/images/square.jpg'},
@@ -89,8 +90,10 @@
             </div>
             {isSliderReady ? (
             <Slider {...settings}>
+              
               {images.map((item, index) => (
                 <div key={index}>
+                  
                   <Link className="link" to={`/product/${item.shape}/${item.id}`} state={item}>
                     <img style={{ width: "250px", height: "250px" }} src={`/images/input/${item.image}`} alt={item.name} />
                   </Link>
