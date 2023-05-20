@@ -46,8 +46,6 @@
 
 
 ## 3. 팀원 소개 👩
-<br>
-
 #### 김수빈 
 <img src="https://user-images.githubusercontent.com/66404477/229358314-5537125b-0a28-4ba3-9f79-64f01f4c65a5.png" width="100"/>
 
@@ -58,7 +56,6 @@
 📌 Role: 팀장, ML(얼굴형 분석 모델 생성), Backend(얼굴형 분석 페이지, user, 마이페이지, 회원가입/로그인)
 🔗 Github : https://github.com/soosbk
 ~~~
-
 <br>
 
 #### 김시은
@@ -71,7 +68,6 @@
 📧 E-mail: se098300@gmail.com
 📌 Role: Data(데이터 수집, 이미지 전처리 및 DB 구축), Backend (안경 가상 피팅, 상품 리스트 및 상세 페이지)
 ~~~
-
 <br>
 
 #### 김소은
