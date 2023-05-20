@@ -26,7 +26,7 @@ output_path = 'crawling/image/output'
 no_eyes_alert = 'Not detected'
 
 
-def run_fitting(left_eye, right_eye, glasses_img, face_img):
+def run_fitting(left_eye, right_eye, glasses_img, face_img, id):
     # 눈 사이 각도 계산
     angle = np.rad2deg(np.arctan2(right_eye[1]-left_eye[1], right_eye[0]-left_eye[0]))
 
@@ -34,7 +34,12 @@ def run_fitting(left_eye, right_eye, glasses_img, face_img):
     eye_distance = np.sqrt((right_eye[1] - left_eye[1])**2 + (right_eye[0] - left_eye[0])**2)
     desired_width = int(eye_distance * 2.3)
     scale_factor = desired_width / glasses_img.shape[1] # 비율 곱 
-    desired_height = int(glasses_img.shape[0] * scale_factor * 0.8) # MODI
+
+    if not (644 <= id <= 655):
+        desired_height = int(glasses_img.shape[0] * scale_factor) 
+    else:
+        desired_height = int(glasses_img.shape[0] * scale_factor * 0.7) # MODI
+
     resized_glasses = cv2.resize(glasses_img, (desired_width, desired_height))
 
     # 안경 이미지를 회전시킬 캔버스(도화지) 생성
@@ -107,7 +112,7 @@ def cv_prac_fitting(static_path, glasses_path, image_file):
     return img_base64
 
 
-def dlib_prac_fitting(static_path, glasses_path, image_file):
+def dlib_prac_fitting(static_path, glasses_path, image_file, id):
     predictor_path = os.path.join(static_path, 'shape_predictor_68_face_landmarks.dat')
 
     # 얼굴 인식기와 랜드마크 인식기 초기화
@@ -140,7 +145,7 @@ def dlib_prac_fitting(static_path, glasses_path, image_file):
         # cv2.circle(face_img, left_eye, 3, (0, 0, 255), -1) # red
         # cv2.circle(face_img, right_eye, 3, (0, 0, 255), -1)
 
-    img_base64 = run_fitting(left_eye, right_eye, glasses_img, face_img)
+    img_base64 = run_fitting(left_eye, right_eye, glasses_img, face_img, id)
     
     return img_base64
 
@@ -176,7 +181,7 @@ def fitting_face(request, id):
 
     ### 4) 이미지 위에 안경 이미지 붙여서 반환
     ### 모드 선택 CHOICE : dlib or cv
-    fitted_face = dlib_prac_fitting(static_path, glasses_path, image_path) # 누끼딴 안경 이미지 경로, 얼굴 이미지 경로
+    fitted_face = dlib_prac_fitting(static_path, glasses_path, image_path, id) # 누끼딴 안경 이미지 경로, 얼굴 이미지 경로
     # fitted_face = cv_prac_fitting(static_path, glasses_path, image_path)       
 
     # response_data = {'result': 'success', 'message': '이미지 처리 완료'}
