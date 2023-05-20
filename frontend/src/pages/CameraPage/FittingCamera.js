@@ -112,16 +112,6 @@ function FittingCamera() {
           mirrored={mirror}
         />
         <div style={{ marginTop: "20px" }}>
-          <Button
-            size="large"
-            shape="round"
-            onClick={() => setMirror(!mirror)}
-            style={{
-              margin: "0 10px"
-            }}
-          >
-            좌우 반전
-          </Button>
           {imageSrc ? (
             <Button
               size="large"
@@ -134,16 +124,28 @@ function FittingCamera() {
               다시 찍기
             </Button>
           ) : (
+            <>
               <Button
                 size="large"
                 shape="round"
-                onClick={capture}
+                onClick={() => setMirror(!mirror)}
                 style={{
                   margin: "0 10px"
                 }}
               >
+                좌우 반전
+              </Button>
+              <Button
+                  size="large"
+                  shape="round"
+                  onClick={capture}
+                  style={{
+                    margin: "0 10px"
+                  }}
+                >
                 사진 찍기
               </Button>
+            </>
             )}
         </div>
         <div className="captured-image-container">
