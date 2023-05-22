@@ -67,6 +67,7 @@ function FittingCamera() {
 
       if(fittingResponse.data.fitted_face == "Not detected"){
         alert("얼굴을 인식할 수 없습니다. 사진을 다시 찍어주세요.")
+        setIsCapturing(false)
       }else{
         const base64Data = fittingResponse.data;
         setImageSrc(`data:image/jpeg;base64,${base64Data}`);
@@ -112,16 +113,6 @@ function FittingCamera() {
           mirrored={mirror}
         />
         <div style={{ marginTop: "20px" }}>
-          <Button
-            size="large"
-            shape="round"
-            onClick={() => setMirror(!mirror)}
-            style={{
-              margin: "0 10px"
-            }}
-          >
-            좌우 반전
-          </Button>
           {imageSrc ? (
             <Button
               size="large"
@@ -134,6 +125,17 @@ function FittingCamera() {
               다시 찍기
             </Button>
           ) : (
+            <>
+              <Button
+                size="large"
+                shape="round"
+                onClick={() => setMirror(!mirror)}
+                style={{
+                  margin: "0 10px"
+                }}
+              >
+                좌우 반전
+              </Button>
               <Button
                 size="large"
                 shape="round"
@@ -144,6 +146,8 @@ function FittingCamera() {
               >
                 사진 찍기
               </Button>
+            </>
+              
             )}
         </div>
         <div className="captured-image-container">
