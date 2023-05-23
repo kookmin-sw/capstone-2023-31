@@ -1,5 +1,13 @@
 # 환경 설정과 관련된 폴더입니다. 
+## 깃 원격저장소
+1. 가상환경을 생성합니다.
+2. 원격 저장소를 clone 받습니다. 
 
+## requirements.txt (capstone-2023-31 에 존재)
+1. pip install --upgrade pip
+2. pip install -r requirements.txt
+  <br> 실행
+  
 ## dlib설치방법
 1.http://dlib.net/ 링크로 접속합니다.
 <br/><br/>
@@ -22,11 +30,7 @@ print(dlib.__version__)  -> 잘 나오면 설치 완료
 ## tensorflow
 
   pip install tensorflow
-  
-## requirements.txt
-  pip install -r requirements.txt
-  <br> 실행
-  
+
 ### front-end
 1. frontend 폴더로 이동한다.  <br>
 2. npm install <br>
