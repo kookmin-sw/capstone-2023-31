@@ -76,6 +76,7 @@ function FittingCamera() {
 
     } catch (error) {
       console.log(error);
+      setIsCapturing(false);
     }
   };
 
