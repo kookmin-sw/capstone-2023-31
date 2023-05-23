@@ -23,4 +23,18 @@ print(dlib.__version__)  -> 잘 나오면 설치 완료
 
   pip install tensorflow
   
+## requirements.txt
+  pip install -r requirements.txt
+  <br> 실행
+  
+### front-end
+1. frontend 폴더로 이동한다.  <br>
+2. npm install <br>
+3. npm start <br>
+
+### back-end
+1. cd backend/eyeglassy <br>
+2. python csv_to_db.py (실행) <br>
+3. python manage.py migrate <br>
+4. python manage.py runserver
   
