@@ -148,7 +148,7 @@
 
 #### Release
 * <p float="left">
-   <img src="https://img.shields.io/badge/docker-100000?style=for-the-badge&logo=docker&logoColor=white"/>
+   <img src="https://img.shields.io/badge/docker-007ACC?style=for-the-badge&logo=docker&logoColor=white"/>
 </p>
 
 <br/><br/>
