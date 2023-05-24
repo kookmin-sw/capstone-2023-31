@@ -160,7 +160,7 @@ def get_csrf_token(request):
     # 클라이언트에게 CSRF 토큰을 반환
     return JsonResponse({'csrfToken': get_token(request)})
 
-
+ 
 @api_view(['POST'])
 @csrf_exempt
 def fitting_face(request, id):
