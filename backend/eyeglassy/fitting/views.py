@@ -80,7 +80,7 @@ def run_fitting(left_eye, right_eye, glasses_img, face_img, id):
     return img_base64
 
 
-def cv_prac_fitting(static_path, glasses_path, image_file):
+def cv_prac_fitting(static_path, glasses_path, image_file, id):
     predictor_path = os.path.join(
         static_path, 'haarcascade_eye_tree_eyeglasses.xml')
     eye_cascade = cv2.CascadeClassifier(predictor_path)
@@ -112,7 +112,7 @@ def cv_prac_fitting(static_path, glasses_path, image_file):
         right_eye = (left_eye_x, int(eyes[0][1]) + (int(eyes[0][3]) // 2))
 
     # 눈 좌표로 fitting 수행
-    img_base64 = run_fitting(left_eye, right_eye, glasses_img, face_img)
+    img_base64 = run_fitting(left_eye, right_eye, glasses_img, face_img, id)
 
     return img_base64
 
@@ -186,7 +186,7 @@ def fitting_face(request, id):
     ### 4) 이미지 위에 안경 이미지 붙여서 반환
     ### 모드 선택 CHOICE : dlib or cv
     #fitted_face = dlib_prac_fitting(static_path, glasses_path, image_path, id)  # 누끼딴 안경 이미지 경로, 얼굴 이미지 경로
-    fitted_face = cv_prac_fitting(static_path, glasses_path, image_path)
+    fitted_face = cv_prac_fitting(static_path, glasses_path, image_path, id)
 
     # response_data = {'result': 'success', 'message': '이미지 처리 완료'}
     # return JsonResponse(response_data)
