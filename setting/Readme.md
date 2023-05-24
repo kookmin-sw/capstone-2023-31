@@ -1,8 +1,14 @@
 # 환경 설정과 관련된 폴더입니다. 
 ## 깃 원격저장소
 1. 가상환경을 생성합니다.
-2. 원격 저장소를 clone 받습니다. 
+2. 원격 저장소를 clone 받습니다.
 
+## Docker file 실행
+1. docker-compose up <br>
+동시에 터미널을 한개 더 켜서 frontend 폴더로 이동합니다. 
+2. npm install 
+3. npm start
+frontend를 실행시키면 docker에서 신호를 잡아, 실행됩니다. 첫 실행 시, 큰 시간이 걸립니다. 
 ## requirements.txt (capstone-2023-31 에 존재)
 1. pip install --upgrade pip
 2. pip install -r requirements.txt
