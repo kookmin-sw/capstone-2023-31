@@ -1,0 +1,17 @@
+version: '3'
+
+services:
+  backend:
+    volumes:
+      - static:/app/backend/eyeglassy/static
+    env_file:
+      - .env
+    build:
+      context: ./backend/eyeglassy/
+    ports:
+      - "8000:8000"
+    command: sh -c "python csv_to_db.py && python manage.py makemigrations && python manage.py migrate --no-input && python manage.py runserver --noreload"
+
+volumes:
+  static:
+

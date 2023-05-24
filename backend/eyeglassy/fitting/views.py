@@ -7,7 +7,6 @@ from rest_framework.response import Response
 from rest_framework import status
 import os
 import cv2
-import dlib
 import numpy as np
 # from . import fitting
 from django.http import HttpResponse
@@ -28,17 +27,19 @@ no_eyes_alert = 'Not detected'
 
 def run_fitting(left_eye, right_eye, glasses_img, face_img, id):
     # 눈 사이 각도 계산
-    angle = np.rad2deg(np.arctan2(right_eye[1]-left_eye[1], right_eye[0]-left_eye[0]))
+    angle = np.rad2deg(np.arctan2(
+        right_eye[1]-left_eye[1], right_eye[0]-left_eye[0]))
 
     # 안경 이미지 사이즈 조정
-    eye_distance = np.sqrt((right_eye[1] - left_eye[1])**2 + (right_eye[0] - left_eye[0])**2)
+    eye_distance = np.sqrt(
+        (right_eye[1] - left_eye[1])**2 + (right_eye[0] - left_eye[0])**2)
     desired_width = int(eye_distance * 2.3)
-    scale_factor = desired_width / glasses_img.shape[1] # 비율 곱 
+    scale_factor = desired_width / glasses_img.shape[1]  # 비율 곱
 
     if not (644 <= id <= 655):
-        desired_height = int(glasses_img.shape[0] * scale_factor) 
+        desired_height = int(glasses_img.shape[0] * scale_factor)
     else:
-        desired_height = int(glasses_img.shape[0] * scale_factor * 0.7) # MODI
+        desired_height = int(glasses_img.shape[0] * scale_factor * 0.7)  # MODI
 
     resized_glasses = cv2.resize(glasses_img, (desired_width, desired_height))
 
@@ -55,18 +56,22 @@ def run_fitting(left_eye, right_eye, glasses_img, face_img, id):
     canvas[start_y:end_y, start_x:end_x] = resized_glasses
 
     # 안경 이미지 회전
-    M = cv2.getRotationMatrix2D((canvas_width / 2, canvas_height / 2), -angle, 1)
+    M = cv2.getRotationMatrix2D(
+        (canvas_width / 2, canvas_height / 2), -angle, 1)
     rotated_glasses = cv2.warpAffine(canvas, M, (canvas_width, canvas_height))
 
     # 안경 이미지 위치 계산
-    center_x = int((left_eye[0] + right_eye[0]) / 2) - int(rotated_glasses.shape[1] / 2)
-    center_y = int((left_eye[1] + right_eye[1]) / 2) - int(rotated_glasses.shape[0] / 2)
+    center_x = int((left_eye[0] + right_eye[0]) / 2) - \
+        int(rotated_glasses.shape[1] / 2)
+    center_y = int((left_eye[1] + right_eye[1]) / 2) - \
+        int(rotated_glasses.shape[0] / 2)
 
     # 안경 이미지 합성
     for i in range(rotated_glasses.shape[0]):
         for j in range(rotated_glasses.shape[1]):
             if rotated_glasses[i, j, 3] > 0:
-                face_img[center_y + i, center_x + j, :] = rotated_glasses[i, j, :3]
+                face_img[center_y + i, center_x + j,
+                         :] = rotated_glasses[i, j, :3]
 
     # 이미지를 바이트로 변환
     _, encoded_img = cv2.imencode('.jpg', face_img)
@@ -75,9 +80,9 @@ def run_fitting(left_eye, right_eye, glasses_img, face_img, id):
     return img_base64
 
 
-
 def cv_prac_fitting(static_path, glasses_path, image_file):
-    predictor_path = os.path.join(static_path, 'haarcascade_eye_tree_eyeglasses.xml')
+    predictor_path = os.path.join(
+        static_path, 'haarcascade_eye_tree_eyeglasses.xml')
     eye_cascade = cv2.CascadeClassifier(predictor_path)
 
     # 이미지 cv2로 읽어오기
@@ -113,7 +118,8 @@ def cv_prac_fitting(static_path, glasses_path, image_file):
 
 
 def dlib_prac_fitting(static_path, glasses_path, image_file, id):
-    predictor_path = os.path.join(static_path, 'shape_predictor_68_face_landmarks.dat')
+    predictor_path = os.path.join(
+        static_path, 'shape_predictor_68_face_landmarks.dat')
 
     # 얼굴 인식기와 랜드마크 인식기 초기화
     detector = dlib.get_frontal_face_detector()
@@ -128,10 +134,10 @@ def dlib_prac_fitting(static_path, glasses_path, image_file, id):
     # 얼굴이 감지되지 않은 경우 처리
     if len(faces) == 0:
         return no_eyes_alert
-    
+
     # 안경 이미지 불러오기
     glasses_img = cv2.imread(glasses_path, cv2.IMREAD_UNCHANGED)
-    
+
     for face in faces:
         landmarks = predictor(face_img, face)
 
@@ -146,13 +152,14 @@ def dlib_prac_fitting(static_path, glasses_path, image_file, id):
         # cv2.circle(face_img, right_eye, 3, (0, 0, 255), -1)
 
     img_base64 = run_fitting(left_eye, right_eye, glasses_img, face_img, id)
-    
+
     return img_base64
 
 
 def get_csrf_token(request):
     # 클라이언트에게 CSRF 토큰을 반환
     return JsonResponse({'csrfToken': get_token(request)})
+
 
 @api_view(['POST'])
 @csrf_exempt
@@ -164,32 +171,29 @@ def fitting_face(request, id):
     except KeyError:
         return Response(status=status.HTTP_400_BAD_REQUEST)
 
-
     ### 2) 이미지 임시 저장 - 경로 만들어주기
     image_path = os.path.join(settings.STATIC_ROOT, image_file.name)
 
     with open(image_path, 'wb+') as destination:
         for chunk in image_file.chunks():
             destination.write(chunk)
-    
 
     ### 3) 안경 데이터 이미지 경로 불러오기
     id -= 2
     product_img = 'res' + str(id) + '.png'
     glasses_path = os.path.join(settings.DEFAULT_DIR, output_path, product_img)
 
-
     ### 4) 이미지 위에 안경 이미지 붙여서 반환
     ### 모드 선택 CHOICE : dlib or cv
-    fitted_face = dlib_prac_fitting(static_path, glasses_path, image_path, id) # 누끼딴 안경 이미지 경로, 얼굴 이미지 경로
-    # fitted_face = cv_prac_fitting(static_path, glasses_path, image_path)       
+    #fitted_face = dlib_prac_fitting(static_path, glasses_path, image_path, id)  # 누끼딴 안경 이미지 경로, 얼굴 이미지 경로
+    fitted_face = cv_prac_fitting(static_path, glasses_path, image_path)
 
     # response_data = {'result': 'success', 'message': '이미지 처리 완료'}
     # return JsonResponse(response_data)
 
     if fitted_face in no_eyes_alert:
         return JsonResponse({'fitted_face': fitted_face})
-    
+
     ### 5) HttpResponse로 이미지 반환
     response = HttpResponse(fitted_face, content_type='image/jpeg')
     return response
