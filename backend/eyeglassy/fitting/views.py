@@ -19,7 +19,7 @@ from product.models import Glasses
 # django.setup()
 
 static_path = os.path.join(settings.BASE_DIR, 'static')
-output_path = 'crawling/image/output'
+output_path = 'output'
 # model_path = 'fitting/models/shape_predictor_68_face_landmarks.dat'
 # cv_model_path = 'fitting/models/haarcascade_eye_tree_eyeglasses.xml'
 no_eyes_alert = 'Not detected'
@@ -173,7 +173,7 @@ def fitting_face(request, id):
 
     ### 2) 이미지 임시 저장 - 경로 만들어주기
     image_path = os.path.join(settings.STATIC_ROOT, image_file.name)
-
+    
     with open(image_path, 'wb+') as destination:
         for chunk in image_file.chunks():
             destination.write(chunk)
@@ -181,12 +181,13 @@ def fitting_face(request, id):
     ### 3) 안경 데이터 이미지 경로 불러오기
     id -= 2
     product_img = 'res' + str(id) + '.png'
-    glasses_path = os.path.join(settings.DEFAULT_DIR, output_path, product_img)
-
+    glasses_path = os.path.join(settings.STATIC_ROOT, output_path, product_img)
+    print(glasses_path)
+    print(static_path)
     ### 4) 이미지 위에 안경 이미지 붙여서 반환
     ### 모드 선택 CHOICE : dlib or cv
     #fitted_face = dlib_prac_fitting(static_path, glasses_path, image_path, id)  # 누끼딴 안경 이미지 경로, 얼굴 이미지 경로
-    fitted_face = cv_prac_fitting(static_path, glasses_path, image_path, id)
+    fitted_face = cv_prac_fitting(settings.STATIC_ROOT, glasses_path, image_path, id)
 
     # response_data = {'result': 'success', 'message': '이미지 처리 완료'}
     # return JsonResponse(response_data)
