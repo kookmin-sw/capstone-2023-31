@@ -91,7 +91,8 @@
 
 ## 4. 소개 영상 🎥
 
-[소개 영상](https://youtu.be/C-NUh5lUpSo)
+[소개 영상](https://youtu.be/aLYHJLLP1NU) <br>
+[시연 영상](https://youtu.be/NodPse4up2s)
 
 <br><br>
 
@@ -160,5 +161,7 @@
 
 
 ## 8. Document 📑
-추가 예정.
+[최종 포스터](https://github.com/kookmin-sw/capstone-2023-31/files/11550511/31_._.pdf) <br>
+최종발표자료 <br>
+수행결과보고서
 
