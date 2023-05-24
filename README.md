@@ -157,13 +157,11 @@
 
 ## 7. 사용법 🕹️
 
-<br/><br/>
-
 배포 가이드 보러가기<br>
 [배포가이드](https://github.com/kookmin-sw/capstone-2023-31/tree/master/backend)
 
 ## 8. Document 📑
 [최종 포스터](https://github.com/kookmin-sw/capstone-2023-31/files/11550511/31_._.pdf) <br>
-최종발표자료 <br>
-수행결과보고서
+[최종발표자료](https://github.com/kookmin-sw/capstone-2023-31/files/11551410/31-.pdf) <br>
+[수행결과보고서](https://github.com/kookmin-sw/capstone-2023-31/files/11551411/31-.pdf)
 
