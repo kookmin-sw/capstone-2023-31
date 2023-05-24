@@ -58,7 +58,7 @@
 ~~~
 👩‍🎓 Student ID : ****2218
 📧 E-mail: sb121300@naver.com
-📌 Role: 팀장, ML(얼굴형 분석 모델 생성), Backend(얼굴형 분석 페이지, user, 마이페이지, 회원가입/로그인)
+📌 Role: 팀장, ML(얼굴형 분석 모델 생성), Backend(얼굴형 분석 페이지, user, 마이페이지, 회원가입/로그인), Release(배포)
 ~~~
 <br>
 
