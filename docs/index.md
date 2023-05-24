@@ -41,13 +41,19 @@
 <br><br><br>
 
 ## 프로젝트 구조 🗂️
-<img src="https://github.com/kookmin-sw/capstone-2023-31/assets/63188042/1b8d42c6-7b4e-45b4-a408-def9f915b8e0" width="800"/>
+<img src="https://github.com/kookmin-sw/capstone-2023-31/assets/66404477/3512dc1c-3fb3-414e-8ec6-3af86da1a347" width="800"/>
 
 <br><br><br>
 
 
-## 소개 영상
+## 소개 영상 🎥
 
-[소개 영상](https://youtu.be/C-NUh5lUpSo)
+[소개 영상](https://youtu.be/aLYHJLLP1NU) <br>
+[시연 영상](https://youtu.be/NodPse4up2s)
 
-<br><br>
+<br><br><br>
+
+## Document 📑
+[최종 포스터](https://github.com/kookmin-sw/capstone-2023-31/files/11550511/31_._.pdf) <br>
+[최종발표자료](https://github.com/kookmin-sw/capstone-2023-31/files/11551410/31-.pdf) <br>
+[수행결과보고서](https://github.com/kookmin-sw/capstone-2023-31/files/11551411/31-.pdf)
