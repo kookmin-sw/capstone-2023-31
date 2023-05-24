@@ -97,9 +97,8 @@
 <br><br>
 
 
-
 ## 5. 프로젝트 구조 🗂️
-<img src="https://github.com/kookmin-sw/capstone-2023-31/assets/63188042/1b8d42c6-7b4e-45b4-a408-def9f915b8e0" width="800"/>
+<img src="https://github.com/kookmin-sw/capstone-2023-31/assets/66404477/3512dc1c-3fb3-414e-8ec6-3af86da1a347" width="800"/>
 
 <br><br>
 
@@ -147,7 +146,10 @@
   <img src="https://img.shields.io/badge/vscode_liveshare-007ACC?style=for-the-badge&logo=visualstudiocode&logoColor=white" /> 
 </p>
 
-
+#### Release
+* <p float="left">
+   <img src="https://img.shields.io/badge/GitHub-100000?style=for-the-badge&logo=docker&logoColor=white"/>
+</p>
 
 <br/><br/>
 
