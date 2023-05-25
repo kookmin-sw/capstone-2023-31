@@ -155,10 +155,68 @@
 
 
 
-## 7. 사용법 🕹️
+## 7. 사용법 🕹️ 
+### 깃 원격저장소
+1. 가상환경을 생성합니다.
+2. 원격 저장소를 clone 받습니다.
 
-배포 가이드 보러가기<br>
-[배포가이드](https://github.com/kookmin-sw/capstone-2023-31/tree/master/backend)
+### Docker file 실행
+1. `docker-compose up` <br>
+동시에 터미널을 한개 더 켜서 frontend 폴더로 이동합니다. 
+2. `npm install` 
+3. `npm start`
+<br/>frontend를 실행시키면 docker에서 신호를 잡아, 실행됩니다. <br/>첫 실행 시, 큰 시간이 걸립니다. 
+
+#### 윈도우 환경에서 도커파일이 실행되지 않은 경우, 다음 안내사항을 따라주세요!
+맥환경에서 세팅한 파일을 윈도우에서 pull 받아 docker container로 다시 빌드하는 과정에서 해당 오류가 발생합니다.<br>
+`exec /entrypoint.sh: no such file or directory`
+<br>
+원인은 윈도우가 LF를 자동으로 CRLF 로 받아오면서 발생한 문제였는데, Git 자체에서 이 변환을 자동으로 하는 것을 막아주는 옵션이 있기 때문입니다.<br> 따라서, 이 명령어를 입력하고 다시 클론 받아와야합니다. (새로운 파일부터 적용됩니다.)<br>
+`git config --global core.autocrlf true`
+
+##### 도커 파일이 실행되지 않은 경우 다음과 같은 과정을 따라주세요:)
+### requirements.txt (capstone-2023-31 에 존재)
+1. `pip install --upgrade pip`
+2. `pip install -r requirements.txt`
+  <br> 실행
+  
+### dlib설치방법
+1.http://dlib.net/ 링크로 접속합니다.
+<br/><br/>
+2. <img width="139" alt="스크린샷 2023-05-24 오전 1 34 26" src="https://github.com/kookmin-sw/capstone-2023-31/assets/66404477/e1df570e-b541-46ff-af9f-3b4b8dedcca8"><br>
+파일을 다운 받습니다.<br/><br/>
+3. 압축을 해제하고, 레포지토리로 dlib 폴더를 이동합니다.<br>
+4. build 폴더와 source 폴더를 생성하고
+모든 파일을 source 폴더로 이동시킵니다. <br>
+<img width="357" alt="스크린샷 2023-05-24 오전 1 41 16" src="https://github.com/kookmin-sw/capstone-2023-31/assets/66404477/213075dc-9310-483a-a895-942b1cc7250d"> <br> -> <br>
+<img width="770" alt="스크린샷 2023-05-24 오전 1 36 22" src="https://github.com/kookmin-sw/capstone-2023-31/assets/66404477/f1a1bb36-90b6-488e-b8e8-cd48319138f8">
+<br><br/>
+5. `cd source`<br/><br/>
+6. `python setup.py build`<br/><br/>
+7. `python setup.py install`<br/><br/>
+<확인 방법><br>
+1. python 접속<br/>
+2. `import dlib`<br/>
+`print(dlib.__version__)`  -> 잘 나오면 설치 완료
+
+
+### tensorflow
+
+  `pip install tensorflow`
+
+### front-end
+1. frontend 폴더로 이동한다.  <br>
+2. `npm install` <br>
+3. `npm start` <br>
+
+### back-end
+1. `cd backend/eyeglassy` <br>
+2. `python csv_to_db.py` (실행) <br>
+3. `python manage.py migrate` <br>
+4. `python manage.py runserver`
+  
+
+
 
 ## 8. Document 📑
 [최종 포스터](https://github.com/kookmin-sw/capstone-2023-31/files/11550511/31_._.pdf) <br>
